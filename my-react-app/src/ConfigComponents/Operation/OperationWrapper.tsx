@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {changeWriteLayer, GlobalWpOperation} from "ConfigComponents/Operation/GlobalWpOperation";
-import {WpLayerSetting} from "ConfigComponents/Operation/WpLayerSetting";
-import LayerSettingMenu from "ConfigComponents/LayerSettingMenu";
+import {changeWriteLayer, GlobalWpOperation} from "./GlobalWpOperation";
+import {WpLayerSetting} from "./WpLayerSetting";
+import LayerSettingMenu from "../LayerSettingMenu";
 
 export type OperationWrapperProps = {
     initalOperation: GlobalWpOperation
@@ -10,9 +10,8 @@ export type OperationWrapperProps = {
 const OperationWrapper = (props: OperationWrapperProps) => {
     const [operation, setOperation] = useState(props.initalOperation);
 
-    const updateLayer = (layerSetting: WpLayerSetting) => {
-        const newOp = changeWriteLayer(operation, layerSetting)
-        console.log(layerSetting, "=======>", newOp.layer )
+    const updateLayer = (oldSetting: WpLayerSetting, newSetting: WpLayerSetting) => {
+        const newOp = changeWriteLayer(operation, oldSetting, newSetting)
         setOperation(newOp)
     }
 

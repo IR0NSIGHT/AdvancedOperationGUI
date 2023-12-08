@@ -1,18 +1,18 @@
 import React from 'react';
-import LayerSelector from "ConfigComponents/LayerSelector";
-import {DefaultLayers, WpLayerSetting} from "ConfigComponents/Operation/WpLayerSetting";
+import LayerSelector from "./LayerSelector";
+import {DefaultLayers, WpLayerSetting} from "./Operation/WpLayerSetting";
 
 export type LayerSettingMenuProps = {
     layerSetting: WpLayerSetting
-    onUpdateSetting: (newSetting: WpLayerSetting) => void
+    onUpdateSetting: (oldSetting: WpLayerSetting, newSetting: WpLayerSetting) => void
 }
 const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({layerSetting, onUpdateSetting}: LayerSettingMenuProps) => {
     const onNameChange = (name: string) => {
-        onUpdateSetting([name, layerSetting[1]])
+        onUpdateSetting(layerSetting, [name, layerSetting[1]])
     }
     return (
         <div>
-            <LayerSelector layerName={layerSetting[0]} layerList={DefaultLayers} onUpdateLayerName={onNameChange} />
+            <LayerSelector layerName={layerSetting[0]} layerList={DefaultLayers} onUpdateLayerName={onNameChange}/>
         </div>
     );
 };

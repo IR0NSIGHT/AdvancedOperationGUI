@@ -1,11 +1,11 @@
 import {changeWriteLayer, GlobalWpOperation} from './GlobalWpOperation';
-import {WpLayerSetting} from "ConfigComponents/Operation/WpLayerSetting"; // Replace with the correct path
+import {WpLayerSetting} from "./WpLayerSetting";
 
 describe('changeWriteLayer function', () => {
 
     const initialOp: GlobalWpOperation = {
         "name": "small bubble forest",
-        "layer": [['Frost', 1], ['Deciduous', 4], ['Pines', 3]],
+        "layer": [['Frost', 1], ['Pines', 3]],
         "onlyOnLayer": [[
             "Mask - Forest",
             1
@@ -20,19 +20,18 @@ describe('changeWriteLayer function', () => {
 
     it('add new layer', () => {
         const writeLayer: WpLayerSetting = ['Deciduous', 4]; // New layer to replace 'Deciduous' in the operation
-        const updatedOp = changeWriteLayer(initialOp, writeLayer);
+        const updatedOp = changeWriteLayer(initialOp, null, writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Frost', 1], ['Deciduous', 4], ['Pines', 3], ['Deciduous', 4]]);
-        // Ensure 'Deciduous' has been updated to the new layer with value 4
+        expect(updatedOp.layer).toEqual([['Frost', 1], ['Pines', 3], ['Deciduous', 4]]);
     });
 
-    it('should not change the operation if write layer does not exist', () => {
-        const writeLayer: WpLayerSetting = ['MissingLayer', 5]; // A layer that doesn't exist in the initial operation
-        const updatedOp = changeWriteLayer(initialOp, writeLayer);
+    it('mutate existing layer', () => {
+        expect(initialOp.layer).toEqual([['Frost', 1], ['Pines', 3]])
 
-        expect(updatedOp).toEqual(initialOp);
-        // Ensure the operation remains unchanged as the write layer doesn't exist in the initial layers
+        const writeLayer: WpLayerSetting = ['Pines', 12]; // A layer that doesn't exist in the initial operation
+        const updatedOp = changeWriteLayer(initialOp, ['Pines', 3], writeLayer);
+
+        expect(updatedOp.layer).toEqual([['Frost', 1], ['Pines', 12]])
     });
 
-    // Add more test cases as needed to cover different scenarios and edge cases
 });

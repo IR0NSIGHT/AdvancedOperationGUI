@@ -1,4 +1,4 @@
-import {WpLayerSetting} from "ConfigComponents/Operation/WpLayerSetting";
+import {WpLayerSetting} from "./WpLayerSetting";
 
 export type GlobalWpOperation = {
     name: string,
@@ -12,12 +12,17 @@ export type GlobalWpOperation = {
     }
 }
 
-export const changeWriteLayer = (op: GlobalWpOperation, writeLayer: WpLayerSetting): GlobalWpOperation => {
-    const changedLayers = op.layer.map(oldSetting =>
-        oldSetting[0] == writeLayer[0] ? writeLayer : oldSetting)
+//FIXME use layer name, not setting to identify old Layer
+export const changeWriteLayer = (op: GlobalWpOperation, oldLayer: WpLayerSetting | null, writeLayer: WpLayerSetting): GlobalWpOperation => {
+    const changedLayers = oldLayer ?
+        op.layer.map(oldSetting =>
+            oldSetting[0] == writeLayer[0] ? writeLayer : oldSetting)
+        : [...op.layer, writeLayer]
 
-    return {
-        ...op,
-        layer: changedLayers
-    }
+    const newOp =
+        {
+            ...op,
+            layer: changedLayers
+        }
+    return newOp
 }
