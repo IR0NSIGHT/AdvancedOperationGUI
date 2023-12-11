@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Story} from '@storybook/react';
 import LayerSettingMenu, {LayerSettingMenuProps} from "./LayerSettingMenu";
-import {WpLayerSetting} from "./Operation/WpLayerSetting";
+import {WpLayerSetting} from "../Operation/WpLayerSetting";
 
 export default {
     title: 'Components/LayerSettingMenu',
@@ -11,9 +11,9 @@ export default {
 const Template: Story<LayerSettingMenuProps> = (args) => {
     const [setting, setSetting] = useState<WpLayerSetting>(args.layerSetting);
 
-    const onUpdateSetting = (newSetting: WpLayerSetting) => {
+    const onUpdateSetting = (oldSetting: WpLayerSetting, newSetting: WpLayerSetting) => {
         setSetting(newSetting);
-        console.log(newSetting);
+        console.log(oldSetting, newSetting);
     };
 
     return <div>

@@ -23,7 +23,6 @@ export const LayerSelector: React.FC<LayerSelectorProps> = ({
 
     return (
         <div>
-            <label htmlFor="nameDropdown">Layer: </label>
             <select id="nameDropdown" onChange={handleNameChange} value={layerName}>
                 {layerListComps}
             </select>

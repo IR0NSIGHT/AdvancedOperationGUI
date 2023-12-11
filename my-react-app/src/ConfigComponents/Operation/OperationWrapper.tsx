@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {changeWriteLayer, GlobalWpOperation} from "./GlobalWpOperation";
 import {WpLayerSetting} from "./WpLayerSetting";
-import LayerSettingMenu from "../LayerSettingMenu";
+import LayerSettingMenu from "../Layer/LayerSettingMenu";
 
 export type OperationWrapperProps = {
     initalOperation: GlobalWpOperation
