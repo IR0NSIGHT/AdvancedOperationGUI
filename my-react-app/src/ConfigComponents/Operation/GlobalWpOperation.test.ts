@@ -1,4 +1,4 @@
-import {changeWriteLayer, GlobalWpOperation} from './GlobalWpOperation';
+import {applyLayerChange, GlobalWpOperation} from './GlobalWpOperation';
 import {WpLayerSetting} from "./WpLayerSetting";
 
 describe('changeWriteLayer function', () => {
@@ -20,9 +20,9 @@ describe('changeWriteLayer function', () => {
             }
         }
         const writeLayer: WpLayerSetting = ['Deciduous', 4]; // New layer to replace 'Deciduous' in the operation
-        const updatedOp = changeWriteLayer(initialOp, null, writeLayer);
+        const updatedOp = applyLayerChange(initialOp.layer, null, writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Deciduous', 4], ['Frost', 1], ['Pines', 3]]);
+        expect(updatedOp).toEqual([['Deciduous', 4], ['Frost', 1], ['Pines', 3]]);
     });
 
     it('mutate existing layer value', () => {
@@ -43,9 +43,9 @@ describe('changeWriteLayer function', () => {
         expect(initialOp.layer).toEqual([['Frost', 1], ['Pines', 3]])
 
         const writeLayer: WpLayerSetting = ['Pines', 12]; // A layer that doesn't exist in the initial operation
-        const updatedOp = changeWriteLayer(initialOp, ['Pines', 3], writeLayer);
+        const updatedOp = applyLayerChange(initialOp.layer, ['Pines', 3], writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Frost', 1], ['Pines', 12]])
+        expect(updatedOp).toEqual([['Frost', 1], ['Pines', 12]])
     });
 
     it('remove existing layer', () => {
@@ -66,9 +66,9 @@ describe('changeWriteLayer function', () => {
         expect(initialOp.layer).toEqual([['Frost', 1], ['Pines', 3]])
 
         const writeLayer: WpLayerSetting | null = null; // A layer that doesn't exist in the initial operation
-        const updatedOp = changeWriteLayer(initialOp, ['Pines', 3], writeLayer);
+        const updatedOp = applyLayerChange(initialOp.layer, ['Pines', 3], writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Frost', 1]])
+        expect(updatedOp).toEqual([['Frost', 1]])
     });
 
     it('mutate layer name pines => annotations', () => {
@@ -89,9 +89,9 @@ describe('changeWriteLayer function', () => {
         expect(initialOp.layer).toEqual([['Pines', 7]])
 
         const writeLayer: WpLayerSetting = ['Annotations', 7];
-        const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], writeLayer);
+        const updatedOp = applyLayerChange(initialOp.layer, ['Pines', 7], writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Annotations', 7]])
+        expect(updatedOp).toEqual([['Annotations', 7]])
     });
 
     it('does not allow double entries', () => {
@@ -109,9 +109,9 @@ describe('changeWriteLayer function', () => {
                 "threshold": 0.5,
             }
         }
-        const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], ['Annotations', 7]);
+        const updatedOp = applyLayerChange(initialOp.layer, ['Pines', 7], ['Annotations', 7]);
 
-        expect(updatedOp.layer).toEqual([['Annotations', 7]])
+        expect(updatedOp).toEqual([['Annotations', 7]])
     });
 
     it('overwrites old and new layer matches', () => {
@@ -129,8 +129,8 @@ describe('changeWriteLayer function', () => {
                 "threshold": 0.5,
             }
         }
-        const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], ['Annotations', 7]);
+        const updatedOp = applyLayerChange(initialOp.layer, ['Pines', 7], ['Annotations', 7]);
 
-        expect(updatedOp.layer).toEqual([['Annotations', 7],["Burgers", 3] ])
+        expect(updatedOp).toEqual([['Annotations', 7],["Burgers", 3] ])
     });
 });

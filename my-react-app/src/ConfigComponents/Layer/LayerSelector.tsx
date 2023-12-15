@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+export const NoneLayer = "None"
+
 export const LayerSelector: React.FC<LayerSelectorProps> = ({
                                                                 layerName,
                                                                 layerList,
@@ -43,8 +45,8 @@ export const LayerSelector: React.FC<LayerSelectorProps> = ({
                 label="Layer"
                 onChange={handleNameChange}
             >
-                <MenuItem value={undefined}>
-                    <em>None</em>
+                <MenuItem value={NoneLayer}>
+                    <em>{NoneLayer}</em>
                 </MenuItem>
                 {layerListComps}
             </Select>
