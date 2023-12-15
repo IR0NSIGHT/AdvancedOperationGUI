@@ -11,9 +11,9 @@ export default {
 const defaultOperation: GlobalWpOperation = {
     "name": "small bubble forest",
     "layer": [[
-        "Ta - Eurasian Aspen (Z)",
+        "Pines",
         7
-    ]],
+    ], ["Annotations", 5]],
     "onlyOnLayer": [[
         "Mask - Forest",
         1
