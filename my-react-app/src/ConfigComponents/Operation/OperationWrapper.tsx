@@ -27,7 +27,6 @@ const OperationWrapper = (props: OperationWrapperProps) => {
                     padding: '20px',
                     cursor: 'pointer',
                 }}
-
             >
                 Global Operation {operation.name}
             </div>

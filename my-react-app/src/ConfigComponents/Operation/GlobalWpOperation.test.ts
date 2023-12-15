@@ -34,4 +34,13 @@ describe('changeWriteLayer function', () => {
         expect(updatedOp.layer).toEqual([['Frost', 1], ['Pines', 12]])
     });
 
+    it('remove existing layer', () => {
+        expect(initialOp.layer).toEqual([['Frost', 1], ['Pines', 3]])
+
+        const writeLayer: WpLayerSetting|null = null; // A layer that doesn't exist in the initial operation
+        const updatedOp = changeWriteLayer(initialOp, ['Pines', 3], writeLayer);
+
+        expect(updatedOp.layer).toEqual([['Frost', 1]])
+    });
+
 });

@@ -13,16 +13,24 @@ export type GlobalWpOperation = {
 }
 
 //FIXME use layer name, not setting to identify old Layer
-export const changeWriteLayer = (op: GlobalWpOperation, oldLayer: WpLayerSetting | null, writeLayer: WpLayerSetting): GlobalWpOperation => {
-    const changedLayers = oldLayer ?
-        op.layer.map(oldSetting =>
-            oldSetting[0] == writeLayer[0] ? writeLayer : oldSetting)
-        : [...op.layer, writeLayer]
+export const changeWriteLayer = (op: GlobalWpOperation, oldLayer: WpLayerSetting | null, newLayer: WpLayerSetting | null): GlobalWpOperation => {
+    const isInsertion = oldLayer == null
+    const isDeletion = newLayer == null
 
-    const newOp =
-        {
-            ...op,
-            layer: changedLayers
-        }
-    return newOp
+
+    if (isDeletion) { //remove oldLayer from list
+        const newLayers = op.layer.filter(s => s[0] != oldLayer![0])
+        return {...op, layer: newLayers }
+    }
+
+    if (isInsertion) {
+        return {...op, layer: [...op.layer, newLayer]}
+    }
+
+    //is overwrite existing op
+    return {
+        ...op,
+        layer: op.layer.map(someSetting =>
+            someSetting[0] == newLayer[0] ? newLayer : someSetting)
+    }
 }
