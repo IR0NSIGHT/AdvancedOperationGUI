@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {applyLayerChange, GlobalWpOperation} from "./GlobalWpOperation";
 import {WpLayerSetting} from "./WpLayerSetting";
 import LayerSettingMenu from "../Layer/LayerSettingMenu";
+import {Button} from "@material-ui/core";
+import {NoneLayer} from "../Layer/LayerSelector";
 
 export type OperationWrapperProps = {
     initalOperation: GlobalWpOperation
@@ -10,11 +12,14 @@ export type OperationWrapperProps = {
 const OperationWrapper = (props: OperationWrapperProps) => {
     const [operation, setOperation] = useState(props.initalOperation);
 
-    const updateLayer = (oldSetting: WpLayerSetting, newSetting: WpLayerSetting) => {
-        const newOp = {...operation, layer: applyLayerChange(operation.layer, oldSetting, newSetting )}
+    const updateLayer = (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => {
+        const newOp = {...operation, layer: applyLayerChange(operation.layer, oldSetting, newSetting)}
         setOperation(newOp)
     }
 
+    const addLayer = () => {
+        updateLayer(null, [NoneLayer, 0])
+    }
     const writeLayers = operation.layer.map(setting =>
         <LayerSettingMenu layerSetting={setting} onUpdateSetting={updateLayer}/>
     )
@@ -31,8 +36,10 @@ const OperationWrapper = (props: OperationWrapperProps) => {
                 Global Operation {operation.name}
             </div>
             {writeLayers}
-
-            <pre>{JSON.stringify(operation,null,3)}</pre>
+            <Button variant="contained" color="primary" onClick={addLayer}>
+                Add new layer
+            </Button>
+            <pre>{JSON.stringify(operation, null, 3)}</pre>
         </div>
     );
 };

@@ -26,7 +26,7 @@ export type GlobalWpOperation = {
  * @returns new layerSetting[] in alphabetic order
  */
 export const applyLayerChange = (layers: WpLayerSetting[], oldLayer: WpLayerSetting | null, newLayer: WpLayerSetting | null): WpLayerSetting[] => {
-    const isDeletion = newLayer == null || newLayer![0] == NoneLayer
+    const isDeletion = newLayer == null
 
     const otherLayers = layers.filter(s => (oldLayer == null || s[0] != oldLayer![0]) && (newLayer == null || s[0] != newLayer![0]));
 
