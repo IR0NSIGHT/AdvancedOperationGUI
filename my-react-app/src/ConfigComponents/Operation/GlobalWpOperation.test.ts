@@ -4,7 +4,6 @@ import {WpLayerSetting} from "./WpLayerSetting";
 describe('changeWriteLayer function', () => {
 
 
-
     it('add new layer', () => {
         const initialOp: GlobalWpOperation = {
             "name": "small bubble forest",
@@ -23,7 +22,7 @@ describe('changeWriteLayer function', () => {
         const writeLayer: WpLayerSetting = ['Deciduous', 4]; // New layer to replace 'Deciduous' in the operation
         const updatedOp = changeWriteLayer(initialOp, null, writeLayer);
 
-        expect(updatedOp.layer).toEqual([['Frost', 1], ['Pines', 3], ['Deciduous', 4]]);
+        expect(updatedOp.layer).toEqual([['Deciduous', 4], ['Frost', 1], ['Pines', 3]]);
     });
 
     it('mutate existing layer value', () => {
@@ -66,7 +65,7 @@ describe('changeWriteLayer function', () => {
         }
         expect(initialOp.layer).toEqual([['Frost', 1], ['Pines', 3]])
 
-        const writeLayer: WpLayerSetting|null = null; // A layer that doesn't exist in the initial operation
+        const writeLayer: WpLayerSetting | null = null; // A layer that doesn't exist in the initial operation
         const updatedOp = changeWriteLayer(initialOp, ['Pines', 3], writeLayer);
 
         expect(updatedOp.layer).toEqual([['Frost', 1]])
@@ -93,5 +92,45 @@ describe('changeWriteLayer function', () => {
         const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], writeLayer);
 
         expect(updatedOp.layer).toEqual([['Annotations', 7]])
+    });
+
+    it('does not allow double entries', () => {
+        const initialOp: GlobalWpOperation = {
+            "name": "small bubble forest",
+            "layer": [['Pines', 7], ["Annotations", 12]],
+            "onlyOnLayer": [[
+                "Mask - Forest",
+                1
+            ]],
+            "perlin": {
+                "seed": 12345678.0,
+                "scale": 40.0,
+                "amplitude": 1.0,
+                "threshold": 0.5,
+            }
+        }
+        const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], ['Annotations', 7]);
+
+        expect(updatedOp.layer).toEqual([['Annotations', 7]])
+    });
+
+    it('overwrites old and new layer matches', () => {
+        const initialOp: GlobalWpOperation = {
+            "name": "small bubble forest",
+            "layer": [['Pines', 7], ['Pines', 2], ["Annotations", 12], ["Annotations", 2], ["Burgers", 3]],
+            "onlyOnLayer": [[
+                "Mask - Forest",
+                1
+            ]],
+            "perlin": {
+                "seed": 12345678.0,
+                "scale": 40.0,
+                "amplitude": 1.0,
+                "threshold": 0.5,
+            }
+        }
+        const updatedOp = changeWriteLayer(initialOp, ['Pines', 7], ['Annotations', 7]);
+
+        expect(updatedOp.layer).toEqual([['Annotations', 7],["Burgers", 3] ])
     });
 });
