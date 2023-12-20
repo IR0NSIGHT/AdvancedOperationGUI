@@ -181,7 +181,7 @@ export const wpTerrainTypes: any[] = [
     {id: 159, name: 'Bare Beaches', shortName: 'Bare Beaches'},
     {id: 160, name: 'Moss', shortName: 'Moss'}
 ];
-export type WpTerrainType = { id: number, name: String, shortName: string}
+export type WpTerrainType = { id: number, name: string, shortName: string}
 export const sortTerrainAlphabetically = (list: WpTerrainType[]) => {
     return [...list].sort((a, b) => {
             return a.shortName.localeCompare(b.shortName)
