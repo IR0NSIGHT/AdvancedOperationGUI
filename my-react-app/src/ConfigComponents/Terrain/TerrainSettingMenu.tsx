@@ -1,24 +1,35 @@
-import {WpLayerSetting} from "../Operation/WpLayerSetting";
+import TerrainSelector from "./TerrainSelector";
+import {getTerrainById, sortTerrainAlphabetically, wpTerrainTypes, WpTerrainType} from "./WpTerrainTypes";
+
+export type WeightedTerrainSetting = { terrain: WpTerrainType, weight: number }
 
 export type TerrainSettingMenuProps = {
-    layerSetting: WpLayerSetting
-    onUpdateSetting: (oldSetting: WpLayerSetting, newSetting: WpLayerSetting) => void
+    terrainSetting: WeightedTerrainSetting
+    onUpdateSetting: (oldSetting: WeightedTerrainSetting, newSetting: WeightedTerrainSetting) => void
 }
 
-const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> = ({layerSetting, onUpdateSetting}: TerrainSettingMenuProps) => {
-    const onNameChange = (name: string) => {
-        onUpdateSetting(layerSetting, [name, layerSetting[1]])
-    }
-    const onValueChange = (value: string) => {
-        console.log("on value change: newValue", value)
-        onUpdateSetting(layerSetting, [layerSetting[0], parseInt(value)])
-    }
-    return (
-        <div>
-            <LayerSelector layerName={layerSetting[0]} layerList={DefaultLayers} onUpdateLayerName={onNameChange}/>
-    <LayerValueSelector layerValue={{ name: layerSetting[0], value: layerSetting[1]}} allowedValues={DefaultLayerValues} onUpdateValue={onValueChange}/>
-    </div>
-);
-};
+const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> =
+    ({terrainSetting, onUpdateSetting}: TerrainSettingMenuProps) => {
 
-export default LayerSettingMenu;
+        const onTerrainTypeChanged = (id: number) => {
+            const newTerrain = getTerrainById(id, wpTerrainTypes)
+            if (newTerrain == undefined) {
+                console.error("terrain type with id " + id + " was not found!")
+                return
+            }
+            onUpdateSetting(terrainSetting, {...terrainSetting, terrain: newTerrain})
+        }
+        const onValueChange = (value: number) => {
+            console.log("on value change: newValue", value)
+            onUpdateSetting(terrainSetting, {...terrainSetting, weight: value})
+        }
+        return (
+            <div>
+                <TerrainSelector onUpdateTerrainName={onTerrainTypeChanged} terrain={terrainSetting.terrain}
+                                 terrainList={sortTerrainAlphabetically(wpTerrainTypes)}/>
+                <div>weight: 1</div>
+            </div>
+        );
+    };
+
+export default TerrainSettingMenu;

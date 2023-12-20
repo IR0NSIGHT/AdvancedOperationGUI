@@ -1,4 +1,4 @@
-export const terrainTypes: any[] = [
+export const wpTerrainTypes: any[] = [
     {
         id: 0,
         name: 'Grass (grass with flowers, tall grass and ferns here and there, and seagrass and kelp under water)',
