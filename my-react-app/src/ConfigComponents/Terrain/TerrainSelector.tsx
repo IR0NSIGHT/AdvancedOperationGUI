@@ -1,10 +1,11 @@
 import React from 'react';
 import {FormControl, InputLabel, MenuItem, Select} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {terrainType} from "./TerrainTypes";
 
 export type TerrainSelectorProps = {
-    terrain: WpTerrain,
-    terrainList: WpTerrain[],
+    terrain: terrainType,
+    terrainList: terrainType[],
     onUpdateTerrainName: (newTerrainId: number) => void
 }
 
@@ -18,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type WpTerrain = { id: number, name: string }
-export const NoneTerrain : WpTerrain = { id: -1, name: "None"}
+export const NoneTerrain : terrainType = { id: -1, name: "None", shortName: "None"}
 
 export const TerrainSelector: React.FC<TerrainSelectorProps> = ({
                                                                     terrain,
@@ -41,6 +41,10 @@ export const TerrainSelector: React.FC<TerrainSelectorProps> = ({
                 value={terrain.id}
                 label="Terrain"
                 onChange={handleNameChange}
+                renderValue={(selected) => {
+                    const selectedTerrain = terrainList.find((t) => t.id === selected);
+                    return selectedTerrain ? selectedTerrain.shortName : NoneTerrain.shortName;
+                }}
             >
                 <MenuItem value={NoneTerrain.id}>
                     <em>{NoneTerrain.name}</em>
