@@ -33,10 +33,23 @@ const OperationWrapper: React.FC<OperationWrapperProps> = ({initalOperation}) =>
         setGlobalOperation(newOp)
     }
 
-    return (
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setGlobalOperation({ ...globalOperation, name: event.target.value });
+    };
+
+    return(
         <CollapsibleComponent
             title={globalOperation.name}
             content={<div>
+                <div>
+                    <label htmlFor="nameInput">Operation Name:</label>
+                    <input
+                        type="text"
+                        id="nameInput"
+                        value={globalOperation.name}
+                        onChange={handleNameChange}
+                    />
+                </div>
                 <OperationLayerSettings mode={LayerSettingsMode.APPLY}
                                         layers={globalOperation.layer}
                                         updateLayer={updateApplyLayer}/>
