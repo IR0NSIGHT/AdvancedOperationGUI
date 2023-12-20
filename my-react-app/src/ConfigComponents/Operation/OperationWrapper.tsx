@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {applyLayerChange, DisplayOperation, GlobalWpOperation} from "./GlobalWpOperation";
+import {applyLayerChange, DisplayOperation} from "./GlobalWpOperation";
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import {CollapsibleComponent} from "./CollapsibleComponent";
 import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
@@ -13,7 +13,6 @@ export type OperationWrapperProps = {
 const OperationWrapper: React.FC<OperationWrapperProps> = ({initalOperation}) => {
     const [globalOperation, setGlobalOperation] = useState(initalOperation);
 
-    const weightedApplyTerrain = initalOperation.terrain
     const handleTerrainChanged = (oldSetting: WeightedTerrainSetting | null, newSetting: WeightedTerrainSetting | null) => {
         setGlobalOperation({
             ...globalOperation, terrain: updateTerrainList(oldSetting, newSetting, globalOperation.terrain)

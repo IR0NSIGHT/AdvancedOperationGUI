@@ -1,7 +1,7 @@
 import React from 'react';
 import {Story} from '@storybook/react';
 import OperationWrapper from './OperationWrapper';
-import {DisplayOperation, emptyOperation, GlobalWpOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
+import {DisplayOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
 
 export default {
     title: 'Components/OperationWrapper',
