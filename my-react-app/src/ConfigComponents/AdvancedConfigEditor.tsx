@@ -8,25 +8,27 @@ export type AdvancedConfigEditorProps = {
     initialConfig: AdvancedConfig
 }
 
-type AdvancedConfig = {
-    operations: GlobalWpOperation[]
+export type AdvancedConfig = {
+    operations: GlobalWpOperation[],
+    author: string,
+    date: string
 }
 
 function denullifyConfigArray<T>(configT: T | T[] | undefined): T[] {
-    if (configT == undefined)
+    if (configT === undefined)
         return []
     if (typeof configT === 'number')
         return [configT]
     else if (Array.isArray(configT))
         return configT
     else
-        throw Error("can not translate config array!",configT)
+        throw Error("can not translate config array!"+configT)
 }
 
 const terrainIdsToTerrains = (xs: number[]): WpTerrainType[] => {
     return xs
         .map(x => getTerrainById(x, wpTerrainTypes))
-        .filter(x => typeof x !== undefined) as WpTerrainType[]
+        .filter(x => x !== undefined) as WpTerrainType[]
 }
 
 

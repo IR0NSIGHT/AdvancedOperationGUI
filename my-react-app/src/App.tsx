@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {AdvancedConfig, AdvancedConfigEditor} from "./ConfigComponents/AdvancedConfigEditor";
+import {formatDate} from "@storybook/blocks";
 
+const initialConfig: AdvancedConfig= {
+  operations: [{
+    name: "My first operation",
+    terrain: [0,0,0,1,2,3],
+    layer: [["Pines",5],["Deciduous",7],["Annotations",1]],
+    belowDegrees: undefined,
+    aboveDegrees: undefined,
+    belowLevel: undefined,
+    aboveLevel: undefined,
+    onlyOnLayer: undefined,
+    perlin: undefined
+  }],
+  author: "IR0NSIGHT",
+  date: formatDate(Date.now())
+}
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AdvancedConfigEditor initialConfig={initialConfig} />
     </div>
   );
 }

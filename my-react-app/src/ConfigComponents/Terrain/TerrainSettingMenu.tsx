@@ -15,7 +15,7 @@ const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> =
 
         const onTerrainTypeChanged = (id: number) => {
             const newTerrain = getTerrainById(id, allowedTerrains)
-            if (newTerrain == undefined) {
+            if (newTerrain === undefined) {
                 console.error("terrain type with id " + id + " was not found!")
                 return
             }

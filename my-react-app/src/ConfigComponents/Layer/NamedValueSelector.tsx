@@ -45,7 +45,7 @@ export const DefaultLayerValues: NamedNumericValue[] = [
 
 
 export const findNamesLayer = (value: number): NamedNumericValue => {
-    return DefaultLayerValues.find(a => a.value == value)!
+    return DefaultLayerValues.find(a => a.value === value)!
 }
 export const NamedValueSelector: React.FC<NamedValueSelectorProps> = ({
                                                                           layerValue,

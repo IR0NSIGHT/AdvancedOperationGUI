@@ -2,6 +2,7 @@ import React from 'react';
 import {Story} from '@storybook/react';
 import {emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
 import {AdvancedConfigEditor} from "./AdvancedConfigEditor";
+import {formatDate} from "@storybook/blocks";
 
 export default {
     title: 'Components/AdvancedConfigEditor',
@@ -72,6 +73,6 @@ const operations: GlobalWpOperation[] = [
 ]
 
 const Template: Story = () => <AdvancedConfigEditor
-    initialConfig={{operations: operations}}/>;
+    initialConfig={{operations: operations, author: "IR0NSIGHT", date: formatDate(Date.now())}}/>;
 
 export const Default = Template.bind({});

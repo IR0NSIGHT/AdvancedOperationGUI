@@ -1,7 +1,7 @@
 import {updateTerrainList} from "./OperationTerrainList";
 import {WeightedTerrainSetting} from "./TerrainSettingMenu";
 
-describe("  mutating terrain list", () => {
+describe("mutating terrain list", () => {
     const grass = {id: 0, name: "grass", shortName: "grass"}
     const stone = {id: 1, name: "stone", shortName: "stone"}
     const sand = {id: 2, name: "sand", shortName: "sand"}

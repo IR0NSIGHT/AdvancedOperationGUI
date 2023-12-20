@@ -1,7 +1,7 @@
 import React from 'react';
 import LayerSelector from "./LayerSelector";
 import {DefaultLayers, WpLayerSetting} from "./WpLayerSetting";
-import {DefaultLayerValues, findNamesLayer, NamedValueSelector} from "./NamedValueSelector";
+import {DefaultLayerValues, NamedValueSelector} from "./NamedValueSelector";
 
 export type LayerSettingMenuProps = {
     layerSetting: WpLayerSetting
