@@ -1,7 +1,7 @@
 import React from 'react';
 import {Story} from '@storybook/react';
 import OperationWrapper from './OperationWrapper';
-import {GlobalWpOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
+import {emptyOperation, GlobalWpOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
 
 export default {
     title: 'Components/OperationWrapper',
@@ -9,6 +9,7 @@ export default {
 };
 
 const defaultOperation: GlobalWpOperation = {
+    ...emptyOperation,
     "name": "small bubble forest",
     "layer": [["Annotations", 5], ["Frost", 0], ["Pines", 7]],
     "onlyOnLayer": [[

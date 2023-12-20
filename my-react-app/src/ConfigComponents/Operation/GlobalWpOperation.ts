@@ -1,12 +1,11 @@
 import {WpLayerSetting} from "./WpLayerSetting";
 import assert from "assert";
-import {NoneLayer} from "../Layer/LayerSelector";
 
 export type GlobalWpOperation = {
     name: string,
     terrain: number[] | number | undefined
-    layer: WpLayerSetting[],
-    onlyOnLayer: WpLayerSetting[]
+    layer: WpLayerSetting[] | undefined,
+    onlyOnLayer: WpLayerSetting[] | undefined
     aboveLevel: number | undefined,
     belowLevel: number | undefined,
     belowDegrees: number | undefined,
@@ -31,8 +30,11 @@ export type GlobalWpOperation = {
  * @param newLayer
  * @returns new layerSetting[] in alphabetic order
  */
-export const applyLayerChange = (layers: WpLayerSetting[], oldLayer: WpLayerSetting | null, newLayer: WpLayerSetting | null): WpLayerSetting[] => {
+export const applyLayerChange = (layers: WpLayerSetting[]|undefined, oldLayer: WpLayerSetting | null, newLayer: WpLayerSetting | null): WpLayerSetting[] => {
     const isDeletion = newLayer == null
+    if (layers == undefined) {
+        return newLayer == null ? [] : [newLayer]
+    }
 
     const otherLayers = layers.filter(s => (oldLayer == null || s[0] != oldLayer![0]) && (newLayer == null || s[0] != newLayer![0]));
 
@@ -48,4 +50,15 @@ const sortLayersAlphabetic = (layers: WpLayerSetting[]) => {
     return layers.sort((a, b) => {
         return a[0].localeCompare(b[0]);
     })
+}
+export const emptyOperation: GlobalWpOperation = {
+    aboveDegrees: undefined,
+    aboveLevel: undefined,
+    belowDegrees: undefined,
+    belowLevel: undefined,
+    layer: undefined,
+    name: "",
+    onlyOnLayer: undefined,
+    perlin: undefined,
+    terrain: undefined
 }

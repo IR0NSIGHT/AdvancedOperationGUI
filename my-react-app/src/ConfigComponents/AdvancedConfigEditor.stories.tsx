@@ -1,24 +1,12 @@
 import React from 'react';
 import {Story} from '@storybook/react';
-import {GlobalWpOperation} from "./Operation/GlobalWpOperation";
+import {emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
 import {AdvancedConfigEditor} from "./AdvancedConfigEditor";
 
 export default {
     title: 'Components/AdvancedConfigEditor',
     component: AdvancedConfigEditor,
 };
-
-const emptyOperation: GlobalWpOperation = {
-    aboveDegrees: undefined,
-    aboveLevel: undefined,
-    belowDegrees: undefined,
-    belowLevel: undefined,
-    layer: [],
-    name: "",
-    onlyOnLayer: [],
-    perlin: undefined,
-    terrain: undefined
-}
 
 const operations: GlobalWpOperation[] = [
     {
