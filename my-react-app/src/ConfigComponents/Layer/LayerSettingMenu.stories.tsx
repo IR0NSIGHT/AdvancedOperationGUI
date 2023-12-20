@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Story} from '@storybook/react';
 import LayerSettingMenu, {LayerSettingMenuProps} from "./LayerSettingMenu";
-import {WpLayerSetting} from "../Operation/WpLayerSetting";
+import {WpLayerSetting} from "./WpLayerSetting";
 
 export default {
     title: 'Components/LayerSettingMenu',

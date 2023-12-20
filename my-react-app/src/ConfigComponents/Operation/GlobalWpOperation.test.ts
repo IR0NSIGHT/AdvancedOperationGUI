@@ -1,5 +1,5 @@
 import {applyLayerChange, emptyOperation, GlobalWpOperation} from './GlobalWpOperation';
-import {WpLayerSetting} from "./WpLayerSetting";
+import {WpLayerSetting} from "../Layer/WpLayerSetting";
 
 describe('changeWriteLayer function', () => {
 

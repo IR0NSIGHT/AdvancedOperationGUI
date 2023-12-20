@@ -1,4 +1,4 @@
-import {WpLayerSetting} from "./WpLayerSetting";
+import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import assert from "assert";
 
 export type GlobalWpOperation = {

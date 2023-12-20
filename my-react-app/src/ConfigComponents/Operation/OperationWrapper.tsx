@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {applyLayerChange, GlobalWpOperation} from "./GlobalWpOperation";
-import {WpLayerSetting} from "./WpLayerSetting";
+import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import {CollapsibleComponent} from "./CollapsibleComponent";
 import {LayerSettingsMode, OperationLayerSettings} from "./OperationLayerSettings";
 
