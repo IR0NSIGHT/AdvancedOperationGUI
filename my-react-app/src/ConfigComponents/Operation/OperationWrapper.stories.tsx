@@ -12,8 +12,8 @@ const defaultOperation: GlobalWpOperation = {
     "name": "small bubble forest",
     "layer": [["Annotations", 5], ["Frost", 0], ["Pines", 7]],
     "onlyOnLayer": [[
-        "Mask - Forest",
-        1
+        "Pines",
+        -1
     ]],
     "perlin": {
         "seed": 12345678.0,
