@@ -1,11 +1,30 @@
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import assert from "assert";
+import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
 
 export type GlobalWpOperation = {
     name: string,
     terrain: number[] | number | undefined
-    layer: WpLayerSetting[] | undefined,
-    onlyOnLayer: WpLayerSetting[] | undefined
+    layer: WpLayerSetting[] | WpLayerSetting | undefined,
+    onlyOnLayer: WpLayerSetting[] | WpLayerSetting | undefined
+    aboveLevel: number | undefined,
+    belowLevel: number | undefined,
+    belowDegrees: number | undefined,
+    aboveDegrees: number | undefined,
+
+    perlin: {
+        "seed": number,
+        "scale": number,
+        "amplitude": number,
+        "threshold": number,
+    } | undefined
+}
+
+export type DisplayOperation = {
+    name: string,
+    terrain: WeightedTerrainSetting[]
+    layer: WpLayerSetting[],
+    onlyOnLayer: WpLayerSetting[]
     aboveLevel: number | undefined,
     belowLevel: number | undefined,
     belowDegrees: number | undefined,

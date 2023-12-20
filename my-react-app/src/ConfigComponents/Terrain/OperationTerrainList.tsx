@@ -37,12 +37,14 @@ export const updateTerrainList = (oldSetting: WeightedTerrainSetting| null, newS
     })
 }
 
+const NoneTerrain: WpTerrainType = { id: -1, name: "None", shortName: "None"}
+
 export const OperationTerrainList: React.FC<OperationTerrainListProps> = ({mode, terrains, onTerrainChanged}) => {
     const allTerrains = terrains == null ? [] : terrains.map(t =>
         <TerrainSettingMenu terrainSetting={t} onUpdateSetting={onTerrainChanged} />
     )
-    const addLayer = () => {
-        onTerrainChanged(null, {terrain: wpTerrainTypes[0], weight: 1})
+    const addTerrain = () => {
+        onTerrainChanged(null, {terrain: NoneTerrain, weight: 1})
     }
     const title = mode == TerrainSettingsMode.APPLY ? "Apply Terrain" : "Only on Terrain"
     return <div>
@@ -50,7 +52,7 @@ export const OperationTerrainList: React.FC<OperationTerrainListProps> = ({mode,
             <h3>{title}</h3>
             {allTerrains}
         </div>
-        <Button variant="contained" color="primary" onClick={addLayer}>
+        <Button variant="contained" color="primary" onClick={addTerrain}>
             Add new terrain
         </Button>
         <hr/>

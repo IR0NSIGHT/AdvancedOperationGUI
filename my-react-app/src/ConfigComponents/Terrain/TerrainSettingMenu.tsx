@@ -1,4 +1,4 @@
-import TerrainSelector from "./TerrainSelector";
+import TerrainSelector, {NoneTerrain} from "./TerrainSelector";
 import {getTerrainById, sortTerrainAlphabetically, wpTerrainTypes, WpTerrainType} from "./WpTerrainTypes";
 import {NamedValueSelector, NamedNumericValue} from "../Layer/NamedValueSelector";
 
@@ -11,9 +11,10 @@ export type TerrainSettingMenuProps = {
 
 const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> =
     ({terrainSetting, onUpdateSetting}: TerrainSettingMenuProps) => {
+        const allowedTerrains = [...wpTerrainTypes, NoneTerrain]
 
         const onTerrainTypeChanged = (id: number) => {
-            const newTerrain = getTerrainById(id, wpTerrainTypes)
+            const newTerrain = getTerrainById(id, allowedTerrains)
             if (newTerrain == undefined) {
                 console.error("terrain type with id " + id + " was not found!")
                 return
@@ -32,13 +33,13 @@ const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> =
         return (
             <div>
                 <TerrainSelector onUpdateTerrainName={onTerrainTypeChanged} terrain={terrainSetting.terrain}
-                                 terrainList={sortTerrainAlphabetically(wpTerrainTypes)}/>
+                                 terrainList={sortTerrainAlphabetically(allowedTerrains)}/>
                 <NamedValueSelector layerValue={{name: terrainSetting.weight.toString(), value: terrainSetting.weight}}
                                     allowedValues={allowedWeights}
                                     onUpdateValue={onValueChange}
                 />
             </div>
-    );
+        );
     };
 
-    export default TerrainSettingMenu;
+export default TerrainSettingMenu;

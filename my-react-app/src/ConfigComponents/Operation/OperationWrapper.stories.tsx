@@ -1,17 +1,16 @@
 import React from 'react';
 import {Story} from '@storybook/react';
 import OperationWrapper from './OperationWrapper';
-import {emptyOperation, GlobalWpOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
+import {DisplayOperation, emptyOperation, GlobalWpOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
 
 export default {
     title: 'Components/OperationWrapper',
     component: OperationWrapper,
 };
 
-const defaultOperation: GlobalWpOperation = {
-    ...emptyOperation,
-    "name": "small bubble forest",
+const defaultOperation: DisplayOperation = {
     "layer": [["Annotations", 5], ["Frost", 0], ["Pines", 7]],
+    "name": "small bubble forest",
     "onlyOnLayer": [[
         "Pines",
         -1
@@ -21,7 +20,12 @@ const defaultOperation: GlobalWpOperation = {
         "scale": 40.0,
         "amplitude": 1.0,
         "threshold": 0.5,
-    }
+    },
+    terrain: [],
+    aboveLevel: undefined,
+    belowLevel: undefined,
+    aboveDegrees: undefined,
+    belowDegrees: undefined
 }
 
 const Template: Story = () => <OperationWrapper initalOperation={defaultOperation}/>;
