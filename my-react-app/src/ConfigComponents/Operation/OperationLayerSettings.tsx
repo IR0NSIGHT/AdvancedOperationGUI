@@ -11,13 +11,13 @@ export enum LayerSettingsMode {
 
 type OperationLayerSettingsProps = {
     mode: LayerSettingsMode,
-    layers: WpLayerSetting[],
+    layers: WpLayerSetting[] | undefined,
     updateLayer: (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => void
 }
 export const OperationLayerSettings: React.FC<OperationLayerSettingsProps> = ({mode, layers, updateLayer}) => {
-    const layersettings = layers.map(setting =>
+    const layersettings = layers != undefined ? layers.map(setting =>
         <LayerSettingMenu layerSetting={setting} onUpdateSetting={updateLayer}/>
-    )
+    ): []
     const addLayer = () => {
         updateLayer(null, [NoneLayer, 0])
     }
