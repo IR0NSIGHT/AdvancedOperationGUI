@@ -5,6 +5,7 @@ import {CollapsibleComponent} from "./CollapsibleComponent";
 import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
 import {OperationTerrainList, TerrainSettingsMode, updateTerrainList} from "../Terrain/OperationTerrainList";
 import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
+import {translateDisplayOperation} from "../AdvancedConfigEditor";
 
 export type OperationWrapperProps = {
     initalOperation: DisplayOperation
@@ -47,7 +48,7 @@ const OperationWrapper: React.FC<OperationWrapperProps> = ({initalOperation}) =>
                 <OperationLayerSettings mode={LayerSettingsMode.ONLY_ON_LAYER}
                                         layers={globalOperation.onlyOnLayer}
                                         updateLayer={updateOnlyOnLayer}/>
-                <pre>{JSON.stringify(globalOperation, null, 3)}</pre>
+                <pre>{JSON.stringify(translateDisplayOperation(globalOperation), null, 3)}</pre>
             </div>}
         />
     );
