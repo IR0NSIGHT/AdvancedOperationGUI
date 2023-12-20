@@ -9,8 +9,8 @@ export type OperationWrapperProps = {
 }
 
 
-const OperationWrapper = (props: OperationWrapperProps) => {
-    const [globalWpOperation, setGlobalWpOperation] = useState(props.initalOperation);
+const OperationWrapper: React.FC<OperationWrapperProps>  = ({ initalOperation }) => {
+    const [globalWpOperation, setGlobalWpOperation] = useState(initalOperation);
 
     const updateApplyLayer = (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => {
         const newOp = {...globalWpOperation, layer: applyLayerChange(globalWpOperation.layer, oldSetting, newSetting)}
