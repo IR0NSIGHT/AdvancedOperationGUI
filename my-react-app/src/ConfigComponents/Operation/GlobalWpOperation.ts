@@ -4,14 +4,20 @@ import {NoneLayer} from "../Layer/LayerSelector";
 
 export type GlobalWpOperation = {
     name: string,
+    terrain: number[] | number | undefined
     layer: WpLayerSetting[],
     onlyOnLayer: WpLayerSetting[]
+    aboveLevel: number | undefined,
+    belowLevel: number | undefined,
+    belowDegrees: number | undefined,
+    aboveDegrees: number | undefined,
+
     perlin: {
         "seed": number,
         "scale": number,
         "amplitude": number,
         "threshold": number,
-    }
+    } | undefined
 }
 
 /**
@@ -31,7 +37,7 @@ export const applyLayerChange = (layers: WpLayerSetting[], oldLayer: WpLayerSett
     const otherLayers = layers.filter(s => (oldLayer == null || s[0] != oldLayer![0]) && (newLayer == null || s[0] != newLayer![0]));
 
     const output = isDeletion ? //remove oldLayer from list
-         sortLayersAlphabetic(otherLayers) :
+        sortLayersAlphabetic(otherLayers) :
         sortLayersAlphabetic([...otherLayers, newLayer])
 
     assert(output.filter(a => a == undefined).length == 0, "Postcondition: illegal values in layersetting list")
