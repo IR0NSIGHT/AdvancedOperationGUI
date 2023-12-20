@@ -181,10 +181,14 @@ export const terrainTypes: any[] = [
     {id: 159, name: 'Bare Beaches', shortName: 'Bare Beaches'},
     {id: 160, name: 'Moss', shortName: 'Moss'}
 ];
-export type terrainType = { id: number, name: String, shortName: string}
-export const sortTerrainAlphabetically = (list: terrainType[]) => {
+export type WpTerrainType = { id: number, name: String, shortName: string}
+export const sortTerrainAlphabetically = (list: WpTerrainType[]) => {
     return [...list].sort((a, b) => {
             return a.shortName.localeCompare(b.shortName)
         }
     )
 }
+
+export const getTerrainById = (id: number, list: WpTerrainType[]): WpTerrainType | undefined => {
+    return list.find(terrain => terrain.id === id);
+};
