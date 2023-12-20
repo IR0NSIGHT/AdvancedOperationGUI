@@ -65,12 +65,12 @@ export const LayerValueSelector: React.FC<LayerValueSelectorProps> = ({
     return (
 
         <FormControl className={classes.formControl}>
-            <InputLabel id="demo-select-small-label">Layer</InputLabel>
+            <InputLabel id="demo-select-small-label">Value</InputLabel>
             <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"
                 value={layerValue.value}
-                label="Layer"
+                label="Value"
                 onChange={onValueChange}
             >
                 {layerListComps}

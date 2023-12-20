@@ -10,10 +10,7 @@ export default {
 
 const defaultOperation: GlobalWpOperation = {
     "name": "small bubble forest",
-    "layer": [[
-        "Pines",
-        7
-    ], ["Annotations", 5]],
+    "layer": [["Annotations", 5], ["Frost", 0], ["Pines", 7]],
     "onlyOnLayer": [[
         "Mask - Forest",
         1
