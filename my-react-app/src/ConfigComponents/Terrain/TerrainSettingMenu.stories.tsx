@@ -1,6 +1,5 @@
-import TerrainSelector, {TerrainSelectorProps} from "./TerrainSelector";
 import {Story} from "@storybook/react";
-import {sortTerrainAlphabetically, wpTerrainTypes} from "./WpTerrainTypes";
+import { wpTerrainTypes} from "./WpTerrainTypes";
 import TerrainSettingMenu, {TerrainSettingMenuProps, WeightedTerrainSetting} from "./TerrainSettingMenu";
 
 export default {

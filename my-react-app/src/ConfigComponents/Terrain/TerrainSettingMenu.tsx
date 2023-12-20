@@ -1,5 +1,6 @@
 import TerrainSelector from "./TerrainSelector";
 import {getTerrainById, sortTerrainAlphabetically, wpTerrainTypes, WpTerrainType} from "./WpTerrainTypes";
+import {NamedValueSelector, NamedNumericValue} from "../Layer/NamedValueSelector";
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType, weight: number }
 
@@ -19,17 +20,25 @@ const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> =
             }
             onUpdateSetting(terrainSetting, {...terrainSetting, terrain: newTerrain})
         }
-        const onValueChange = (value: number) => {
+        const onValueChange = (value: string) => {
             console.log("on value change: newValue", value)
-            onUpdateSetting(terrainSetting, {...terrainSetting, weight: value})
+            onUpdateSetting(terrainSetting, {...terrainSetting, weight: parseInt(value)})
         }
+
+        const allowedWeights: NamedNumericValue[] = [
+            0, 1, 2, 3, 4, 5, 10, 20, 50
+        ].map(w => ({name: w.toString(), value: w}))
+
         return (
             <div>
                 <TerrainSelector onUpdateTerrainName={onTerrainTypeChanged} terrain={terrainSetting.terrain}
                                  terrainList={sortTerrainAlphabetically(wpTerrainTypes)}/>
-                <div>weight: 1</div>
+                <NamedValueSelector layerValue={{name: terrainSetting.weight.toString(), value: terrainSetting.weight}}
+                                    allowedValues={allowedWeights}
+                                    onUpdateValue={onValueChange}
+                />
             </div>
-        );
+    );
     };
 
-export default TerrainSettingMenu;
+    export default TerrainSettingMenu;
