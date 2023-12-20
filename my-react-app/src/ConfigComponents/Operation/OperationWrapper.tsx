@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {applyLayerChange, GlobalWpOperation} from "./GlobalWpOperation";
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import {CollapsibleComponent} from "./CollapsibleComponent";
-import {LayerSettingsMode, OperationLayerSettings} from "./OperationLayerSettings";
+import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
 
 export type OperationWrapperProps = {
     initalOperation: GlobalWpOperation

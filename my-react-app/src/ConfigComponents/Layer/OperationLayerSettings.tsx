@@ -1,7 +1,7 @@
-import {WpLayerSetting} from "../Layer/WpLayerSetting";
+import {WpLayerSetting} from "./WpLayerSetting";
 import React from "react";
-import LayerSettingMenu from "../Layer/LayerSettingMenu";
-import {NoneLayer} from "../Layer/LayerSelector";
+import LayerSettingMenu from "./LayerSettingMenu";
+import {NoneLayer} from "./LayerSelector";
 import {Button} from "@material-ui/core";
 
 export enum LayerSettingsMode {
