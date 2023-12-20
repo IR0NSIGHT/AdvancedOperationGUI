@@ -1,7 +1,7 @@
 import React from 'react';
 import LayerSelector from "./LayerSelector";
 import {DefaultLayers, WpLayerSetting} from "../Operation/WpLayerSetting";
-import {DefaultLayerValues, findNamesLayer, LayerValueSelector} from "../Layer/LayerValueSelector";
+import {DefaultLayerValues, findNamesLayer, NamedValueSelector} from "./NamedValueSelector";
 
 export type LayerSettingMenuProps = {
     layerSetting: WpLayerSetting
@@ -19,7 +19,7 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({layerSetting, onUpda
     return (
         <div>
             <LayerSelector layerName={layerSetting[0]} layerList={DefaultLayers} onUpdateLayerName={onNameChange}/>
-            <LayerValueSelector layerValue={{ name: layerSetting[0], value: layerSetting[1]}} allowedValues={DefaultLayerValues} onUpdateValue={onValueChange}/>
+            <NamedValueSelector layerValue={{ name: layerSetting[0], value: layerSetting[1]}} allowedValues={DefaultLayerValues} onUpdateValue={onValueChange}/>
         </div>
     );
 };
