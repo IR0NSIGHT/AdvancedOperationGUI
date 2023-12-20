@@ -1,4 +1,4 @@
-import {WpLayerSetting} from "./WpLayerSetting";
+import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import React from "react";
 import LayerSettingMenu from "../Layer/LayerSettingMenu";
 import {NoneLayer} from "../Layer/LayerSelector";
