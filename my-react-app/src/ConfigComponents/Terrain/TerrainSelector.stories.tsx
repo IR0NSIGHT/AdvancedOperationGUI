@@ -1,6 +1,6 @@
 import TerrainSelector, {TerrainSelectorProps} from "./TerrainSelector";
 import {Story} from "@storybook/react";
-import {sortTerrainAlphabetically, terrainTypes} from "./TerrainTypes";
+import {sortTerrainAlphabetically, wpTerrainTypes} from "./WpTerrainTypes";
 
 export default {
     title: 'Components/TerrainSelector',
@@ -11,8 +11,8 @@ const Template: Story<TerrainSelectorProps> = (args) => <TerrainSelector {...arg
 
 export const Default = Template.bind({});
 Default.args = {
-    terrain: terrainTypes[0],
-    terrainList: sortTerrainAlphabetically(terrainTypes),
+    terrain: wpTerrainTypes[0],
+    terrainList: sortTerrainAlphabetically(wpTerrainTypes),
     onUpdateTerrainName: (newId: number) => {
         console.log("SELECTED NEW TERRAIN: ", newId)
     }
