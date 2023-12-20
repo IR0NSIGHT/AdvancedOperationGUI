@@ -1,6 +1,6 @@
 import {DisplayOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
 import {useState} from "react";
-import OperationWrapper from "./Operation/OperationWrapper";
+import OperationWrapper from "./Operation/OperationEditor";
 import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrainTypes";
 import {WpLayerSetting} from "./Layer/WpLayerSetting";
 
