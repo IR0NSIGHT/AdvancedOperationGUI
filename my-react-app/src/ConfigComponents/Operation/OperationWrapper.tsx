@@ -2,31 +2,14 @@ import React, {useState} from 'react';
 import {applyLayerChange, GlobalWpOperation} from "./GlobalWpOperation";
 import {WpLayerSetting} from "./WpLayerSetting";
 import LayerSettingMenu from "../Layer/LayerSettingMenu";
-import {Button, Collapse, IconButton, Paper, Typography} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import {NoneLayer} from "../Layer/LayerSelector";
-import {ExpandLess, ExpandMore} from "@mui/icons-material";
-import {makeStyles} from "@material-ui/core/styles";
+import {CollapsibleComponent} from "./CollapsibleComponent";
 
 export type OperationWrapperProps = {
     initalOperation: GlobalWpOperation
 }
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: 'auto',
-        maxWidth: 1200,
-        margin: 'auto',
-        marginTop: theme.spacing(2),
-        padding: theme.spacing(2),
-    },
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        cursor: 'pointer',
-    },
-}));
 
 const OperationWrapper = (props: OperationWrapperProps) => {
     const [advancedConfig, setAdvancedConfig] = useState(props.initalOperation);
@@ -60,39 +43,6 @@ const OperationWrapper = (props: OperationWrapperProps) => {
             <CollapsibleComponent title={advancedConfig.name} content={operationComponent}/>
             <pre>{JSON.stringify(advancedConfig, null, 3)}</pre>
         </div>
-    );
-};
-
-type CollapsibleProps = {
-    title: string;
-    content: JSX.Element;
-};
-
-const CollapsibleComponent: React.FC<CollapsibleProps> = ({title, content}) => {
-    const classes = useStyles();
-    const [expanded, setExpanded] = useState(false);
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
-    return (
-        <Paper className={classes.root}>
-            <div
-                className={classes.header}
-                onClick={handleExpandClick}
-                role="button"
-                tabIndex={0}
-            >
-                <Typography variant="h6">{title}</Typography>
-                <IconButton>
-                    {expanded ? <ExpandLess/> : <ExpandMore/>}
-                </IconButton>
-            </div>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <Typography variant="body1">{content}</Typography>
-            </Collapse>
-        </Paper>
     );
 };
 
