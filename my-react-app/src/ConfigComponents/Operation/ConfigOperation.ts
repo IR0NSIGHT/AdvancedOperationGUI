@@ -60,7 +60,7 @@ export const configOperationToDisplay = (
     terrain: terrainIdsToTerrains(
       configEntryToArray<number>(configOp.terrain)
     ).map((t) => ({
-      weight: 1,
+      weight: 1,  //FIXME respect occurences as weight
       terrain: t,
     })),
     onlyOnTerrain: terrainIdsToTerrains(
