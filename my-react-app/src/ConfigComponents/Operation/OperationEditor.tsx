@@ -3,7 +3,7 @@ import { applyLayerChange, WpLayerSetting } from "../Layer/WpLayerSetting";
 import { CollapsibleComponent } from "./CollapsibleComponent";
 import { LayerSettingsMode, LayerListEditor } from "../Layer/LayerListEditor";
 import {
-  OperationTerrainList,
+  OperationTerrainList, TerrainListEditor,
   TerrainSettingsMode,
   updateTerrainList,
 } from "../Terrain/OperationTerrainList";
@@ -15,6 +15,7 @@ import {
 import { Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
+import {WpTerrainType, wpTerrainTypes} from "../Terrain/WpTerrainTypes";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -33,7 +34,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
   updateOperation,
   deleteOperation,
 }) => {
-  const handleTerrainChanged = (
+  const onApplyTerrainChange = (
     oldSetting: WeightedTerrainSetting | null,
     newSetting: WeightedTerrainSetting | null
   ) => {
@@ -47,7 +48,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     });
   };
 
-  const updateApplyLayer = (
+  const onApplyLayerChange = (
     oldSetting: WpLayerSetting | null,
     newSetting: WpLayerSetting | null
   ) => {
@@ -58,7 +59,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     updateOperation(newOp);
   };
 
-  const updateOnlyOnLayer = (
+  const onLayerFilterChange = (
     oldSetting: WpLayerSetting | null,
     newSetting: WpLayerSetting | null
   ) => {
@@ -73,7 +74,15 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     updateOperation(newOp);
   };
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onTerrainFilterChange = (old: WpTerrainType[], newL: WpTerrainType[]) => {
+    const newOp = {
+      ...initialOperation,
+      onlyOnTerrain: newL
+    };
+    updateOperation(newOp);
+  }
+
+  const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateOperation({ ...initialOperation, name: event.target.value });
   };
   const classes = useStyles();
@@ -89,7 +98,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                 type="text"
                 id="nameInput"
                 value={initialOperation.name}
-                onChange={handleNameChange}
+                onChange={onNameChange}
               />
             </div>
             <DeleteButton
@@ -105,28 +114,27 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                 <LayerListEditor
                   mode={LayerSettingsMode.APPLY}
                   layers={initialOperation.layer}
-                  updateLayer={updateApplyLayer}
+                  updateLayer={onApplyLayerChange}
                 />
               </Grid>
               <Grid item xs={6}>
                 <LayerListEditor
                   mode={LayerSettingsMode.ONLY_ON_LAYER}
                   layers={initialOperation.onlyOnLayer}
-                  updateLayer={updateOnlyOnLayer}
+                  updateLayer={onLayerFilterChange}
                 />
               </Grid>
               <Grid item xs={6}>
                 <OperationTerrainList
-                  mode={TerrainSettingsMode.APPLY}
                   terrains={initialOperation.terrain}
-                  onTerrainChanged={handleTerrainChanged}
+                  onTerrainChanged={onApplyTerrainChange}
                 />
               </Grid>
               <Grid item xs={6}>
-                <OperationTerrainList
-                  mode={TerrainSettingsMode.ONLY_ON_TERRAIN}
-                  terrains={initialOperation.terrain}
-                  onTerrainChanged={handleTerrainChanged}
+                <TerrainListEditor
+                  terrainList={initialOperation.onlyOnTerrain}
+                  onListChanged={onTerrainFilterChange}
+                  allowedTerrains={wpTerrainTypes}
                 />
               </Grid>
             </Grid>
