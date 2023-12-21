@@ -1,20 +1,16 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import {IconButton} from "@material-ui/core";
 
 export type DeleteButtonProp = {
     onClick: () => void
 }
 export const DeleteButton: React.FC<DeleteButtonProp> = ({onClick}) => {
     return (
-        <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<DeleteIcon/>}
-            onClick={onClick}
+        <IconButton aria-label="delete" size="small" onClick={onClick}
         >
-            Delete
-        </Button>
+            <DeleteIcon fontSize="small"/>
+        </IconButton>
     );
 };
 
