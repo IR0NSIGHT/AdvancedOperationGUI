@@ -1,17 +1,17 @@
 import { Story } from "@storybook/react";
 import { wpTerrainTypes } from "./WpTerrainTypes";
-import TerrainSettingMenu, {
-  TerrainSettingMenuProps,
+import {WeightedTerrainEditor,
+  WeightedTerrainEditorProps,
   WeightedTerrainSetting,
-} from "./TerrainSettingMenu";
+} from "./WeightedTerrainEditor";
 
 export default {
   title: "Components/TerrainSettingMenu",
-  component: TerrainSettingMenu,
+  component: WeightedTerrainEditor,
 };
 
-const Template: Story<TerrainSettingMenuProps> = (args) => (
-  <TerrainSettingMenu {...args} />
+const Template: Story<WeightedTerrainEditorProps> = (args) => (
+  <WeightedTerrainEditor {...args} />
 );
 
 const onUpdateSetting = (

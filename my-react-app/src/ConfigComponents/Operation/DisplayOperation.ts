@@ -1,4 +1,4 @@
-import { WeightedTerrainSetting } from "../Terrain/TerrainSettingMenu";
+import { WeightedTerrainSetting } from "../Terrain/WeightedTerrainEditor";
 import { WpLayerSetting } from "../Layer/WpLayerSetting";
 import { ConfigOperation, compassDir, slopeDir } from "./ConfigOperation";
 import assert from "assert";

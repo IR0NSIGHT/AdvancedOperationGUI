@@ -7,7 +7,7 @@ import {
   TerrainSettingsMode,
   updateTerrainList,
 } from "../Terrain/OperationTerrainList";
-import { WeightedTerrainSetting } from "../Terrain/TerrainSettingMenu";
+import { WeightedTerrainSetting } from "../Terrain/WeightedTerrainEditor";
 import {
   DisplayOperation,
   translateDisplayOperation,

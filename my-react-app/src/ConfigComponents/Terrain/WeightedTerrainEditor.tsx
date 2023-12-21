@@ -12,7 +12,7 @@ import {
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType; weight: number };
 
-export type TerrainSettingMenuProps = {
+export type WeightedTerrainEditorProps = {
   terrainSetting: WeightedTerrainSetting;
   onUpdateSetting: (
     oldSetting: WeightedTerrainSetting,
@@ -20,10 +20,10 @@ export type TerrainSettingMenuProps = {
   ) => void;
 };
 
-const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> = ({
+export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
   terrainSetting,
   onUpdateSetting,
-}: TerrainSettingMenuProps) => {
+}: WeightedTerrainEditorProps) => {
   const allowedTerrains = [...wpTerrainTypes, NoneTerrain];
 
   const onTerrainTypeChanged = (id: number) => {
@@ -65,4 +65,3 @@ const TerrainSettingMenu: React.FC<TerrainSettingMenuProps> = ({
   );
 };
 
-export default TerrainSettingMenu;
