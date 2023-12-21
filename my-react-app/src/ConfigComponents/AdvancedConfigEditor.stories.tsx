@@ -84,6 +84,7 @@ const Template: Story = () => (
   <AdvancedConfigEditor
     initialConfig={{
       operations: operations,
+      name: "DebugConfig",
       author: "IR0NSIGHT",
       date: formatDate(Date.now()),
     }}

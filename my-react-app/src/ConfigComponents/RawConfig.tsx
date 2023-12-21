@@ -2,6 +2,7 @@ import { ConfigOperation } from "./Operation/ConfigOperation";
 
 export type RawConfig = {
   operations: ConfigOperation[];
+  name: string;
   author: string;
   date: string;
 };
