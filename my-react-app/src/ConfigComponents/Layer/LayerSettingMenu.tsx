@@ -42,7 +42,10 @@ const getNamedValuesByLayer = (layerName: string): NamedNumericValue[] => {
         case "Annotations":
             return annotationValues
         case "Frost":
+        case "Void":
+        case "Read Only":
             return binaryValue
+        //FIXME biomes
         default:
             return DefaultLayerValues
     }
