@@ -8,60 +8,60 @@ import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
 import {translateDisplayOperation} from "../AdvancedConfigEditor";
 
 export type OperationEditorProps = {
-    initalOperation: DisplayOperation
+    initialOperation: DisplayOperation,
+    updateOperation: (op: DisplayOperation) => void,
+    deleteOperation: (op: DisplayOperation) => void
 }
 
-export const OperationEditor: React.FC<OperationEditorProps> = ({initalOperation}) => {
-    const [displayedOperation, setDisplayedOperation] = useState(initalOperation);
-
+export const OperationEditor: React.FC<OperationEditorProps> = ({initialOperation, updateOperation}) => {
     const handleTerrainChanged = (oldSetting: WeightedTerrainSetting | null, newSetting: WeightedTerrainSetting | null) => {
-        setDisplayedOperation({
-            ...displayedOperation, terrain: updateTerrainList(oldSetting, newSetting, displayedOperation.terrain)
+        updateOperation({
+            ...initialOperation, terrain: updateTerrainList(oldSetting, newSetting, initialOperation.terrain)
     })
     }
 
     const updateApplyLayer = (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => {
-        const newOp = {...displayedOperation, layer: applyLayerChange(displayedOperation.layer, oldSetting, newSetting)}
-        setDisplayedOperation(newOp)
+        const newOp = {...initialOperation, layer: applyLayerChange(initialOperation.layer, oldSetting, newSetting)}
+        updateOperation(newOp)
     }
 
     const updateOnlyOnLayer = (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => {
         const newOp = {
-            ...displayedOperation,
-            onlyOnLayer: applyLayerChange(displayedOperation.onlyOnLayer, oldSetting, newSetting)
+            ...initialOperation,
+            onlyOnLayer: applyLayerChange(initialOperation.onlyOnLayer, oldSetting, newSetting)
         }
-        setDisplayedOperation(newOp)
+        updateOperation(newOp)
     }
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDisplayedOperation({ ...displayedOperation, name: event.target.value });
+        updateOperation({ ...initialOperation, name: event.target.value });
     };
 
     return(
         <CollapsibleComponent
-            title={displayedOperation.name}
+            title={initialOperation.name}
             content={<div>
                 <div>
                     <label htmlFor="nameInput">Operation Name:</label>
                     <input
                         type="text"
                         id="nameInput"
-                        value={displayedOperation.name}
+                        value={initialOperation.name}
                         onChange={handleNameChange}
                     />
                 </div>
                 <OperationLayerSettings mode={LayerSettingsMode.APPLY}
-                                        layers={displayedOperation.layer}
+                                        layers={initialOperation.layer}
                                         updateLayer={updateApplyLayer}/>
 
                 <OperationTerrainList mode={TerrainSettingsMode.APPLY}
-                                      terrains={displayedOperation.terrain}
+                                      terrains={initialOperation.terrain}
                                       onTerrainChanged={handleTerrainChanged}/>
 
                 <OperationLayerSettings mode={LayerSettingsMode.ONLY_ON_LAYER}
-                                        layers={displayedOperation.onlyOnLayer}
+                                        layers={initialOperation.onlyOnLayer}
                                         updateLayer={updateOnlyOnLayer}/>
-                <pre>{JSON.stringify(translateDisplayOperation(displayedOperation), null, 3)}</pre>
+                <pre>{JSON.stringify(translateDisplayOperation(initialOperation), null, 3)}</pre>
             </div>}
         />
     );

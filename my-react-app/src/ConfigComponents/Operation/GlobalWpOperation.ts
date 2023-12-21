@@ -21,6 +21,7 @@ export type GlobalWpOperation = {
 }
 
 export type DisplayOperation = {
+    displayId: number,
     name: string,
     terrain: WeightedTerrainSetting[]
     layer: WpLayerSetting[],

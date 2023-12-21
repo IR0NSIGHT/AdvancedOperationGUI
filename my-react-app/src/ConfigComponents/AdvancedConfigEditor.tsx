@@ -4,6 +4,7 @@ import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrain
 import {WpLayerSetting} from "./Layer/WpLayerSetting";
 import {OperationEditor} from "./Operation/OperationEditor";
 import {Button} from "@material-ui/core";
+import assert from "assert";
 
 export type AdvancedConfigEditorProps = {
     initialConfig: AdvancedConfig
@@ -53,8 +54,9 @@ export const translateDisplayOperation = (x: DisplayOperation): GlobalWpOperatio
 }
 
 
-const advancedOperationToDisplay = (configOp: GlobalWpOperation): DisplayOperation => {
+const advancedOperationToDisplay = (configOp: GlobalWpOperation, id: number): DisplayOperation => {
     return {
+        displayId: id,
         aboveDegrees: undefined,
         aboveLevel: undefined,
         belowDegrees: undefined,
@@ -70,23 +72,77 @@ const advancedOperationToDisplay = (configOp: GlobalWpOperation): DisplayOperati
     }
 }
 
+export const emptyDisplayOperation: DisplayOperation = {
+    name: "",
+    displayId: -1,
+    terrain: [],
+    layer: [],
+    onlyOnLayer: [],
+    perlin: undefined,
+    aboveDegrees: undefined,
+    belowDegrees: undefined,
+    belowLevel: undefined,
+    aboveLevel: undefined
+}
+
+
+export enum ArrayMutationAction {
+    INSERT,
+    OVERWRITE,
+    DELETE
+}
+
+/**
+ * updates operations with given op. will replace op with same id, or append to list if not present
+ * @param op
+ * @param actionType type of action to perform
+ * @param displayedOperations
+ */
+export const updateOperationArray = (op: DisplayOperation, actionType: ArrayMutationAction, displayedOperations: DisplayOperation[]): DisplayOperation[] => {
+    switch (actionType) {
+        case ArrayMutationAction.DELETE:
+            return displayedOperations.filter(x => x.displayId !== op.displayId)
+
+        case ArrayMutationAction.INSERT:
+            //find max id in existing ops to generate a higher one:
+            const maxId = displayedOperations.map(op => op.displayId).reduce((previousValue, currentValue) => Math.max(previousValue, currentValue))
+            op.displayId = maxId + 1
+
+            displayedOperations.push(op);
+            return displayedOperations
+
+        case ArrayMutationAction.OVERWRITE:
+            const index = displayedOperations.findIndex(x => x.displayId === op.displayId);
+            assert(displayedOperations[index].displayId == op.displayId, "operation ids went out of synch")
+            displayedOperations[index] = op
+            return displayedOperations
+        default:
+            throw Error("illegal enum type")
+    }
+
+
+}
 export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
-    const [displayedConfig, setDisplayedConfig] = useState(props.initialConfig);
-    const operations = displayedConfig.operations
-        .map(advancedOperationToDisplay)
-        .map(op => (<OperationEditor initalOperation={op}/>))
+    const displayOps = props.initialConfig.operations.map(advancedOperationToDisplay)
+    const [displayedOperations, setDisplayedOperations] = useState<DisplayOperation[]>(displayOps);
 
     const addOperation = () => {
-        const newOP = {
-            ...emptyOperation,
-            name: "My new Global Operation"
-        };
-        setDisplayedConfig(
-            {
-                ...displayedConfig, operations: [...displayedConfig.operations, newOP]
-            }
-        )
+        const newOps = updateOperationArray(
+            {...emptyDisplayOperation, name: "my new operation"},
+            ArrayMutationAction.INSERT,
+            [...displayedOperations]);
+        console.log("new operations after adding:", newOps.map(op => ({name: op.name, id: op.displayId})))
+        setDisplayedOperations(newOps)
     }
+
+    const updateOperation = (op: DisplayOperation) => {
+        setDisplayedOperations(updateOperationArray(op, ArrayMutationAction.OVERWRITE, [...displayedOperations]))
+    }
+
+    const deleteOperation = (op: DisplayOperation) => {
+        setDisplayedOperations(updateOperationArray(op, ArrayMutationAction.DELETE, [...displayedOperations]))
+    }
+
     return (
         <div>
             <h1>AdvancedConfig GUI</h1>
@@ -94,10 +150,11 @@ export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
                 Editor for the AdvancedOperator script
                 by IR0NSIGHT
             </div>
-            {operations}
+            {displayedOperations.map(op => (<OperationEditor initialOperation={op} updateOperation={updateOperation} deleteOperation={deleteOperation}/>))}
             <Button variant="contained" color="primary" onClick={addOperation}>
                 Add new global operation
             </Button>
+            <pre>{JSON.stringify(displayedOperations, null, 3)}</pre>
         </div>
     )
 }
