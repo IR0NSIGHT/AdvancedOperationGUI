@@ -23,6 +23,7 @@ const initialConfig: RawConfig = {
       facing: undefined
     },
   ],
+  name: "DebugConfig",
   author: "IR0NSIGHT",
   date: formatDate(Date.now()),
 };
