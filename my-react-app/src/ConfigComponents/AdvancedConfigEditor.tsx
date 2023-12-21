@@ -1,4 +1,4 @@
-import {emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
+import {emptyConfigOperation, ConfigOperation} from "./Operation/ConfigOperation";
 import React, {useState} from "react";
 import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrainTypes";
 import {WpLayerSetting} from "./Layer/WpLayerSetting";
@@ -12,7 +12,7 @@ export type AdvancedConfigEditorProps = {
 }
 
 export type AdvancedConfig = {
-    operations: GlobalWpOperation[],
+    operations: ConfigOperation[],
     author: string,
     date: string
 }
@@ -34,7 +34,7 @@ const terrainIdsToTerrains = (xs: number[]): WpTerrainType[] => {
         .filter(x => x !== undefined) as WpTerrainType[]
 }
 
-export const translateDisplayOperation = (x: DisplayOperation): GlobalWpOperation => {
+export const translateDisplayOperation = (x: DisplayOperation): ConfigOperation => {
     const configTerrain: number[] = [];
     x.terrain.forEach(t => {
         for (let i = 0; i < t.weight; i++) {
@@ -55,7 +55,7 @@ export const translateDisplayOperation = (x: DisplayOperation): GlobalWpOperatio
 }
 
 
-const advancedOperationToDisplay = (configOp: GlobalWpOperation, id: number): DisplayOperation => {
+const advancedOperationToDisplay = (configOp: ConfigOperation, id: number): DisplayOperation => {
     return {
         displayId: id,
         aboveDegrees: undefined,

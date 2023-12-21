@@ -1,6 +1,6 @@
 import React from 'react';
 import {Story} from '@storybook/react';
-import {emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
+import {emptyConfigOperation, ConfigOperation} from "./Operation/ConfigOperation";
 import {AdvancedConfigEditor} from "./AdvancedConfigEditor";
 import {formatDate} from "@storybook/blocks";
 
@@ -9,16 +9,16 @@ export default {
     component: AdvancedConfigEditor,
 };
 
-const operations: GlobalWpOperation[] = [
+const operations: ConfigOperation[] = [
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         layer: [["Pines", 0], ["Annotations", 0], ["Frost", 0]],
         name: 'remove crap',
         onlyOnLayer: [],
         terrain: 2
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         aboveLevel: 70,
         belowDegrees: 40,
         belowLevel: 90,
@@ -28,7 +28,7 @@ const operations: GlobalWpOperation[] = [
         terrain: [40]
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         belowDegrees: 40,
         belowLevel: 70,
         layer: [],
@@ -37,7 +37,7 @@ const operations: GlobalWpOperation[] = [
         terrain: 29
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         aboveDegrees: 40,
         belowLevel: 70,
         layer: [],
@@ -46,7 +46,7 @@ const operations: GlobalWpOperation[] = [
         terrain: 72
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         aboveLevel: 70,
         belowDegrees: 40,
         layer: [["Pines", 5], ["Deciduous", 3]],
@@ -60,11 +60,11 @@ const operations: GlobalWpOperation[] = [
         ]
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         name: 'rocky cliffs', terrain: 31, aboveDegrees: 30,
     },
     {
-        ...emptyOperation,
+        ...emptyConfigOperation,
         name: 'frost perlin on water',
         belowLevel: 64,
         layer: [['Frost', 1]],

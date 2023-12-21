@@ -1,6 +1,6 @@
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
 
-export type GlobalWpOperation = {
+export type ConfigOperation = {
     name: string,
     terrain: number[] | number | undefined
     layer: WpLayerSetting[] | WpLayerSetting | undefined,
@@ -18,7 +18,7 @@ export type GlobalWpOperation = {
     } | undefined
 }
 
-export const emptyOperation: GlobalWpOperation = {
+export const emptyConfigOperation: ConfigOperation = {
     aboveDegrees: undefined,
     aboveLevel: undefined,
     belowDegrees: undefined,
