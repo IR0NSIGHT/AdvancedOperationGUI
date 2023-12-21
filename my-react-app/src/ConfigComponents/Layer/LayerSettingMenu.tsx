@@ -32,10 +32,17 @@ const annotationValues: NamedNumericValue[] = [
     {value: 15, name: "Black"},
 ]
 
+const binaryValue: NamedNumericValue[] = [
+    {value: -1, name: "Present"},
+    {value: 0, name: "Absent"},
+]
+
 const getNamedValuesByLayer = (layerName: string): NamedNumericValue[] => {
     switch (layerName) {
         case "Annotations":
             return annotationValues
+        case "Frost":
+            return binaryValue
         default:
             return DefaultLayerValues
     }
@@ -50,6 +57,11 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> =
             console.log("on value change: newValue", value);
             onUpdateSetting(layerSetting, [layerSetting[0], parseInt(value)]);
         };
+
+        const allowedValues = getNamedValuesByLayer(layerSetting[0])
+        if (allowedValues.find(l => l.value == layerSetting[1]) == undefined)
+            onValueChange(allowedValues[0].value.toString())
+
         return (
             <div>
                 <LayerSelector
@@ -59,7 +71,7 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> =
                 />
                 <NamedValueSelector
                     layerValue={{name: layerSetting[0], value: layerSetting[1]}}
-                    allowedValues={getNamedValuesByLayer(layerSetting[0])}
+                    allowedValues={allowedValues}
                     onUpdateValue={onValueChange}
                 />
                 <DeleteButton onClick={() => {
