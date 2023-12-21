@@ -1,14 +1,14 @@
-import TerrainSelector, { TerrainSelectorProps } from "./TerrainSelector";
+import TerrainTypeSelect, { TerrainTypeSelectProps } from "./TerrainTypeSelect";
 import { Story } from "@storybook/react";
 import { sortTerrainAlphabetically, wpTerrainTypes } from "./WpTerrainTypes";
 
 export default {
   title: "Components/TerrainSelector",
-  component: TerrainSelector,
+  component: TerrainTypeSelect,
 };
 
-const Template: Story<TerrainSelectorProps> = (args) => (
-  <TerrainSelector {...args} />
+const Template: Story<TerrainTypeSelectProps> = (args) => (
+  <TerrainTypeSelect {...args} />
 );
 
 export const Default = Template.bind({});

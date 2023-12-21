@@ -1,4 +1,4 @@
-import TerrainSelector, { NoneTerrain } from "./TerrainSelector";
+import TerrainTypeSelect, { NoneTerrain } from "./TerrainTypeSelect";
 import {
   getTerrainById,
   sortTerrainAlphabetically,
@@ -50,7 +50,7 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
 
   return (
     <div>
-      <TerrainSelector
+      <TerrainTypeSelect
         onUpdateTerrainName={onTerrainTypeChanged}
         terrain={terrainSetting.terrain}
         terrainList={sortTerrainAlphabetically(allowedTerrains)}
