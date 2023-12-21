@@ -79,18 +79,21 @@ export const OperationEditor: React.FC<OperationEditorProps> =
                 title={initialOperation.name}
                 content={
                     <div>
-                        <DeleteButton onClick={() => {
-                            deleteOperation(initialOperation)
-                        }}/>
-                        <div>
-                            <label htmlFor="nameInput">Operation Name:</label>
-                            <input
-                                type="text"
-                                id="nameInput"
-                                value={initialOperation.name}
-                                onChange={handleNameChange}
-                            />
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <div>
+                                <label htmlFor="nameInput">Operation Name:</label>
+                                <input
+                                    type="text"
+                                    id="nameInput"
+                                    value={initialOperation.name}
+                                    onChange={handleNameChange}
+                                />
+                            </div>
+                            <DeleteButton onClick={() => {
+                                deleteOperation(initialOperation)
+                            }}/>
                         </div>
+
                         <div className={classes.root}>
                             <Grid container spacing={2}>
 
