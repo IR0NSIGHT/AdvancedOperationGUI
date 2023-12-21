@@ -12,7 +12,7 @@ export const HistoryNavigator: React.FC<HistoryNavigatorProps> = ({maxHistories,
     const [history, setHistory] = useState<DisplayConfig[]>(initialHistory);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const displayedConfig: DisplayConfig = history.length > 0 ? history[currentIndex] : newEmptyConfig();
+    const displayedConfig: DisplayConfig = history.length > 0 ? {...history[currentIndex]} : newEmptyConfig();
     console.log("displayed config:", displayedConfig, "history:", history)
     const goToPrevious = () => {
         if (currentIndex > 0) {
