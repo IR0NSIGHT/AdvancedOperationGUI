@@ -14,6 +14,7 @@ import {
 } from "./DisplayOperation";
 import {Grid, Paper} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {DeleteButton} from "../DeleteButton";
 
 export type OperationEditorProps = {
     initialOperation: DisplayOperation;
@@ -27,111 +28,113 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const OperationEditor: React.FC<OperationEditorProps> = ({
-                                                                    initialOperation,
-                                                                    updateOperation,
-                                                                }) => {
-    const handleTerrainChanged = (
-        oldSetting: WeightedTerrainSetting | null,
-        newSetting: WeightedTerrainSetting | null
-    ) => {
-        updateOperation({
-            ...initialOperation,
-            terrain: updateTerrainList(
-                oldSetting,
-                newSetting,
-                initialOperation.terrain
-            ),
-        });
-    };
-
-    const updateApplyLayer = (
-        oldSetting: WpLayerSetting | null,
-        newSetting: WpLayerSetting | null
-    ) => {
-        const newOp = {
-            ...initialOperation,
-            layer: applyLayerChange(initialOperation.layer, oldSetting, newSetting),
+export const OperationEditor: React.FC<OperationEditorProps> =
+    ({initialOperation, updateOperation, deleteOperation}) => {
+        const handleTerrainChanged = (
+            oldSetting: WeightedTerrainSetting | null,
+            newSetting: WeightedTerrainSetting | null
+        ) => {
+            updateOperation({
+                ...initialOperation,
+                terrain: updateTerrainList(
+                    oldSetting,
+                    newSetting,
+                    initialOperation.terrain
+                ),
+            });
         };
-        updateOperation(newOp);
-    };
 
-    const updateOnlyOnLayer = (
-        oldSetting: WpLayerSetting | null,
-        newSetting: WpLayerSetting | null
-    ) => {
-        const newOp = {
-            ...initialOperation,
-            onlyOnLayer: applyLayerChange(
-                initialOperation.onlyOnLayer,
-                oldSetting,
-                newSetting
-            ),
+        const updateApplyLayer = (
+            oldSetting: WpLayerSetting | null,
+            newSetting: WpLayerSetting | null
+        ) => {
+            const newOp = {
+                ...initialOperation,
+                layer: applyLayerChange(initialOperation.layer, oldSetting, newSetting),
+            };
+            updateOperation(newOp);
         };
-        updateOperation(newOp);
-    };
 
-    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        updateOperation({...initialOperation, name: event.target.value});
-    };
-    const classes = useStyles();
-    return (
-        <CollapsibleComponent
-            title={initialOperation.name}
-            content={
-                <div>
+        const updateOnlyOnLayer = (
+            oldSetting: WpLayerSetting | null,
+            newSetting: WpLayerSetting | null
+        ) => {
+            const newOp = {
+                ...initialOperation,
+                onlyOnLayer: applyLayerChange(
+                    initialOperation.onlyOnLayer,
+                    oldSetting,
+                    newSetting
+                ),
+            };
+            updateOperation(newOp);
+        };
+
+        const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            updateOperation({...initialOperation, name: event.target.value});
+        };
+        const classes = useStyles();
+        return (
+            <CollapsibleComponent
+                title={initialOperation.name}
+                content={
                     <div>
-                        <label htmlFor="nameInput">Operation Name:</label>
-                        <input
-                            type="text"
-                            id="nameInput"
-                            value={initialOperation.name}
-                            onChange={handleNameChange}
-                        />
-                    </div>
-                    <div className={classes.root}>
-                        <Grid container spacing={2}>
+                        <DeleteButton onClick={() => {
+                            deleteOperation(initialOperation)
+                        }}/>
+                        <div>
+                            <label htmlFor="nameInput">Operation Name:</label>
+                            <input
+                                type="text"
+                                id="nameInput"
+                                value={initialOperation.name}
+                                onChange={handleNameChange}
+                            />
+                        </div>
+                        <div className={classes.root}>
+                            <Grid container spacing={2}>
 
-                            <Grid item xs={6}>
-                                <LayerListEditor
-                                    mode={LayerSettingsMode.APPLY}
-                                    layers={initialOperation.layer}
-                                    updateLayer={updateApplyLayer}
-                                />
+                                <Grid item xs={6}>
+                                    <LayerListEditor
+                                        mode={LayerSettingsMode.APPLY}
+                                        layers={initialOperation.layer}
+                                        updateLayer={updateApplyLayer}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <LayerListEditor
+                                        mode={LayerSettingsMode.ONLY_ON_LAYER}
+                                        layers={initialOperation.onlyOnLayer}
+                                        updateLayer={updateOnlyOnLayer}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <OperationTerrainList
+                                        mode={TerrainSettingsMode.APPLY}
+                                        terrains={initialOperation.terrain}
+                                        onTerrainChanged={handleTerrainChanged}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <OperationTerrainList
+                                        mode={TerrainSettingsMode.ONLY_ON_TERRAIN}
+                                        terrains={initialOperation.terrain}
+                                        onTerrainChanged={handleTerrainChanged}
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={6}>
-                                <LayerListEditor
-                                    mode={LayerSettingsMode.ONLY_ON_LAYER}
-                                    layers={initialOperation.onlyOnLayer}
-                                    updateLayer={updateOnlyOnLayer}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <OperationTerrainList
-                                    mode={TerrainSettingsMode.APPLY}
-                                    terrains={initialOperation.terrain}
-                                    onTerrainChanged={handleTerrainChanged}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <OperationTerrainList
-                                    mode={TerrainSettingsMode.ONLY_ON_TERRAIN}
-                                    terrains={initialOperation.terrain}
-                                    onTerrainChanged={handleTerrainChanged}
-                                />
-                            </Grid>
-                        </Grid>
-                    </div>
+                        </div>
 
-                    <CollapsibleComponent title={"JSON config"} content={<pre>
+                        <CollapsibleComponent title={"JSON config"} content={<pre>
                         {JSON.stringify(
                             translateDisplayOperation(initialOperation),
                             null,
                             3
                         )}
                     </pre>}></CollapsibleComponent>
-                </div>
-            }
-        />
-    );
-};
+                    </div>
+                }
+            />
+        )
+            ;
+    };
