@@ -14,7 +14,7 @@ type OperationLayerSettingsProps = {
     layers: WpLayerSetting[] | undefined,
     updateLayer: (oldSetting: WpLayerSetting | null, newSetting: WpLayerSetting | null) => void
 }
-export const OperationLayerSettings: React.FC<OperationLayerSettingsProps> = ({mode, layers, updateLayer}) => {
+export const LayerListEditor: React.FC<OperationLayerSettingsProps> = ({mode, layers, updateLayer}) => {
     const layersettings = layers !== undefined ? layers.map(setting =>
         <LayerSettingMenu layerSetting={setting} onUpdateSetting={updateLayer}/>
     ): []
