@@ -12,7 +12,7 @@ export type TerrainSelectorProps = {
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: "25em",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
