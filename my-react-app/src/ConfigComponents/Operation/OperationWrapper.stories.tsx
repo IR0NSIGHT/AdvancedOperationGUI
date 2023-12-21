@@ -9,6 +9,7 @@ export default {
 };
 
 const defaultOperation: DisplayOperation = {
+    displayId: 0,
     "layer": [["Annotations", 5], ["Frost", 0], ["Pines", 7]],
     "name": "small bubble forest",
     "onlyOnLayer": [[
