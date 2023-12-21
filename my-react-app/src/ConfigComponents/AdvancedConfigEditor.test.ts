@@ -1,6 +1,6 @@
-import {ArrayMutationAction, emptyDisplayOperation, updateOperationArray} from "./AdvancedConfigEditor";
+import {ArrayMutationAction} from "./AdvancedConfigEditor";
 
-import {DisplayOperation} from "./Operation/DisplayOperation";
+import {DisplayOperation, emptyDisplayOperation, updateOperationArray} from "./Operation/DisplayOperation";
 
 describe("mutate list of operations", () => {
     test("can insert new operation", () => {
