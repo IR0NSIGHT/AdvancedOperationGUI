@@ -15,8 +15,8 @@ const Template: Story<WeightedTerrainEditorProps> = (args) => (
 );
 
 const onUpdateSetting = (
-  oldSetting: WeightedTerrainSetting,
-  newSetting: WeightedTerrainSetting
+  oldSetting: WeightedTerrainSetting|null,
+  newSetting: WeightedTerrainSetting|null
 ) => {
   console.log("new setting was set:", oldSetting, " => ", newSetting);
 };
