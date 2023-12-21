@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import { WeightedTerrainSetting } from "./TerrainSettingMenu";
+import { WeightedTerrainSetting } from "./WeightedTerrainEditor";
 import {
   OperationTerrainList,
   OperationTerrainListProps,

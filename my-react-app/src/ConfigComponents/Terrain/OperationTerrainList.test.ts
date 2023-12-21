@@ -1,5 +1,5 @@
 import { updateTerrainList } from "./OperationTerrainList";
-import { WeightedTerrainSetting } from "./TerrainSettingMenu";
+import { WeightedTerrainSetting } from "./WeightedTerrainEditor";
 
 describe("mutating terrain list", () => {
   const grass = { id: 0, name: "grass", shortName: "grass" };
