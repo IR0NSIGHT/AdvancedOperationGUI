@@ -6,6 +6,7 @@ import { terrainIdsToTerrains } from "../Terrain/WpTerrainTypes";
 export type ConfigOperation = {
   name: string;
   terrain: number[] | number | undefined;
+  onlyOnTerrain: number[] | number | undefined;
   layer: WpLayerSetting[] | WpLayerSetting | undefined;
   onlyOnLayer: WpLayerSetting[] | WpLayerSetting | undefined;
   aboveLevel: number | undefined;
@@ -33,6 +34,7 @@ export const emptyConfigOperation: ConfigOperation = {
   onlyOnLayer: undefined,
   perlin: undefined,
   terrain: undefined,
+  onlyOnTerrain: undefined
 };
 
 export const configOperationToDisplay = (
@@ -55,5 +57,6 @@ export const configOperationToDisplay = (
       weight: 1,
       terrain: t,
     })),
+    onlyOnTerrain: terrainIdsToTerrains(denullifyConfigArray<number>(configOp.onlyOnTerrain))
   };
 };
