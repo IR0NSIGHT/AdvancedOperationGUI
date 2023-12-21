@@ -192,3 +192,8 @@ export const sortTerrainAlphabetically = (list: WpTerrainType[]) => {
 export const getTerrainById = (id: number, list: WpTerrainType[]): WpTerrainType | undefined => {
     return list.find(terrain => terrain.id === id);
 };
+export const terrainIdsToTerrains = (xs: number[]): WpTerrainType[] => {
+    return xs
+        .map(x => getTerrainById(x, wpTerrainTypes))
+        .filter(x => x !== undefined) as WpTerrainType[]
+}

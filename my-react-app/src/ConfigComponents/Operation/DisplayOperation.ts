@@ -2,7 +2,8 @@ import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
 import {ConfigOperation} from "./ConfigOperation";
 import assert from "assert";
-import {ArrayMutationAction} from "../AdvancedConfigEditor";
+
+import {ArrayMutationAction} from "../RawConfig";
 
 export type DisplayOperation = {
     displayId: number,

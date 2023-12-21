@@ -1,4 +1,7 @@
 import {WpLayerSetting} from "../Layer/WpLayerSetting";
+import {DisplayOperation} from "./DisplayOperation";
+import {denullifyConfigArray} from "../RawConfig";
+import {terrainIdsToTerrains} from "../Terrain/WpTerrainTypes";
 
 export type ConfigOperation = {
     name: string,
@@ -28,4 +31,22 @@ export const emptyConfigOperation: ConfigOperation = {
     onlyOnLayer: undefined,
     perlin: undefined,
     terrain: undefined
+}
+
+export const configOperationToDisplay = (configOp: ConfigOperation, id: number): DisplayOperation => {
+    return {
+        displayId: id,
+        aboveDegrees: undefined,
+        aboveLevel: undefined,
+        belowDegrees: undefined,
+        belowLevel: undefined,
+        layer: denullifyConfigArray<WpLayerSetting>(configOp.layer),
+        name: configOp.name,
+        onlyOnLayer: denullifyConfigArray<WpLayerSetting>(configOp.onlyOnLayer),
+        perlin: undefined,
+        terrain: terrainIdsToTerrains(denullifyConfigArray<number>(configOp.terrain)).map(t => ({
+            weight: 1,
+            terrain: t
+        }))
+    }
 }

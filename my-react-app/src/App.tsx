@@ -1,7 +1,8 @@
-import {AdvancedConfig, AdvancedConfigEditor} from "./ConfigComponents/AdvancedConfigEditor";
+import {AdvancedConfigEditor} from "./ConfigComponents/AdvancedConfigEditor";
 import {formatDate} from "@storybook/blocks";
+import {RawConfig} from "./ConfigComponents/RawConfig";
 
-const initialConfig: AdvancedConfig= {
+const initialConfig: RawConfig= {
   operations: [{
     name: "My first operation",
     terrain: [0,0,0,1,2,3],
