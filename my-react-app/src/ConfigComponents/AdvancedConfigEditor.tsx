@@ -1,14 +1,15 @@
-import { configOperationToDisplay } from "./Operation/ConfigOperation";
-import React, { useState } from "react";
-import { OperationEditor } from "./Operation/OperationEditor";
-import { Button } from "@material-ui/core";
+import {configOperationToDisplay} from "./Operation/ConfigOperation";
+import React, {useState} from "react";
+import {OperationEditor} from "./Operation/OperationEditor";
+import {Button} from "@material-ui/core";
 import {
-  DisplayOperation,
-  emptyDisplayOperation,
-  translateDisplayOperation,
-  updateOperationArray,
+    DisplayOperation,
+    emptyDisplayOperation,
+    translateDisplayOperation,
+    updateOperationArray,
 } from "./Operation/DisplayOperation";
-import { ArrayMutationAction, RawConfig } from "./RawConfig";
+import {ArrayMutationAction, RawConfig} from "./RawConfig";
+import DownloadJsonButton from "./DownloadJsonButton";
 
 export type AdvancedConfigEditorProps = {
   initialConfig: RawConfig;
@@ -83,34 +84,4 @@ export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
   );
 };
 
-type DownloadConfigProps = {
-  config: RawConfig;
-  fileName: string;
-};
 
-const DownloadJsonButton: React.FC<DownloadConfigProps> = ({
-  config,
-  fileName,
-}) => {
-  const downloadJsonFile = () => {
-    const jsonDataString = JSON.stringify(config, null, 2);
-    const blob = new Blob([jsonDataString], { type: "application/json" });
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName + ".json";
-    link.click();
-
-    // Release the object URL
-    window.URL.revokeObjectURL(url);
-  };
-
-  return (
-    <Button variant="contained" color="primary" onClick={downloadJsonFile}>
-      Download JSON
-    </Button>
-  );
-};
-
-export default DownloadJsonButton;
