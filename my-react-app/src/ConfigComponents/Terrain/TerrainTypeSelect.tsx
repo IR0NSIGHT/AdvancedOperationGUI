@@ -3,7 +3,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { WpTerrainType } from "./WpTerrainTypes";
 
-export type TerrainSelectorProps = {
+export type TerrainTypeSelectProps = {
   terrain: WpTerrainType;
   terrainList: WpTerrainType[];
   onUpdateTerrainName: (newTerrainId: number) => void;
@@ -25,11 +25,11 @@ export const NoneTerrain: WpTerrainType = {
   shortName: "None",
 };
 
-export const TerrainSelector: React.FC<TerrainSelectorProps> = ({
+export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
   terrain,
   terrainList,
   onUpdateTerrainName,
-}: TerrainSelectorProps) => {
+}: TerrainTypeSelectProps) => {
   const handleNameChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
     child: React.ReactNode
@@ -66,4 +66,4 @@ export const TerrainSelector: React.FC<TerrainSelectorProps> = ({
   );
 };
 
-export default TerrainSelector;
+export default TerrainTypeSelect;
