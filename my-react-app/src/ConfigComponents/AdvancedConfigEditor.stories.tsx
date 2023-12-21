@@ -2,7 +2,7 @@ import React from "react";
 import { Story } from "@storybook/react";
 import {
   emptyConfigOperation,
-  ConfigOperation,
+  ConfigOperation, configOperationToDisplay,
 } from "./Operation/ConfigOperation";
 import { AdvancedConfigEditor } from "./AdvancedConfigEditor";
 import { formatDate } from "@storybook/blocks";
@@ -83,10 +83,11 @@ const operations: ConfigOperation[] = [
 const Template: Story = () => (
   <AdvancedConfigEditor
     initialConfig={{
-      operations: operations,
+      operations: operations.map(configOperationToDisplay),
       name: "DebugConfig",
       author: "IR0NSIGHT",
       date: formatDate(Date.now()),
+      description: ""
     }}
   />
 );

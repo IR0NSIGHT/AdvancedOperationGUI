@@ -1,28 +1,19 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import {ConfigOperation} from "./Operation/ConfigOperation";
-import {DisplayOperation} from "./Operation/DisplayOperation";
-import {number} from "prop-types";
-
-type DisplayConfig = {
-    operations: DisplayOperation[]
-    author: string,
-    name: string,
-    description: string,
-    date: string
-}
+import {AdvancedConfigEditor} from "./AdvancedConfigEditor";
+import {DisplayConfig, newEmptyConfig} from "./DisplayConfig";
 
 export type HistoryNavigatorProps = {
     maxHistories: number,
-    initialConfig: DisplayConfig
+    initialHistory: DisplayConfig[]
 }
 
-export const HistoryNavigator: React.FC<HistoryNavigatorProps> = ({maxHistories, initialConfig}) => {
-    const [history, setHistory] = useState<DisplayConfig[]>([initialConfig]);
-    const [currentIndex, setCurrentIndex] = useState(-1);
+export const HistoryNavigator: React.FC<HistoryNavigatorProps> = ({maxHistories, initialHistory}) => {
+    const [history, setHistory] = useState<DisplayConfig[]>(initialHistory);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const displayedConfig = history[currentIndex];
-
+    const displayedConfig: DisplayConfig = history.length > 0 ? history[currentIndex] : newEmptyConfig();
+    console.log("displayed config:", displayedConfig, "history:", history)
     const goToPrevious = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
@@ -79,6 +70,7 @@ export const HistoryNavigator: React.FC<HistoryNavigatorProps> = ({maxHistories,
                         historic config
                     </Button>
                 ))}
+                <AdvancedConfigEditor initialConfig={displayedConfig}/>
             </div>
         </div>
     );

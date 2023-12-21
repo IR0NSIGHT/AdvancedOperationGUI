@@ -54,7 +54,7 @@ export const translateDisplayOperation = (
     slopeDir: x.slopeDir,
   };
 };
-export const emptyDisplayOperation: DisplayOperation = {
+const emptyDisplayOPeration: DisplayOperation = {
   name: "",
   displayId: -1,
   terrain: [],
@@ -69,6 +69,10 @@ export const emptyDisplayOperation: DisplayOperation = {
   slopeDir: [],
   facing: [],
 };
+
+export const newEmptyDisplayOperation= () => {
+  return {...emptyDisplayOPeration}
+}
 /**
  * updates operations with given op. will replace op with same id, or append to list if not present
  * @param op

@@ -1,30 +1,28 @@
-import {configOperationToDisplay} from "./Operation/ConfigOperation";
 import React, {useState} from "react";
 import {OperationEditor} from "./Operation/OperationEditor";
 import {Button} from "@material-ui/core";
-import {
-    DisplayOperation,
-    emptyDisplayOperation,
-    translateDisplayOperation,
-    updateOperationArray,
-} from "./Operation/DisplayOperation";
 import {ArrayMutationAction, RawConfig} from "./RawConfig";
 import DownloadJsonButton from "./DownloadJsonButton";
+import {DisplayConfig} from "./DisplayConfig";
+import {
+    DisplayOperation,
+    newEmptyDisplayOperation,
+    translateDisplayOperation,
+    updateOperationArray
+} from "./Operation/DisplayOperation";
 
 export type AdvancedConfigEditorProps = {
-  initialConfig: RawConfig;
+  initialConfig: DisplayConfig;
 };
 
-export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
-  const displayOps = props.initialConfig.operations.map(
-    configOperationToDisplay
-  );
+export const AdvancedConfigEditor: React.FC<AdvancedConfigEditorProps> = ({ initialConfig}) => {
+  const displayOps = initialConfig.operations
   const [displayedOperations, setDisplayedOperations] =
     useState<DisplayOperation[]>(displayOps);
 
   const addOperation = () => {
     const newOps = updateOperationArray(
-      { ...emptyDisplayOperation, name: "my new operation" },
+      { ...newEmptyDisplayOperation(), name: "my new operation" },
       ArrayMutationAction.INSERT,
       [...displayedOperations]
     );
@@ -68,10 +66,10 @@ export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
 
       <DownloadJsonButton
         config={{
-          ...props.initialConfig,
+          ...initialConfig,
           operations: displayedOperations.map(translateDisplayOperation),
         }}
-        fileName={"AdvancedOperator_config_" + props.initialConfig.name}
+        fileName={"AdvancedOperator_config_" + initialConfig.name}
       />
       <pre>
         {JSON.stringify(
