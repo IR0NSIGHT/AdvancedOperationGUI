@@ -1,8 +1,9 @@
-import {DisplayOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
-import {useState} from "react";
-import OperationWrapper from "./Operation/OperationEditor";
+import {DisplayOperation, emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
+import React, {useState} from "react";
 import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrainTypes";
 import {WpLayerSetting} from "./Layer/WpLayerSetting";
+import {OperationEditor} from "./Operation/OperationEditor";
+import {Button} from "@material-ui/core";
 
 export type AdvancedConfigEditorProps = {
     initialConfig: AdvancedConfig
@@ -73,8 +74,19 @@ export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
     const [displayedConfig, setDisplayedConfig] = useState(props.initialConfig);
     const operations = displayedConfig.operations
         .map(advancedOperationToDisplay)
-        .map(op => (<OperationWrapper initalOperation={op}/>))
+        .map(op => (<OperationEditor initalOperation={op}/>))
 
+    const addOperation = () => {
+        const newOP = {
+            ...emptyOperation,
+            name: "My new Global Operation"
+        };
+        setDisplayedConfig(
+            {
+                ...displayedConfig, operations: [...displayedConfig.operations, newOP]
+            }
+        )
+    }
     return (
         <div>
             <h1>AdvancedConfig GUI</h1>
@@ -83,6 +95,9 @@ export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
                 by IR0NSIGHT
             </div>
             {operations}
+            <Button variant="contained" color="primary" onClick={addOperation}>
+                Add new global operation
+            </Button>
         </div>
     )
 }

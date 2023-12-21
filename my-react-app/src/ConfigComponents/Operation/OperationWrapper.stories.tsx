@@ -1,11 +1,11 @@
 import React from 'react';
 import {Story} from '@storybook/react';
-import OperationWrapper from './OperationEditor';
-import {DisplayOperation} from "./GlobalWpOperation"; // Adjust the path as per your project structure
+import {DisplayOperation} from "./GlobalWpOperation";
+import {OperationEditor} from "./OperationEditor"; // Adjust the path as per your project structure
 
 export default {
-    title: 'Components/OperationWrapper',
-    component: OperationWrapper,
+    title: 'Components/OperationEditor',
+    component: OperationEditor,
 };
 
 const defaultOperation: DisplayOperation = {
@@ -28,6 +28,6 @@ const defaultOperation: DisplayOperation = {
     belowDegrees: undefined
 }
 
-const Template: Story = () => <OperationWrapper initalOperation={defaultOperation}/>;
+const Template: Story = () => <OperationEditor initalOperation={defaultOperation}/>;
 
 export const Default = Template.bind({});
