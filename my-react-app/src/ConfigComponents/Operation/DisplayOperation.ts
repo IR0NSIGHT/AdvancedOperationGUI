@@ -75,7 +75,7 @@ export const updateOperationArray = (op: DisplayOperation, actionType: ArrayMuta
 
         case ArrayMutationAction.OVERWRITE:
             const index = displayedOperations.findIndex(x => x.displayId === op.displayId);
-            assert(displayedOperations[index].displayId == op.displayId, "operation ids went out of synch")
+            assert(displayedOperations[index].displayId === op.displayId, "operation ids went out of synch")
             displayedOperations[index] = op
             return displayedOperations
         default:
