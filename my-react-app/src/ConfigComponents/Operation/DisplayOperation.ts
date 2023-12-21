@@ -1,6 +1,6 @@
 import { WeightedTerrainSetting } from "../Terrain/TerrainSettingMenu";
 import { WpLayerSetting } from "../Layer/WpLayerSetting";
-import { ConfigOperation } from "./ConfigOperation";
+import {ConfigOperation, compassDir, slopeDir} from "./ConfigOperation";
 import assert from "assert";
 
 import { ArrayMutationAction } from "../RawConfig";
@@ -26,6 +26,9 @@ export type DisplayOperation = {
         threshold: number;
       }
     | undefined;
+
+  facing: compassDir[],
+  slopeDir: slopeDir[]
 };
 export const translateDisplayOperation = (
   x: DisplayOperation
@@ -47,6 +50,8 @@ export const translateDisplayOperation = (
     onlyOnTerrain: x.onlyOnTerrain.map(t => t.id),
     layer: x.layer,
     terrain: configTerrain,
+    facing: x.facing,
+    slopeDir: x.slopeDir
   };
 };
 export const emptyDisplayOperation: DisplayOperation = {
@@ -61,6 +66,8 @@ export const emptyDisplayOperation: DisplayOperation = {
   belowDegrees: undefined,
   belowLevel: undefined,
   aboveLevel: undefined,
+  slopeDir: [],
+  facing: []
 };
 /**
  * updates operations with given op. will replace op with same id, or append to list if not present

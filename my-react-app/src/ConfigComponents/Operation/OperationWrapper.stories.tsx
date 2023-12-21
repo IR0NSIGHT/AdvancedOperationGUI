@@ -29,6 +29,8 @@ const defaultOperation: DisplayOperation = {
   belowLevel: undefined,
   aboveDegrees: undefined,
   belowDegrees: undefined,
+  slopeDir: [],
+  facing: []
 };
 
 const Template: Story = () => (
