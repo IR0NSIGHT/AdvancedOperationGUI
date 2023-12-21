@@ -90,7 +90,7 @@ export const updateOperationArray = (
         .map((op) => op.displayId)
         .reduce((previousValue, currentValue) =>
           Math.max(previousValue, currentValue)
-        );
+        ,0);
       op.displayId = maxId + 1;
 
       displayedOperations.push(op);
