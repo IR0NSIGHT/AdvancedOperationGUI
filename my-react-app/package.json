@@ -61,6 +61,7 @@
     "@storybook/react-webpack5": "^7.6.4",
     "@storybook/test": "^7.6.4",
     "eslint-plugin-storybook": "^0.6.15",
+    "gh-pages": "^6.1.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.4",
     "webpack": "^5.89.0"
