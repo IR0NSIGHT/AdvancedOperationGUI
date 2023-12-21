@@ -2,12 +2,13 @@ import React from "react";
 import LayerSelector from "./LayerSelector";
 import { DefaultLayers, WpLayerSetting } from "./WpLayerSetting";
 import { DefaultLayerValues, NamedValueSelector } from "./NamedValueSelector";
+import {DeleteButton} from "../DeleteButton";
 
 export type LayerSettingMenuProps = {
   layerSetting: WpLayerSetting;
   onUpdateSetting: (
-    oldSetting: WpLayerSetting,
-    newSetting: WpLayerSetting
+    oldSetting: WpLayerSetting|null,
+    newSetting: WpLayerSetting|null
   ) => void;
 };
 
@@ -34,6 +35,7 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({
         allowedValues={DefaultLayerValues}
         onUpdateValue={onValueChange}
       />
+        <DeleteButton onClick={()=>{onUpdateSetting(layerSetting,null)}}/>
     </div>
   );
 };
