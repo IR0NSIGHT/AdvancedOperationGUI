@@ -3,10 +3,9 @@ import { applyLayerChange, WpLayerSetting } from "../Layer/WpLayerSetting";
 import { CollapsibleComponent } from "./CollapsibleComponent";
 import { LayerSettingsMode, LayerListEditor } from "../Layer/LayerListEditor";
 import {
-  OperationTerrainList, TerrainListEditor,
-  TerrainSettingsMode,
-  updateTerrainList,
-} from "../Terrain/OperationTerrainList";
+  WeightedTerrainListEditor,
+  updateWeightedTerrainList,
+} from "../Terrain/WeightedTerrainListEditor";
 import { WeightedTerrainSetting } from "../Terrain/WeightedTerrainEditor";
 import {
   DisplayOperation,
@@ -16,6 +15,7 @@ import { Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
 import {WpTerrainType, wpTerrainTypes} from "../Terrain/WpTerrainTypes";
+import {TerrainListEditor, TerrainListEditorProps} from "../Terrain/TerrainListEditorProps";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -40,7 +40,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
   ) => {
     updateOperation({
       ...initialOperation,
-      terrain: updateTerrainList(
+      terrain: updateWeightedTerrainList(
         oldSetting,
         newSetting,
         initialOperation.terrain
@@ -125,7 +125,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                 />
               </Grid>
               <Grid item xs={6}>
-                <OperationTerrainList
+                <WeightedTerrainListEditor
                   terrains={initialOperation.terrain}
                   onTerrainChanged={onApplyTerrainChange}
                 />

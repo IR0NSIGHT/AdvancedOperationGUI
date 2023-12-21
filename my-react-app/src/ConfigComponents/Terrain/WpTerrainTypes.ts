@@ -627,3 +627,4 @@ export const terrainIdsToTerrains = (xs: number[]): WpTerrainType[] => {
     .map((x) => getTerrainById(x, wpTerrainTypes))
     .filter((x) => x !== undefined) as WpTerrainType[];
 };
+export const NoneTerrain: WpTerrainType = {id: -1, name: "None", shortName: "None"};

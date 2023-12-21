@@ -1,4 +1,4 @@
-import { updateTerrainList } from "./OperationTerrainList";
+import { updateWeightedTerrainList } from "./WeightedTerrainListEditor";
 import { WeightedTerrainSetting } from "./WeightedTerrainEditor";
 
 describe("mutating terrain list", () => {
@@ -8,7 +8,7 @@ describe("mutating terrain list", () => {
 
   test("add new value to empty list", () => {
     const terrains: WeightedTerrainSetting[] = [];
-    const updated = updateTerrainList(
+    const updated = updateWeightedTerrainList(
       null,
       {
         weight: 1,
@@ -25,7 +25,7 @@ describe("mutating terrain list", () => {
     const terrains: WeightedTerrainSetting[] = [
       { weight: 1, terrain: { id: 0, name: "grass", shortName: "grass" } },
     ];
-    const updated = updateTerrainList(
+    const updated = updateWeightedTerrainList(
       {
         weight: 1,
         terrain: { id: 0, name: "grass", shortName: "grass" },
@@ -40,7 +40,7 @@ describe("mutating terrain list", () => {
     const terrains: WeightedTerrainSetting[] = [
       { weight: 1, terrain: { id: 0, name: "grass", shortName: "grass" } },
     ];
-    const updated = updateTerrainList(
+    const updated = updateWeightedTerrainList(
       null,
       {
         weight: 1,
@@ -56,7 +56,7 @@ describe("mutating terrain list", () => {
       { weight: 1, terrain: { id: 0, name: "grass", shortName: "grass" } },
       { weight: 1, terrain: { id: 0, name: "grass", shortName: "grass" } },
     ];
-    const updated = updateTerrainList(
+    const updated = updateWeightedTerrainList(
       null,
       {
         weight: 1,
@@ -76,7 +76,7 @@ describe("mutating terrain list", () => {
       { weight: 3, terrain: sand },
     ];
 
-    const updated = updateTerrainList(
+    const updated = updateWeightedTerrainList(
       {
         weight: 1,
         terrain: grass,

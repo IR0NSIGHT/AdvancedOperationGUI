@@ -1,20 +1,19 @@
 import { Story } from "@storybook/react";
 import { WeightedTerrainSetting } from "./WeightedTerrainEditor";
 import {
-  OperationTerrainList,
-  OperationTerrainListProps,
-  TerrainSettingsMode,
-  updateTerrainList,
-} from "./OperationTerrainList";
+  WeightedTerrainListEditor,
+  WeightedTerrainListEditorProps,
+  updateWeightedTerrainList,
+} from "./WeightedTerrainListEditor";
 import { wpTerrainTypes } from "./WpTerrainTypes";
 import { useState } from "react";
 
 export default {
   title: "Components/OperationTerrainList",
-  component: OperationTerrainList,
+  component: WeightedTerrainListEditor,
 };
 
-const Template: Story<OperationTerrainListProps> = (args) => {
+const Template: Story<WeightedTerrainListEditorProps> = (args) => {
   const [currentTerrains, setCurrentTerrains] = useState(
     wpTerrainTypes.slice(3, 10).map((t) => ({
       terrain: t,
@@ -27,15 +26,14 @@ const Template: Story<OperationTerrainListProps> = (args) => {
     newSetting: WeightedTerrainSetting | null
   ) => {
     setCurrentTerrains(
-      updateTerrainList(oldSetting, newSetting, currentTerrains)
+      updateWeightedTerrainList(oldSetting, newSetting, currentTerrains)
     );
   };
 
   return (
-    <OperationTerrainList
+    <WeightedTerrainListEditor
       terrains={currentTerrains}
       onTerrainChanged={handleTerrainChanged}
-      mode={TerrainSettingsMode.APPLY}
     />
   );
 };
