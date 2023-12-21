@@ -30,7 +30,7 @@ const initialConfig: RawConfig = {
 function App() {
   return (
     <div className="App">
-      <AdvancedConfigEditor initialConfig={initialConfig} />
+      <AdvancedConfigEditor displayedConfig={initialConfig} />
     </div>
   );
 }
