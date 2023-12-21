@@ -10,7 +10,7 @@ import {
   NamedNumericValue,
 } from "../Layer/NamedValueSelector";
 import {DeleteButton} from "../DeleteButton";
-import {updateTerrainList} from "./OperationTerrainList";
+import {updateWeightedTerrainList} from "./WeightedTerrainListEditor";
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType; weight: number };
 
