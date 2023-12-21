@@ -1,65 +1,17 @@
-import {ConfigOperation} from "./Operation/ConfigOperation";
+import {configOperationToDisplay} from "./Operation/ConfigOperation";
 import React, {useState} from "react";
-import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrainTypes";
-import {WpLayerSetting} from "./Layer/WpLayerSetting";
 import {OperationEditor} from "./Operation/OperationEditor";
 import {Button} from "@material-ui/core";
 import {DisplayOperation, emptyDisplayOperation, updateOperationArray} from "./Operation/DisplayOperation";
+import {ArrayMutationAction, RawConfig} from "./RawConfig";
 
 export type AdvancedConfigEditorProps = {
-    initialConfig: AdvancedConfig
+    initialConfig: RawConfig
 }
 
-export type AdvancedConfig = {
-    operations: ConfigOperation[],
-    author: string,
-    date: string
-}
-
-function denullifyConfigArray<T>(configT: T | T[] | undefined): T[] {
-    if (configT === undefined)
-        return []
-    if (typeof configT === 'number')
-        return [configT]
-    else if (Array.isArray(configT))
-        return configT
-    else
-        throw Error("can not translate config array!" + configT)
-}
-
-const terrainIdsToTerrains = (xs: number[]): WpTerrainType[] => {
-    return xs
-        .map(x => getTerrainById(x, wpTerrainTypes))
-        .filter(x => x !== undefined) as WpTerrainType[]
-}
-
-
-const advancedOperationToDisplay = (configOp: ConfigOperation, id: number): DisplayOperation => {
-    return {
-        displayId: id,
-        aboveDegrees: undefined,
-        aboveLevel: undefined,
-        belowDegrees: undefined,
-        belowLevel: undefined,
-        layer: denullifyConfigArray<WpLayerSetting>(configOp.layer),
-        name: configOp.name,
-        onlyOnLayer: denullifyConfigArray<WpLayerSetting>(configOp.onlyOnLayer),
-        perlin: undefined,
-        terrain: terrainIdsToTerrains(denullifyConfigArray<number>(configOp.terrain)).map(t => ({
-            weight: 1,
-            terrain: t
-        }))
-    }
-}
-
-export enum ArrayMutationAction {
-    INSERT,
-    OVERWRITE,
-    DELETE
-}
 
 export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
-    const displayOps = props.initialConfig.operations.map(advancedOperationToDisplay)
+    const displayOps = props.initialConfig.operations.map(configOperationToDisplay)
     const [displayedOperations, setDisplayedOperations] = useState<DisplayOperation[]>(displayOps);
 
     const addOperation = () => {
