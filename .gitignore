@@ -1,10 +1,7 @@
 .gradle
-build/
 !backend/gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-
+/backend/build
 
 ### IntelliJ IDEA ###
 .idea/*
