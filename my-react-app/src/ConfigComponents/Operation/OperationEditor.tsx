@@ -4,8 +4,7 @@ import {CollapsibleComponent} from "./CollapsibleComponent";
 import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
 import {OperationTerrainList, TerrainSettingsMode, updateTerrainList} from "../Terrain/OperationTerrainList";
 import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
-import {translateDisplayOperation} from "../AdvancedConfigEditor";
-import {DisplayOperation} from "./DisplayOperation";
+import {DisplayOperation, translateDisplayOperation} from "./DisplayOperation";
 
 export type OperationEditorProps = {
     initialOperation: DisplayOperation,
