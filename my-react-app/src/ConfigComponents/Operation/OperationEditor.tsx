@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {applyLayerChange, DisplayOperation} from "./GlobalWpOperation";
-import {WpLayerSetting} from "../Layer/WpLayerSetting";
+import {applyLayerChange, WpLayerSetting} from "../Layer/WpLayerSetting";
 import {CollapsibleComponent} from "./CollapsibleComponent";
 import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
 import {OperationTerrainList, TerrainSettingsMode, updateTerrainList} from "../Terrain/OperationTerrainList";
 import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
 import {translateDisplayOperation} from "../AdvancedConfigEditor";
+import {DisplayOperation} from "./DisplayOperation";
 
 export type OperationEditorProps = {
     initialOperation: DisplayOperation,

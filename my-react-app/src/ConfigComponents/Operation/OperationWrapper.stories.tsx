@@ -1,7 +1,7 @@
 import React from 'react';
 import {Story} from '@storybook/react';
-import {DisplayOperation} from "./GlobalWpOperation";
-import {OperationEditor} from "./OperationEditor"; // Adjust the path as per your project structure
+import {OperationEditor} from "./OperationEditor";
+import {DisplayOperation} from "./DisplayOperation"; // Adjust the path as per your project structure
 
 export default {
     title: 'Components/OperationEditor',
