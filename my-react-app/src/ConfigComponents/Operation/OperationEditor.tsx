@@ -129,7 +129,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                             null,
                             3
                         )}
-                    </pre>} ></CollapsibleComponent>
+                    </pre>}></CollapsibleComponent>
                 </div>
             }
         />

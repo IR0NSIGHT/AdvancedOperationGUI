@@ -24,6 +24,7 @@ const defaultOperation: DisplayOperation = {
     threshold: 0.5,
   },
   terrain: [],
+  onlyOnTerrain: [],
   aboveLevel: undefined,
   belowLevel: undefined,
   aboveDegrees: undefined,

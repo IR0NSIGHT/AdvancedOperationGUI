@@ -4,11 +4,13 @@ import { ConfigOperation } from "./ConfigOperation";
 import assert from "assert";
 
 import { ArrayMutationAction } from "../RawConfig";
+import {WpTerrainType} from "../Terrain/WpTerrainTypes";
 
 export type DisplayOperation = {
   displayId: number;
   name: string;
   terrain: WeightedTerrainSetting[];
+  onlyOnTerrain: WpTerrainType[];
   layer: WpLayerSetting[];
   onlyOnLayer: WpLayerSetting[];
   aboveLevel: number | undefined;
@@ -42,6 +44,7 @@ export const translateDisplayOperation = (
     belowDegrees: x.belowDegrees,
     perlin: x.perlin,
     onlyOnLayer: x.layer,
+    onlyOnTerrain: x.onlyOnTerrain.map(t => t.id),
     layer: x.layer,
     terrain: configTerrain,
   };
@@ -52,6 +55,7 @@ export const emptyDisplayOperation: DisplayOperation = {
   terrain: [],
   layer: [],
   onlyOnLayer: [],
+  onlyOnTerrain: [],
   perlin: undefined,
   aboveDegrees: undefined,
   belowDegrees: undefined,
