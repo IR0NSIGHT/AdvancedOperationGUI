@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 type CollapsibleProps = {
-  title: JSX.Element|string;
+  title: JSX.Element | string;
   content: JSX.Element;
 };
 export const CollapsibleComponent: React.FC<CollapsibleProps> = ({

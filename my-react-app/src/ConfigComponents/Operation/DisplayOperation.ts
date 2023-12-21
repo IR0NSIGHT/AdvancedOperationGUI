@@ -1,10 +1,10 @@
 import { WeightedTerrainSetting } from "../Terrain/TerrainSettingMenu";
 import { WpLayerSetting } from "../Layer/WpLayerSetting";
-import {ConfigOperation, compassDir, slopeDir} from "./ConfigOperation";
+import { ConfigOperation, compassDir, slopeDir } from "./ConfigOperation";
 import assert from "assert";
 
 import { ArrayMutationAction } from "../RawConfig";
-import {WpTerrainType} from "../Terrain/WpTerrainTypes";
+import { WpTerrainType } from "../Terrain/WpTerrainTypes";
 
 export type DisplayOperation = {
   displayId: number;
@@ -27,8 +27,8 @@ export type DisplayOperation = {
       }
     | undefined;
 
-  facing: compassDir[],
-  slopeDir: slopeDir[]
+  facing: compassDir[];
+  slopeDir: slopeDir[];
 };
 export const translateDisplayOperation = (
   x: DisplayOperation
@@ -47,11 +47,11 @@ export const translateDisplayOperation = (
     belowDegrees: x.belowDegrees,
     perlin: x.perlin,
     onlyOnLayer: x.layer,
-    onlyOnTerrain: x.onlyOnTerrain.map(t => t.id),
+    onlyOnTerrain: x.onlyOnTerrain.map((t) => t.id),
     layer: x.layer,
     terrain: configTerrain,
     facing: x.facing,
-    slopeDir: x.slopeDir
+    slopeDir: x.slopeDir,
   };
 };
 export const emptyDisplayOperation: DisplayOperation = {
@@ -67,7 +67,7 @@ export const emptyDisplayOperation: DisplayOperation = {
   belowLevel: undefined,
   aboveLevel: undefined,
   slopeDir: [],
-  facing: []
+  facing: [],
 };
 /**
  * updates operations with given op. will replace op with same id, or append to list if not present
@@ -88,9 +88,11 @@ export const updateOperationArray = (
       //find max id in existing ops to generate a higher one:
       const maxId = displayedOperations
         .map((op) => op.displayId)
-        .reduce((previousValue, currentValue) =>
-          Math.max(previousValue, currentValue)
-        ,0);
+        .reduce(
+          (previousValue, currentValue) =>
+            Math.max(previousValue, currentValue),
+          0
+        );
       op.displayId = maxId + 1;
 
       displayedOperations.push(op);

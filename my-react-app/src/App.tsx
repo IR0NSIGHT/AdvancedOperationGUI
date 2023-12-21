@@ -20,7 +20,7 @@ const initialConfig: RawConfig = {
       onlyOnLayer: undefined,
       perlin: undefined,
       slopeDir: undefined,
-      facing: undefined
+      facing: undefined,
     },
   ],
   name: "DebugConfig",
