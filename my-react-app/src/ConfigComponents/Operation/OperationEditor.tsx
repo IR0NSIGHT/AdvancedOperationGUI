@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {applyLayerChange, WpLayerSetting} from "../Layer/WpLayerSetting";
 import {CollapsibleComponent} from "./CollapsibleComponent";
-import {LayerSettingsMode, OperationLayerSettings} from "../Layer/OperationLayerSettings";
+import {LayerSettingsMode, LayerListEditor} from "../Layer/LayerListEditor";
 import {OperationTerrainList, TerrainSettingsMode, updateTerrainList} from "../Terrain/OperationTerrainList";
 import {WeightedTerrainSetting} from "../Terrain/TerrainSettingMenu";
 import {DisplayOperation, translateDisplayOperation} from "./DisplayOperation";
@@ -49,17 +49,17 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({initialOperatio
                         onChange={handleNameChange}
                     />
                 </div>
-                <OperationLayerSettings mode={LayerSettingsMode.APPLY}
-                                        layers={initialOperation.layer}
-                                        updateLayer={updateApplyLayer}/>
+                <LayerListEditor mode={LayerSettingsMode.APPLY}
+                                 layers={initialOperation.layer}
+                                 updateLayer={updateApplyLayer}/>
 
                 <OperationTerrainList mode={TerrainSettingsMode.APPLY}
                                       terrains={initialOperation.terrain}
                                       onTerrainChanged={handleTerrainChanged}/>
 
-                <OperationLayerSettings mode={LayerSettingsMode.ONLY_ON_LAYER}
-                                        layers={initialOperation.onlyOnLayer}
-                                        updateLayer={updateOnlyOnLayer}/>
+                <LayerListEditor mode={LayerSettingsMode.ONLY_ON_LAYER}
+                                 layers={initialOperation.onlyOnLayer}
+                                 updateLayer={updateOnlyOnLayer}/>
                 <pre>{JSON.stringify(translateDisplayOperation(initialOperation), null, 3)}</pre>
             </div>}
         />

@@ -29,6 +29,6 @@ const defaultOperation: DisplayOperation = {
     belowDegrees: undefined
 }
 
-const Template: Story = () => <OperationEditor initalOperation={defaultOperation}/>;
+const Template: Story = () => <OperationEditor initialOperation={defaultOperation} deleteOperation={()=>{}} updateOperation={(x)=>{}}/>;
 
 export const Default = Template.bind({});
