@@ -1,10 +1,11 @@
-import {DisplayOperation, emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
+import {emptyOperation, GlobalWpOperation} from "./Operation/GlobalWpOperation";
 import React, {useState} from "react";
 import {getTerrainById, WpTerrainType, wpTerrainTypes} from "./Terrain/WpTerrainTypes";
 import {WpLayerSetting} from "./Layer/WpLayerSetting";
 import {OperationEditor} from "./Operation/OperationEditor";
 import {Button} from "@material-ui/core";
 import assert from "assert";
+import {DisplayOperation} from "./Operation/DisplayOperation";
 
 export type AdvancedConfigEditorProps = {
     initialConfig: AdvancedConfig
@@ -85,7 +86,6 @@ export const emptyDisplayOperation: DisplayOperation = {
     aboveLevel: undefined
 }
 
-
 export enum ArrayMutationAction {
     INSERT,
     OVERWRITE,
@@ -119,8 +119,6 @@ export const updateOperationArray = (op: DisplayOperation, actionType: ArrayMuta
         default:
             throw Error("illegal enum type")
     }
-
-
 }
 export const AdvancedConfigEditor = (props: AdvancedConfigEditorProps) => {
     const displayOps = props.initialConfig.operations.map(advancedOperationToDisplay)
