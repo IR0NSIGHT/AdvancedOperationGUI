@@ -6,7 +6,7 @@ export type RawConfig = {
   date: string;
 };
 
-export function denullifyConfigArray<T>(configT: T | T[] | undefined): T[] {
+export function configEntryToArray<T>(configT: T | T[] | undefined): T[] {
   if (configT === undefined) return [];
   if (typeof configT === "number") return [configT];
   else if (Array.isArray(configT)) return configT;

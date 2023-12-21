@@ -19,6 +19,8 @@ const initialConfig: RawConfig = {
       aboveLevel: undefined,
       onlyOnLayer: undefined,
       perlin: undefined,
+      slopeDir: undefined,
+      facing: undefined
     },
   ],
   author: "IR0NSIGHT",
