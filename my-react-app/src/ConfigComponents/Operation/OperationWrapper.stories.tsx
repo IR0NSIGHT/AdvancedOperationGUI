@@ -30,7 +30,7 @@ const defaultOperation: DisplayOperation = {
   aboveDegrees: undefined,
   belowDegrees: undefined,
   slopeDir: [],
-  facing: []
+  facing: [],
 };
 
 const Template: Story = () => (
