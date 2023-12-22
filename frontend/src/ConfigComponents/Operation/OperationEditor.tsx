@@ -103,7 +103,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     />
   );
 
-  let applyLayersEditor = (
+  const applyLayersEditor = (
     <LayerListEditor
       mode={LayerSettingsMode.APPLY}
       layers={initialOperation.layer}

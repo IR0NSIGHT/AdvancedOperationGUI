@@ -33,7 +33,7 @@ export const NumericFilterSelect: React.FC<NumericFilterSelectProp> = ({
     (f) => f.name == selectedFilter.name
   );
   return (
-    <FormControl>
+    <FormControl style={{ width: "10em" }}>
       <InputLabel id="demo-select-small-label">Layer</InputLabel>
       <Select
         labelId="demo-select-small-label"
