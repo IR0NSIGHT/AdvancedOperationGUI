@@ -16,9 +16,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
 import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
 import { TerrainListEditor } from "../Terrain/TerrainListEditorProps";
-import { StandardFilters } from "./NumericFilterSelect";
 import { NumericFilterSettingList } from "./NumericFilterSettingList";
 import { OperationSubsection } from "./OperationSubsection";
+import { NumericFilterSetting } from "./NumericFilterSetting";
+import {
+  NumericToStandardFilter,
+  StandardToNumericFilter,
+} from "./StandardFilter";
+import { NoneFilter, StandardFilters } from "./NumericFilter";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -88,18 +93,30 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     updateOperation(newOp);
   };
 
+  const onNumericFilterChange = (
+    old: NumericFilterSetting[],
+    newF: NumericFilterSetting[]
+  ) => {
+    console.log("changed filter from:", old, " to: ", newF);
+    const stdFilter = NumericToStandardFilter(newF);
+    const newOp: DisplayOperation = {
+      ...initialOperation,
+      ...stdFilter,
+    };
+    updateOperation(newOp);
+  };
+
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateOperation({ ...initialOperation, name: event.target.value });
   };
   const classes = useStyles();
+
+  const allowedFilters = [NoneFilter, ...StandardFilters];
   const standardFilterEditor = (
     <NumericFilterSettingList
-      listedFilters={StandardFilters.map((f) => ({
-        filter: f,
-        value: 1,
-      }))}
-      allowedFilters={StandardFilters}
-      onFiltersChanged={(a, b) => {}}
+      listedFilters={StandardToNumericFilter(initialOperation)}
+      allowedFilters={allowedFilters}
+      onFiltersChanged={onNumericFilterChange}
     />
   );
 

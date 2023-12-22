@@ -1,3 +1,3 @@
-import { NumericFilter } from "./NumericFilterSelect";
+import { NumericFilter } from "./NumericFilter";
 
 export type NumericFilterSetting = { filter: NumericFilter; value: number };
