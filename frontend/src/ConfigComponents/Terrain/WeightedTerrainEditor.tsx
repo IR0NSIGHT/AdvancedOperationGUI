@@ -33,7 +33,7 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
     }
     onUpdateSetting(terrainSetting, { ...terrainSetting, terrain: newTerrain });
   };
-  const onValueChange = (value: number) => {
+  const onValueChange = (oldV: number, value: number) => {
     console.log("on value change: newValue", value);
     onUpdateSetting(terrainSetting, {
       ...terrainSetting,
