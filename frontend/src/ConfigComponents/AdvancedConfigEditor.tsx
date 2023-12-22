@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { OperationEditor } from "./Operation/OperationEditor";
 import { Button } from "@material-ui/core";
-import { ArrayMutationAction } from "./RawConfig";
+import { ArrayMutationAction, RawConfig } from "./RawConfig";
 import DownloadJsonButton from "./DownloadJsonButton";
 import { DisplayConfig } from "./DisplayConfig";
 import {
@@ -10,6 +10,7 @@ import {
   translateDisplayOperation,
   updateOperationArray,
 } from "./Operation/DisplayOperation";
+import { JsonTextPanel } from "./Operation/JsonTextPanel";
 
 export type AdvancedConfigEditorProps = {
   initialConfig: DisplayConfig;
@@ -70,19 +71,24 @@ export const AdvancedConfigEditor: React.FC<AdvancedConfigEditorProps> = ({
       </Button>
 
       <DownloadJsonButton
-        config={{
-          ...initialConfig,
-          operations: displayedOperations.map(translateDisplayOperation),
-        }}
+        config={rawConfigFromDisplay(initialConfig)}
         fileName={"AdvancedOperator_config_" + initialConfig.name}
       />
-      <pre>
-        {JSON.stringify(
+      <JsonTextPanel
+        json={JSON.stringify(
           displayedOperations.map(translateDisplayOperation),
           null,
           3
         )}
-      </pre>
+        title={"executable JSON config"}
+      />
     </div>
   );
+};
+
+const rawConfigFromDisplay = (displayConfig: DisplayConfig): RawConfig => {
+  return {
+    ...displayConfig,
+    operations: displayConfig.operations.map(translateDisplayOperation),
+  };
 };
