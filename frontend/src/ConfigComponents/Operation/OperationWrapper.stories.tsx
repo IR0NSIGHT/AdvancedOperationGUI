@@ -1,7 +1,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { OperationEditor } from "./OperationEditor";
-import { DisplayOperation } from "./DisplayOperation"; // Adjust the path as per your project structure
+import { DisplayOperation } from "./DisplayOperation";
+import { aboveDegreesFilter, belowDegreesFilter } from "./NumericFilter"; // Adjust the path as per your project structure
 
 export default {
   title: "Components/OperationEditor",
@@ -25,7 +26,10 @@ const defaultOperation: DisplayOperation = {
   },
   terrain: [],
   onlyOnTerrain: [],
-  numericFilters: [],
+  numericFilters: [
+    { filter: aboveDegreesFilter, value: 45 },
+    { filter: belowDegreesFilter, value: 50 },
+  ],
   slopeDir: [],
   facing: [],
 };
