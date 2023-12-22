@@ -68,10 +68,7 @@ export const WeightedTerrainListEditor: React.FC<
   const title = "Apply Terrain";
   return (
     <div>
-      <div>
-        <h3>{title}</h3>
-        {terrainList()}
-      </div>
+      {terrainList()}
       <Button variant="contained" color="primary" onClick={addTerrain}>
         Add new terrain
       </Button>
