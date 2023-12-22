@@ -12,7 +12,10 @@ describe("", () => {
       { id: 1, weight: 6 },
       { id: 5, weight: 2 },
       { id: 6, weight: 1 },
-      { id: 7, weight: 1 },
+      {
+        id: 7,
+        weight: 1,
+      },
     ]);
   });
 });
