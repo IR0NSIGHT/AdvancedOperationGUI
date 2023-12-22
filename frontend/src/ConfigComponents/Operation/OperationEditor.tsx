@@ -18,6 +18,7 @@ import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
 import { TerrainListEditor } from "../Terrain/TerrainListEditorProps";
 import { StandardFilters } from "./NumericFilterSelect";
 import { NumericFilterSettingList } from "./NumericFilterSettingList";
+import { OperationSubsection } from "./OperationSubsection";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -91,6 +92,44 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     updateOperation({ ...initialOperation, name: event.target.value });
   };
   const classes = useStyles();
+  const standardFilterEditor = (
+    <NumericFilterSettingList
+      listedFilters={StandardFilters.map((f) => ({
+        filter: f,
+        value: 1,
+      }))}
+      allowedFilters={StandardFilters}
+      onFiltersChanged={(a, b) => {}}
+    />
+  );
+
+  let applyLayersEditor = (
+    <LayerListEditor
+      mode={LayerSettingsMode.APPLY}
+      layers={initialOperation.layer}
+      updateLayer={onApplyLayerChange}
+    />
+  );
+  const onlyOnLayerEditor = (
+    <LayerListEditor
+      mode={LayerSettingsMode.ONLY_ON_LAYER}
+      layers={initialOperation.onlyOnLayer}
+      updateLayer={onLayerFilterChange}
+    />
+  );
+  const applyTerrainEditor = (
+    <WeightedTerrainListEditor
+      terrains={initialOperation.terrain}
+      onTerrainChanged={onApplyTerrainChange}
+    />
+  );
+  const onlyOnTerrainEditor = (
+    <TerrainListEditor
+      terrainList={initialOperation.onlyOnTerrain}
+      onListChanged={onTerrainFilterChange}
+      allowedTerrains={wpTerrainTypes}
+    />
+  );
   return (
     <CollapsibleComponent
       title={initialOperation.name}
@@ -115,43 +154,35 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
 
           <div className={classes.root}>
             <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <LayerListEditor
-                  mode={LayerSettingsMode.APPLY}
-                  layers={initialOperation.layer}
-                  updateLayer={onApplyLayerChange}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <LayerListEditor
-                  mode={LayerSettingsMode.ONLY_ON_LAYER}
-                  layers={initialOperation.onlyOnLayer}
-                  updateLayer={onLayerFilterChange}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <WeightedTerrainListEditor
-                  terrains={initialOperation.terrain}
-                  onTerrainChanged={onApplyTerrainChange}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TerrainListEditor
-                  terrainList={initialOperation.onlyOnTerrain}
-                  onListChanged={onTerrainFilterChange}
-                  allowedTerrains={wpTerrainTypes}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <NumericFilterSettingList
-                  listedFilters={StandardFilters.map((f) => ({
-                    filter: f,
-                    value: 1,
-                  }))}
-                  allowedFilters={StandardFilters}
-                  onFiltersChanged={(a, b) => {}}
-                />
-              </Grid>
+              <OperationSubsection
+                xs={6}
+                title={"Apply Layer"}
+                content={applyLayersEditor}
+              />
+
+              <OperationSubsection
+                xs={6}
+                title={"Only on Layer"}
+                content={onlyOnLayerEditor}
+              />
+
+              <OperationSubsection
+                xs={6}
+                title={"Apply Terrain"}
+                content={applyTerrainEditor}
+              />
+
+              <OperationSubsection
+                xs={6}
+                title={"Only on Terrain"}
+                content={onlyOnTerrainEditor}
+              />
+
+              <OperationSubsection
+                xs={6}
+                title={"Standard Filter"}
+                content={standardFilterEditor}
+              />
             </Grid>
           </div>
 
