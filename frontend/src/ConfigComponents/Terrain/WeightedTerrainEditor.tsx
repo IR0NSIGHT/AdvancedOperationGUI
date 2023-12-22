@@ -10,6 +10,7 @@ import {
   NamedNumericValue,
 } from "../Layer/NamedValueSelector";
 import { DeleteButton } from "../DeleteButton";
+import { NumberInput } from "../Operation/NumberInput";
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType; weight: number };
 
@@ -43,6 +44,9 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
     });
   };
 
+  const sanitizeWeight = (weight: number) => {
+    return Math.max(1, Math.min(100, weight));
+  };
   const allowedWeights: NamedNumericValue[] = [
     0, 1, 2, 3, 4, 5, 10, 20, 50,
   ].map((w) => ({ name: w.toString(), value: w }));
