@@ -2,11 +2,9 @@ import React from "react";
 import { Story } from "@storybook/react";
 import {
   emptyConfigOperation,
-  ConfigOperation,
   configOperationToDisplay,
 } from "./Operation/ConfigOperation";
 import { AdvancedConfigEditor } from "./AdvancedConfigEditor";
-import { formatDate } from "@storybook/blocks";
 import { RawConfig } from "./RawConfig";
 import { DisplayConfig } from "./DisplayConfig";
 
