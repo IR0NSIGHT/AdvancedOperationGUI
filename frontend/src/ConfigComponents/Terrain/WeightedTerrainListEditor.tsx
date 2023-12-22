@@ -14,6 +14,21 @@ export type WeightedTerrainListEditorProps = {
   ) => void;
 };
 
+/**
+ * @param xs
+ */
+export const sortWeightedTerrainList = (
+  xs: WeightedTerrainSetting[]
+): WeightedTerrainSetting[] => {
+  return [...xs].sort(
+    (a: WeightedTerrainSetting, b: WeightedTerrainSetting): number => {
+      const weight = a.weight - b.weight;
+      if (weight !== 0) return weight;
+      else return a.terrain.shortName.localeCompare(b.terrain.shortName);
+    }
+  );
+};
+
 export const updateWeightedTerrainList = (
   oldSetting: WeightedTerrainSetting | null,
   newSetting: WeightedTerrainSetting | null,
@@ -31,22 +46,14 @@ export const updateWeightedTerrainList = (
   );
 
   const out = isDeletion ? otherTerrains : [...otherTerrains, newSetting];
+  return sortWeightedTerrainList(out);
   //sort by display name aphabetically
-  return out.sort(
-    (a: WeightedTerrainSetting, b: WeightedTerrainSetting): number => {
-      const weight = a.weight - b.weight;
-      if (weight !== 0) return weight;
-      else return a.terrain.shortName.localeCompare(b.terrain.shortName);
-    }
-  );
 };
 
 export const WeightedTerrainListEditor: React.FC<
   WeightedTerrainListEditorProps
 > = ({ terrains, onTerrainChanged }) => {
   const terrainList = (): JSX.Element[] => {
-    if (terrains == null) return [];
-
     return terrains.map((t) => (
       <WeightedTerrainEditor
         terrainSetting={t}
@@ -54,6 +61,7 @@ export const WeightedTerrainListEditor: React.FC<
       />
     ));
   };
+
   const addTerrain = () => {
     onTerrainChanged(null, { terrain: NoneTerrain, weight: 1 });
   };
