@@ -1,21 +1,21 @@
-import {DisplayOperation} from "./Operation/DisplayOperation";
+import { DisplayOperation } from "./Operation/DisplayOperation";
 
 export type DisplayConfig = {
-    operations: DisplayOperation[]
-    author: string,
-    name: string,
-    description: string,
-    date: string
-}
+  operations: DisplayOperation[];
+  author: string;
+  name: string;
+  description: string;
+  date: string;
+};
 
 const EmptyConfig = {
-    operations: [],
-    author: "",
-    name: "",
-    description: "",
-    date: ""
-}
+  operations: [],
+  author: "",
+  name: "",
+  description: "",
+  date: "",
+};
 
 export const newEmptyConfig = () => {
-    return {...EmptyConfig}
-}
+  return { ...EmptyConfig };
+};

@@ -5,7 +5,7 @@ export type RawConfig = {
   name: string;
   author: string;
   date: string;
-  description: string
+  description: string;
 };
 
 export function configEntryToArray<T>(configT: T | T[] | undefined): T[] {

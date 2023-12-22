@@ -14,8 +14,11 @@ import {
 import { Grid, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
-import {WpTerrainType, wpTerrainTypes} from "../Terrain/WpTerrainTypes";
-import {TerrainListEditor, TerrainListEditorProps} from "../Terrain/TerrainListEditorProps";
+import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
+import {
+  TerrainListEditor,
+  TerrainListEditorProps,
+} from "../Terrain/TerrainListEditorProps";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -74,13 +77,16 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     updateOperation(newOp);
   };
 
-  const onTerrainFilterChange = (old: WpTerrainType[], newL: WpTerrainType[]) => {
+  const onTerrainFilterChange = (
+    old: WpTerrainType[],
+    newL: WpTerrainType[]
+  ) => {
     const newOp = {
       ...initialOperation,
-      onlyOnTerrain: newL
+      onlyOnTerrain: newL,
     };
     updateOperation(newOp);
-  }
+  };
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateOperation({ ...initialOperation, name: event.target.value });

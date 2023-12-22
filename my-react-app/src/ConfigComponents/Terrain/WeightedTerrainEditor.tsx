@@ -9,16 +9,16 @@ import {
   NamedValueSelector,
   NamedNumericValue,
 } from "../Layer/NamedValueSelector";
-import {DeleteButton} from "../DeleteButton";
-import {updateWeightedTerrainList} from "./WeightedTerrainListEditor";
+import { DeleteButton } from "../DeleteButton";
+import { updateWeightedTerrainList } from "./WeightedTerrainListEditor";
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType; weight: number };
 
 export type WeightedTerrainEditorProps = {
   terrainSetting: WeightedTerrainSetting;
   onUpdateSetting: (
-    oldSetting: WeightedTerrainSetting|null,
-    newSetting: WeightedTerrainSetting|null
+    oldSetting: WeightedTerrainSetting | null,
+    newSetting: WeightedTerrainSetting | null
   ) => void;
 };
 
@@ -63,10 +63,11 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
         allowedValues={allowedWeights}
         onUpdateValue={onValueChange}
       />
-      <DeleteButton onClick={()=>{
-        onUpdateSetting(terrainSetting, null)
-      }}></DeleteButton>
+      <DeleteButton
+        onClick={() => {
+          onUpdateSetting(terrainSetting, null);
+        }}
+      ></DeleteButton>
     </div>
   );
 };
-
