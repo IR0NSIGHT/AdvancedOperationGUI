@@ -38,10 +38,7 @@ export const LayerListEditor: React.FC<OperationLayerSettingsProps> = ({
     mode === LayerSettingsMode.APPLY ? "Apply Layer" : "Only on layer";
   return (
     <div>
-      <div>
-        <h3>{title}</h3>
-        {layersettings}
-      </div>
+      {layersettings}
       <Button variant="contained" color="primary" onClick={addLayer}>
         Add new layer
       </Button>

@@ -37,21 +37,16 @@ export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
 
   return (
     <div>
-      <div>
-        <h3>{"Only on terrain"}</h3>
-        {terrainList.map((t) => (
-          <div>
-            <TerrainTypeSelect
-              terrain={t}
-              terrainList={allowedTerrains}
-              onUpdateTerrainName={(newId: number) =>
-                changeTerrain(t.id, newId)
-              }
-            />
-            <DeleteButton onClick={deleteTerrain(t.id)} />
-          </div>
-        ))}
-      </div>
+      {terrainList.map((t) => (
+        <div>
+          <TerrainTypeSelect
+            terrain={t}
+            terrainList={allowedTerrains}
+            onUpdateTerrainName={(newId: number) => changeTerrain(t.id, newId)}
+          />
+          <DeleteButton onClick={deleteTerrain(t.id)} />
+        </div>
+      ))}
       <Button variant="contained" color="primary" onClick={addTerrain}>
         Add new terrain
       </Button>

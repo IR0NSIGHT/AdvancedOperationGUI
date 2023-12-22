@@ -1,5 +1,6 @@
 import { NumericFilter, NumericFilterSelect } from "./NumericFilterSelect";
 import React from "react";
+import { Button } from "@material-ui/core";
 
 type NumericFilterSetting = { filter: NumericFilter; value: number };
 type NumericFilterSettingListProps = {
@@ -18,16 +19,22 @@ export const NumericFilterSettingList: React.FC<
     newFilters[idx] = { filter: filter, value: newFilters[idx].value };
     onFiltersChanged(listedFilters, newFilters);
   };
+
+  const addFilter = () => {};
+
+  const filters = listedFilters.map((f, idx) => (
+    <NumericFilterSelect
+      selectedFilter={f.filter}
+      allowedFilters={allowedFilters}
+      onFilterChanged={(old, newF) => setFilterType(idx, newF)}
+    />
+  ));
   return (
     <div>
-      My Numeric Filters
-      {listedFilters.map((f, idx) => (
-        <NumericFilterSelect
-          selectedFilter={f.filter}
-          allowedFilters={allowedFilters}
-          onFilterChanged={(old, newF) => setFilterType(idx, newF)}
-        />
-      ))}
+      {filters}
+      <Button variant="contained" color="primary" onClick={addFilter}>
+        Add new filter
+      </Button>
     </div>
   );
 };
