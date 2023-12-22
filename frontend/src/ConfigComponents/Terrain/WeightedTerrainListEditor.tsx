@@ -75,7 +75,6 @@ export const WeightedTerrainListEditor: React.FC<
       <Button variant="contained" color="primary" onClick={addTerrain}>
         Add new terrain
       </Button>
-      <hr />
     </div>
   );
 };
