@@ -55,7 +55,6 @@ export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
       <Button variant="contained" color="primary" onClick={addTerrain}>
         Add new terrain
       </Button>
-      <hr />
     </div>
   );
 };

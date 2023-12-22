@@ -45,7 +45,6 @@ export const LayerListEditor: React.FC<OperationLayerSettingsProps> = ({
       <Button variant="contained" color="primary" onClick={addLayer}>
         Add new layer
       </Button>
-      <hr />
     </div>
   );
 };
