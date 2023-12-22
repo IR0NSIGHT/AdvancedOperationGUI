@@ -42,7 +42,7 @@ export const translateDisplayOperation = (
     name: x.name,
     ...NumericToStandardFilter(x.numericFilters),
     perlin: x.perlin,
-    onlyOnLayer: x.layer,
+    onlyOnLayer: x.onlyOnLayer,
     onlyOnTerrain: x.onlyOnTerrain.map((t) => t.id),
     layer: x.layer,
     terrain: configTerrain,
