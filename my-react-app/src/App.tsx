@@ -1,14 +1,15 @@
 import { AdvancedConfigEditor } from "./ConfigComponents/AdvancedConfigEditor";
+
 import {
+  advancedConfigEditorStories,
   IcyPinesConfig,
-  rawConfigToDisplay,
-} from "./ConfigComponents/RawConfigToDisplay";
+} from "./ConfigComponents/RawConfig";
 
 function App() {
   return (
     <div className="App">
       <AdvancedConfigEditor
-        initialConfig={rawConfigToDisplay(IcyPinesConfig)}
+        initialConfig={advancedConfigEditorStories(IcyPinesConfig)}
       />
     </div>
   );
