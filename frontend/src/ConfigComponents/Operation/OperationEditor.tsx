@@ -19,11 +19,8 @@ import { TerrainListEditor } from "../Terrain/TerrainListEditorProps";
 import { NumericFilterSettingList } from "./NumericFilterSettingList";
 import { OperationSubsection } from "./OperationSubsection";
 import { NumericFilterSetting } from "./NumericFilterSetting";
-import {
-  NumericToStandardFilter,
-  StandardToNumericFilter,
-} from "./StandardFilter";
 import { NoneFilter, StandardFilters } from "./NumericFilter";
+import { JsonTextPanel } from "./JsonTextPanel";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -201,19 +198,14 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
               />
             </Grid>
           </div>
-
-          <CollapsibleComponent
-            title={"JSON config"}
-            content={
-              <pre>
-                {JSON.stringify(
-                  translateDisplayOperation(initialOperation),
-                  null,
-                  3
-                )}
-              </pre>
-            }
-          ></CollapsibleComponent>
+          <JsonTextPanel
+            json={JSON.stringify(
+              translateDisplayOperation(initialOperation),
+              null,
+              3
+            )}
+            title={"JSON"}
+          />
         </div>
       }
     />
