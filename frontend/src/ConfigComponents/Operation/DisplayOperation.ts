@@ -5,6 +5,8 @@ import assert from "assert";
 
 import { ArrayMutationAction } from "../RawConfig";
 import { WpTerrainType } from "../Terrain/WpTerrainTypes";
+import { NumericFilterSetting } from "./NumericFilterSetting";
+import { NumericToStandardFilter } from "./StandardFilter";
 
 export type DisplayOperation = {
   displayId: number;
@@ -13,10 +15,7 @@ export type DisplayOperation = {
   onlyOnTerrain: WpTerrainType[];
   layer: WpLayerSetting[];
   onlyOnLayer: WpLayerSetting[];
-  aboveLevel: number | undefined;
-  belowLevel: number | undefined;
-  belowDegrees: number | undefined;
-  aboveDegrees: number | undefined;
+  numericFilters: NumericFilterSetting[];
 
   perlin:
     | {
@@ -41,10 +40,7 @@ export const translateDisplayOperation = (
   });
   return {
     name: x.name,
-    aboveLevel: x.aboveLevel,
-    belowLevel: x.belowLevel,
-    aboveDegrees: x.aboveDegrees,
-    belowDegrees: x.belowDegrees,
+    ...NumericToStandardFilter(x.numericFilters),
     perlin: x.perlin,
     onlyOnLayer: x.layer,
     onlyOnTerrain: x.onlyOnTerrain.map((t) => t.id),
@@ -62,10 +58,7 @@ const emptyDisplayOPeration: DisplayOperation = {
   onlyOnLayer: [],
   onlyOnTerrain: [],
   perlin: undefined,
-  aboveDegrees: undefined,
-  belowDegrees: undefined,
-  belowLevel: undefined,
-  aboveLevel: undefined,
+  numericFilters: [],
   slopeDir: [],
   facing: [],
 };

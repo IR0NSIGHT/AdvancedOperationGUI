@@ -49,10 +49,7 @@ export const configOperationToDisplay = (
 ): DisplayOperation => {
   return {
     displayId: id,
-    aboveDegrees: undefined,
-    aboveLevel: undefined,
-    belowDegrees: undefined,
-    belowLevel: undefined,
+    numericFilters: [],
     layer: configEntryToArray<WpLayerSetting>(configOp.layer),
     name: configOp.name,
     onlyOnLayer: configEntryToArray<WpLayerSetting>(configOp.onlyOnLayer),

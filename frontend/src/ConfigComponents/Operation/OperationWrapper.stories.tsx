@@ -25,10 +25,7 @@ const defaultOperation: DisplayOperation = {
   },
   terrain: [],
   onlyOnTerrain: [],
-  aboveLevel: undefined,
-  belowLevel: undefined,
-  aboveDegrees: undefined,
-  belowDegrees: undefined,
+  numericFilters: [],
   slopeDir: [],
   facing: [],
 };

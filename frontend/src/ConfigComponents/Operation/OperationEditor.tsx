@@ -98,10 +98,9 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
     newF: NumericFilterSetting[]
   ) => {
     console.log("changed filter from:", old, " to: ", newF);
-    const stdFilter = NumericToStandardFilter(newF);
     const newOp: DisplayOperation = {
       ...initialOperation,
-      ...stdFilter,
+      numericFilters: newF,
     };
     updateOperation(newOp);
   };
@@ -114,7 +113,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
   const allowedFilters = [NoneFilter, ...StandardFilters];
   const standardFilterEditor = (
     <NumericFilterSettingList
-      listedFilters={StandardToNumericFilter(initialOperation)}
+      listedFilters={initialOperation.numericFilters}
       allowedFilters={allowedFilters}
       onFiltersChanged={onNumericFilterChange}
     />
