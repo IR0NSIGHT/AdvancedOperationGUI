@@ -18,27 +18,26 @@ export const NumberInput: React.FC<NumberInputProps> = ({
   }, [value]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-  };
-  const onBlur = () => {
-    const parsed = parseInt(inputValue, 10);
+    const parsed = parseInt(event.target.value, 10);
+    console.log("onChange number input, parsed = ", parsed);
     if (!isNaN(parsed)) {
       const sanitizes = sanitizeInput(parsed);
       onInput(value, sanitizes);
       setInputValue(sanitizes.toString());
     } else {
-      //reset to original value => guaranteed to be legal number
-      setInputValue(value.toString());
+      setInputValue(event.target.value);
     }
   };
+
   return (
     <TextField
       id="outlined-number"
       label="Number"
       type="number"
-      onBlur={onBlur}
       onChange={handleInputChange}
+      onBlur={() => {
+        setInputValue(value.toString());
+      }}
       InputLabelProps={{
         shrink: true,
       }}

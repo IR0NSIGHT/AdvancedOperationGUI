@@ -2,13 +2,10 @@ import TerrainTypeSelect, { NoneTerrain } from "./TerrainTypeSelect";
 import {
   getTerrainById,
   sortTerrainAlphabetically,
-  wpTerrainTypes,
   WpTerrainType,
+  wpTerrainTypes,
 } from "./WpTerrainTypes";
-import {
-  NamedValueSelector,
-  NamedNumericValue,
-} from "../Layer/NamedValueSelector";
+import { NamedNumericValue } from "../Layer/NamedValueSelector";
 import { DeleteButton } from "../DeleteButton";
 import { NumberInput } from "../Operation/NumberInput";
 
@@ -36,11 +33,11 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
     }
     onUpdateSetting(terrainSetting, { ...terrainSetting, terrain: newTerrain });
   };
-  const onValueChange = (value: string) => {
+  const onValueChange = (value: number) => {
     console.log("on value change: newValue", value);
     onUpdateSetting(terrainSetting, {
       ...terrainSetting,
-      weight: parseInt(value),
+      weight: value,
     });
   };
 
@@ -58,14 +55,12 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
         terrain={terrainSetting.terrain}
         terrainList={sortTerrainAlphabetically(allowedTerrains)}
       />
-      <NamedValueSelector
-        layerValue={{
-          name: terrainSetting.weight.toString(),
-          value: terrainSetting.weight,
-        }}
-        allowedValues={allowedWeights}
-        onUpdateValue={onValueChange}
+      <NumberInput
+        value={terrainSetting.weight}
+        onInput={onValueChange}
+        sanitizeInput={(n) => Math.max(1, n)}
       />
+
       <DeleteButton
         onClick={() => {
           onUpdateSetting(terrainSetting, null);
