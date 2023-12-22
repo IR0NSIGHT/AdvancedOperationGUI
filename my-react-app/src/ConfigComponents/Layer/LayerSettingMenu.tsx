@@ -68,7 +68,7 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({
   };
 
   const allowedValues = getNamedValuesByLayer(layerSetting[0]);
-  if (allowedValues.find((l) => l.value == layerSetting[1]) == undefined)
+  if (allowedValues.find((l) => l.value === layerSetting[1]) === undefined)
     onValueChange(allowedValues[0].value.toString());
 
   return (

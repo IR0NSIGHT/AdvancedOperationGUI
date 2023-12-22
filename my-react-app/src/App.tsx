@@ -2,7 +2,7 @@ import { AdvancedConfigEditor } from "./ConfigComponents/AdvancedConfigEditor";
 import {
   IcyPinesConfig,
   rawConfigToDisplay,
-} from "./ConfigComponents/AdvancedConfigEditor.stories";
+} from "./ConfigComponents/RawConfigToDisplay";
 
 function App() {
   return (

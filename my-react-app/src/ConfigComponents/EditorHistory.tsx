@@ -35,7 +35,7 @@ export const HistoryNavigator: React.FC<HistoryNavigatorProps> = ({
   };
 
   const addToHistory = (config: DisplayConfig) => {
-    const editingHistory = currentIndex != history.length - 1;
+    const editingHistory = currentIndex !== history.length - 1;
     if (editingHistory) {
       setHistory([...history.slice(0, currentIndex + 1), config]);
       setCurrentIndex(currentIndex + 1);
