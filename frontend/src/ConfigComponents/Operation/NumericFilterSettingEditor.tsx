@@ -44,8 +44,11 @@ export const NumericFilterSettingEditor: React.FC<
       <NumberInput
         value={setting.value ?? 0}
         onInput={setFilterValue}
-        isAllowed={(n) =>
-          setting.filter.maxValue >= n && setting.filter.minValue <= n
+        sanitizeInput={(n) =>
+          Math.min(
+            Math.max(n, setting.filter.minValue),
+            setting.filter.maxValue
+          )
         }
       />
       <DeleteButton onClick={() => onSettingChanged(setting, null)} />
