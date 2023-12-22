@@ -62,7 +62,7 @@ export const configOperationToDisplay = (
     ),
     onlyOnTerrain: terrainIdsToWeightedTerrains(
       configEntryToArray<number>(configOp.onlyOnTerrain)
-    ).map(x => x.terrain),
+    ).map((x) => x.terrain),
     slopeDir: configEntryToArray(configOp.slopeDir),
     facing: configEntryToArray(configOp.facing),
   };
