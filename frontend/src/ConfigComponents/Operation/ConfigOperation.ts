@@ -2,6 +2,7 @@ import { WpLayerSetting } from "../Layer/WpLayerSetting";
 import { DisplayOperation } from "./DisplayOperation";
 import { configEntryToArray } from "../RawConfig";
 import { terrainIdsToWeightedTerrains } from "../Terrain/WpTerrainTypes";
+import { StandardToNumericFilter } from "./StandardFilter";
 
 export type ConfigOperation = {
   name: string;
@@ -49,7 +50,7 @@ export const configOperationToDisplay = (
 ): DisplayOperation => {
   return {
     displayId: id,
-    numericFilters: [],
+    numericFilters: StandardToNumericFilter(configOp),
     layer: configEntryToArray<WpLayerSetting>(configOp.layer),
     name: configOp.name,
     onlyOnLayer: configEntryToArray<WpLayerSetting>(configOp.onlyOnLayer),
