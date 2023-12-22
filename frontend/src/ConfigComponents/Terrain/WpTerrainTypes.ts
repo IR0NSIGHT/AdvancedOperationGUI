@@ -1,6 +1,6 @@
 import { WeightedTerrainSetting } from "./WeightedTerrainEditor";
 
-export const wpTerrainTypes: any[] = [
+export const wpTerrainTypes: WpTerrainType[] = [
   {
     id: 0,
     name: "Grass (grass with flowers, tall grass and ferns here and there, and seagrass and kelp under water)",
