@@ -1,8 +1,9 @@
-import { NumericFilter, NumericFilterSelect } from "./NumericFilterSelect";
+import { NumericFilterSelect } from "./NumericFilterSelect";
 import React from "react";
 import { Button } from "@material-ui/core";
 import { DeleteButton } from "../DeleteButton";
 import { NumericFilterSetting } from "./NumericFilterSetting";
+import { NumericFilter } from "./NumericFilter";
 
 type NumericFilterSettingListProps = {
   listedFilters: NumericFilterSetting[];
