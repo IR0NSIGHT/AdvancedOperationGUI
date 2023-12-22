@@ -1,5 +1,9 @@
 import { ArrayMutationAction } from "./RawConfig";
-import {DisplayOperation, newEmptyDisplayOperation, updateOperationArray} from "./Operation/DisplayOperation";
+import {
+  DisplayOperation,
+  newEmptyDisplayOperation,
+  updateOperationArray,
+} from "./Operation/DisplayOperation";
 
 describe("mutate list of operations", () => {
   test("can insert new operation", () => {

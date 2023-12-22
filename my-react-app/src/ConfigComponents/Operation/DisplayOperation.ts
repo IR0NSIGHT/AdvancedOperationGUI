@@ -70,9 +70,9 @@ const emptyDisplayOPeration: DisplayOperation = {
   facing: [],
 };
 
-export const newEmptyDisplayOperation= () => {
-  return {...emptyDisplayOPeration}
-}
+export const newEmptyDisplayOperation = () => {
+  return { ...emptyDisplayOPeration };
+};
 /**
  * updates operations with given op. will replace op with same id, or append to list if not present
  * @param op

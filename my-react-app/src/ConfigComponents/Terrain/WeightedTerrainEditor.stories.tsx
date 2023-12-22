@@ -1,6 +1,7 @@
 import { Story } from "@storybook/react";
 import { wpTerrainTypes } from "./WpTerrainTypes";
-import {WeightedTerrainEditor,
+import {
+  WeightedTerrainEditor,
   WeightedTerrainEditorProps,
   WeightedTerrainSetting,
 } from "./WeightedTerrainEditor";
@@ -15,8 +16,8 @@ const Template: Story<WeightedTerrainEditorProps> = (args) => (
 );
 
 const onUpdateSetting = (
-  oldSetting: WeightedTerrainSetting|null,
-  newSetting: WeightedTerrainSetting|null
+  oldSetting: WeightedTerrainSetting | null,
+  newSetting: WeightedTerrainSetting | null
 ) => {
   console.log("new setting was set:", oldSetting, " => ", newSetting);
 };
