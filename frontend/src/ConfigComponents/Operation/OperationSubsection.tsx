@@ -5,7 +5,7 @@ import { Button, Grid } from "@material-ui/core";
 
 type OperationSubsectionProps = {
   title: string;
-  content: JSX.Element[];
+  content: JSX.Element | JSX.Element[];
   xs: number;
 };
 export const OperationSubsection: React.FC<OperationSubsectionProps> = ({
