@@ -2,8 +2,8 @@ import { NumericFilter, NumericFilterSelect } from "./NumericFilterSelect";
 import React from "react";
 import { Button } from "@material-ui/core";
 import { DeleteButton } from "../DeleteButton";
+import { NumericFilterSetting } from "./NumericFilterSetting";
 
-type NumericFilterSetting = { filter: NumericFilter; value: number };
 type NumericFilterSettingListProps = {
   listedFilters: NumericFilterSetting[];
   allowedFilters: NumericFilter[];
@@ -21,9 +21,20 @@ export const NumericFilterSettingList: React.FC<
     onFiltersChanged(listedFilters, newFilters);
   };
 
-  const addFilter = () => {};
+  const addFilter = () => {
+    const newFilters = [
+      ...listedFilters,
+      {
+        filter: allowedFilters[0],
+        value: 0,
+      },
+    ];
+    onFiltersChanged(listedFilters, newFilters);
+  };
 
-  const deleteFilter = (id: number) => {};
+  const deleteFilter = (id: number) => {
+    onFiltersChanged(listedFilters, listedFilters.splice(id, 1));
+  };
 
   const filters = listedFilters.map((f, idx) => (
     <div>

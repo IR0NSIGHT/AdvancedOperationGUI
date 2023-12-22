@@ -8,11 +8,26 @@ export const StandardFilters: NumericFilter[] = [
   { name: "above degrees", maxValue: 90, minValue: 0 },
   { name: "below degrees", maxValue: 90, minValue: 0 },
 ];
+
+type DefaultFilterNames =
+  | "above level"
+  | "below level"
+  | "above degrees"
+  | "below degrees"
+  | "None";
+
 export type NumericFilter = {
-  name: string;
+  name: DefaultFilterNames;
   maxValue: number;
   minValue: number;
 };
+
+export const NoneFilter: NumericFilter = {
+  name: "None",
+  maxValue: 0,
+  minValue: 0,
+};
+
 type NumericFilterSelectProp = {
   selectedFilter: NumericFilter;
   allowedFilters: NumericFilter[];
