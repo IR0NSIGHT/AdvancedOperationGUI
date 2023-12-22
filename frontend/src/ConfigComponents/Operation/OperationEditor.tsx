@@ -1,10 +1,10 @@
 import React from "react";
 import { applyLayerChange, WpLayerSetting } from "../Layer/WpLayerSetting";
 import { CollapsibleComponent } from "./CollapsibleComponent";
-import { LayerSettingsMode, LayerListEditor } from "../Layer/LayerListEditor";
+import { LayerListEditor, LayerSettingsMode } from "../Layer/LayerListEditor";
 import {
-  WeightedTerrainListEditor,
   updateWeightedTerrainList,
+  WeightedTerrainListEditor,
 } from "../Terrain/WeightedTerrainListEditor";
 import { WeightedTerrainSetting } from "../Terrain/WeightedTerrainEditor";
 import {
@@ -16,6 +16,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
 import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
 import { TerrainListEditor } from "../Terrain/TerrainListEditorProps";
+import {
+  NumericFilter,
+  NumericFilterSelect,
+  StandardFilters,
+} from "./NumericFilterSelect";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -140,6 +145,16 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                   allowedTerrains={wpTerrainTypes}
                 />
               </Grid>
+              <Grid item xs={6}>
+                <NumericFilterList
+                  listedFilters={StandardFilters.map((f) => ({
+                    filter: f,
+                    value: 1,
+                  }))}
+                  allowedFilters={StandardFilters}
+                  onFiltersChanged={(a, b) => {}}
+                />
+              </Grid>
             </Grid>
           </div>
 
@@ -158,5 +173,39 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
         </div>
       }
     />
+  );
+};
+
+type NumericFilterSetting = { filter: NumericFilter; value: number };
+type NumericFilterListProps = {
+  listedFilters: NumericFilterSetting[];
+  allowedFilters: NumericFilter[];
+  onFiltersChanged: (
+    old: NumericFilterSetting[],
+    newFilters: NumericFilterSetting[]
+  ) => void;
+};
+
+const NumericFilterList: React.FC<NumericFilterListProps> = ({
+  allowedFilters,
+  listedFilters,
+  onFiltersChanged,
+}) => {
+  const setFilterType = (idx: number, filter: NumericFilter) => {
+    const newFilters = [...listedFilters];
+    newFilters[idx] = { filter: filter, value: newFilters[idx].value };
+    onFiltersChanged(listedFilters, newFilters);
+  };
+  return (
+    <div>
+      My Numeric Filters
+      {listedFilters.map((f, idx) => (
+        <NumericFilterSelect
+          selectedFilter={f.filter}
+          allowedFilters={allowedFilters}
+          onFilterChanged={(old, newF) => setFilterType(idx, newF)}
+        />
+      ))}
+    </div>
   );
 };
