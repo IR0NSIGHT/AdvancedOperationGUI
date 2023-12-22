@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { OperationEditor } from "./Operation/OperationEditor";
 import { Button } from "@material-ui/core";
-import { ArrayMutationAction, RawConfig } from "./RawConfig";
+import { ArrayMutationAction } from "./RawConfig";
 import DownloadJsonButton from "./DownloadJsonButton";
 import { DisplayConfig } from "./DisplayConfig";
 import {
