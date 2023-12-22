@@ -1,7 +1,7 @@
 import { WpLayerSetting } from "../Layer/WpLayerSetting";
 import { DisplayOperation } from "./DisplayOperation";
 import { configEntryToArray } from "../RawConfig";
-import { terrainIdsToTerrains } from "../Terrain/WpTerrainTypes";
+import { terrainIdsToWeightedTerrains } from "../Terrain/WpTerrainTypes";
 
 export type ConfigOperation = {
   name: string;
@@ -57,15 +57,12 @@ export const configOperationToDisplay = (
     name: configOp.name,
     onlyOnLayer: configEntryToArray<WpLayerSetting>(configOp.onlyOnLayer),
     perlin: undefined,
-    terrain: terrainIdsToTerrains(
+    terrain: terrainIdsToWeightedTerrains(
       configEntryToArray<number>(configOp.terrain)
-    ).map((t) => ({
-      weight: 1, //FIXME respect occurences as weight
-      terrain: t,
-    })),
-    onlyOnTerrain: terrainIdsToTerrains(
-      configEntryToArray<number>(configOp.onlyOnTerrain)
     ),
+    onlyOnTerrain: terrainIdsToWeightedTerrains(
+      configEntryToArray<number>(configOp.onlyOnTerrain)
+    ).map(x => x.terrain),
     slopeDir: configEntryToArray(configOp.slopeDir),
     facing: configEntryToArray(configOp.facing),
   };
