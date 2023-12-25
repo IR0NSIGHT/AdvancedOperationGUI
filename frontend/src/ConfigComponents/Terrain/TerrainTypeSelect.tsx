@@ -1,7 +1,8 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import { FormControl, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { NoneTerrain, WpTerrainType } from "./WpTerrainTypes";
+import { WpTerrainType } from "./WpTerrainTypes";
+import { DropdownSelect, NamedValue } from "./DropdownSelect";
 
 export type TerrainTypeSelectProps = {
   terrain: WpTerrainType;
@@ -50,38 +51,3 @@ export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
 };
 
 export default TerrainTypeSelect;
-
-type NamedValue = { value: number; name: string };
-const DropdownSelect: React.FC<{
-  selected: NamedValue;
-  allItems: NamedValue[];
-  noneItem: NamedValue;
-  onChange: (newSelected: NamedValue) => void;
-  label: string;
-}> = ({ selected, allItems, noneItem, onChange, label }) => {
-  const changed = (
-    event: React.ChangeEvent<{
-      name?: string;
-      value: unknown;
-    }>
-  ) => {
-    const id = parseInt((event.target as HTMLSelectElement).value);
-    onChange(allItems.find((i) => i.value == id)!);
-  };
-  return (
-    <Select
-      labelId="demo-select-small-label"
-      id="demo-select-small"
-      value={selected.value}
-      label={label}
-      onChange={changed}
-    >
-      <MenuItem value={noneItem.value} disabled style={{ display: "none" }}>
-        {noneItem.name}
-      </MenuItem>
-      {allItems.map((item) => (
-        <MenuItem value={item.value}>{item.name}</MenuItem>
-      ))}
-    </Select>
-  );
-};
