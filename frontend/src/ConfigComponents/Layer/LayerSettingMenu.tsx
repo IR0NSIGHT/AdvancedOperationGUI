@@ -63,7 +63,6 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({
     onUpdateSetting(layerSetting, [name, layerSetting[1]]);
   };
   const onValueChange = (value: string) => {
-    console.log("on value change: newValue", value);
     onUpdateSetting(layerSetting, [layerSetting[0], parseInt(value)]);
   };
 
