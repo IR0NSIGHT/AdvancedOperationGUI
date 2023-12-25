@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { OperationEditor } from "./Operation/OperationEditor";
-import { Button } from "@material-ui/core";
 import { ArrayMutationAction, RawConfig } from "./RawConfig";
 import DownloadJsonButton from "./DownloadJsonButton";
 import { DisplayConfig } from "./DisplayConfig";
@@ -11,6 +10,7 @@ import {
   updateOperationArray,
 } from "./Operation/DisplayOperation";
 import { JsonTextPanel } from "./Operation/JsonTextPanel";
+import { AddButton } from "./Terrain/AddButton";
 
 export type AdvancedConfigEditorProps = {
   initialConfig: DisplayConfig;
@@ -66,10 +66,7 @@ export const AdvancedConfigEditor: React.FC<AdvancedConfigEditorProps> = ({
           deleteOperation={deleteOperation}
         />
       ))}
-      <Button variant="contained" color="primary" onClick={addOperation}>
-        Add new global operation
-      </Button>
-
+      <AddButton title={"Add new operation"} addAction={addOperation} />
       <DownloadJsonButton
         config={rawConfigFromDisplay(initialConfig)}
         fileName={"AdvancedOperator_config_" + initialConfig.name}

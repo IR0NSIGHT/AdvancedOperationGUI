@@ -6,7 +6,7 @@ import {
 } from "./WpTerrainTypes";
 import TerrainTypeSelect from "./TerrainTypeSelect";
 import { DeleteButton } from "../DeleteButton";
-import { Button } from "@material-ui/core";
+import { AddButton } from "./AddButton";
 
 export type TerrainListEditorProps = {
   terrainList: WpTerrainType[];
@@ -47,9 +47,7 @@ export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
           <DeleteButton onClick={deleteTerrain(t.id)} />
         </div>
       ))}
-      <Button variant="contained" color="primary" onClick={addTerrain}>
-        Add new terrain
-      </Button>
+      <AddButton title={"Add terrain"} addAction={addTerrain} />
     </div>
   );
 };

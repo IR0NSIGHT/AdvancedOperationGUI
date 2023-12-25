@@ -3,6 +3,7 @@ import React from "react";
 import LayerSettingMenu from "./LayerSettingMenu";
 import { NoneLayer } from "./LayerSelector";
 import { Button } from "@material-ui/core";
+import { AddButton } from "../Terrain/AddButton";
 
 export enum LayerSettingsMode {
   APPLY = "Apply",
@@ -39,9 +40,7 @@ export const LayerListEditor: React.FC<OperationLayerSettingsProps> = ({
   return (
     <div>
       {layersettings}
-      <Button variant="contained" color="primary" onClick={addLayer}>
-        Add new layer
-      </Button>
+      <AddButton title={"Add layer"} addAction={addLayer} />
     </div>
   );
 };

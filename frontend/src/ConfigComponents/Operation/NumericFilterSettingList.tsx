@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core";
 import { NumericFilterSetting } from "./NumericFilterSetting";
 import { NumericFilter } from "./NumericFilter";
 import { NumericFilterSettingEditor } from "./NumericFilterSettingEditor";
+import { AddButton } from "../Terrain/AddButton";
 
 type NumericFilterSettingListProps = {
   listedFilters: NumericFilterSetting[];
@@ -53,9 +54,7 @@ export const NumericFilterSettingList: React.FC<
   return (
     <div>
       {filters}
-      <Button variant="contained" color="primary" onClick={addFilter}>
-        Add new filter
-      </Button>
+      <AddButton title={"Add filter"} addAction={addFilter} />
     </div>
   );
 };
