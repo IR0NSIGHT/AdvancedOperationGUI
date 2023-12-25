@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { WpTerrainType } from "./WpTerrainTypes";
+import { NoneTerrain, WpTerrainType } from "./WpTerrainTypes";
 
 export type TerrainTypeSelectProps = {
   terrain: WpTerrainType;
@@ -26,39 +26,62 @@ export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
   onUpdateTerrainName,
   noneTerrain,
 }: TerrainTypeSelectProps) => {
-  const allTerrains = [noneTerrain, ...terrainList];
-  const handleNameChange = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>,
-    child: React.ReactNode
-  ) => {
-    const newName = (event.target as HTMLSelectElement).value;
-    onUpdateTerrainName(parseInt(newName)); // Call the prop function to update the name in the parent component
+  const handleNameChange = (newSelected: NamedValue) => {
+    onUpdateTerrainName(newSelected.value);
   };
 
   const classes = useStyles();
+  const selectedItem = { value: terrain.id, name: terrain.shortName };
+  const allItems = terrainList.map((t) => ({ value: t.id, name: t.shortName }));
+  const noneItem = { value: noneTerrain.id, name: noneTerrain.shortName };
+
   return (
     <FormControl className={classes.formControl}>
       <InputLabel id="demo-select-small-label">Layer</InputLabel>
-      <Select
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={terrain.id}
-        label="Terrain"
+      <DropdownSelect
+        selected={selectedItem}
+        allItems={allItems}
+        noneItem={noneItem}
         onChange={handleNameChange}
-        renderValue={(selected) => {
-          const selectedTerrain = allTerrains.find((t) => t.id === selected);
-          return selectedTerrain!.shortName;
-        }}
-      >
-        <MenuItem value={noneTerrain.id} disabled style={{ display: "none" }}>
-          {noneTerrain.name}
-        </MenuItem>
-        {terrainList.map((terrain) => (
-          <MenuItem value={terrain.id}>{terrain.name}</MenuItem>
-        ))}
-      </Select>
+        label={"Terrain"}
+      />
     </FormControl>
   );
 };
 
 export default TerrainTypeSelect;
+
+type NamedValue = { value: number; name: string };
+const DropdownSelect: React.FC<{
+  selected: NamedValue;
+  allItems: NamedValue[];
+  noneItem: NamedValue;
+  onChange: (newSelected: NamedValue) => void;
+  label: string;
+}> = ({ selected, allItems, noneItem, onChange, label }) => {
+  const changed = (
+    event: React.ChangeEvent<{
+      name?: string;
+      value: unknown;
+    }>
+  ) => {
+    const id = parseInt((event.target as HTMLSelectElement).value);
+    onChange(allItems.find((i) => i.value == id)!);
+  };
+  return (
+    <Select
+      labelId="demo-select-small-label"
+      id="demo-select-small"
+      value={selected.value}
+      label={label}
+      onChange={changed}
+    >
+      <MenuItem value={noneItem.value} disabled style={{ display: "none" }}>
+        {noneItem.name}
+      </MenuItem>
+      {allItems.map((item) => (
+        <MenuItem value={item.value}>{item.name}</MenuItem>
+      ))}
+    </Select>
+  );
+};
