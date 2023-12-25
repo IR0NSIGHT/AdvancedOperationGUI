@@ -50,14 +50,9 @@ export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
         onChange={handleNameChange}
         renderValue={(selected) => {
           const selectedTerrain = terrainList.find((t) => t.id === selected);
-          return selectedTerrain
-            ? selectedTerrain.shortName
-            : NoneTerrain.shortName;
+          return selectedTerrain!.shortName;
         }}
       >
-        <MenuItem value={NoneTerrain.id}>
-          <em>{NoneTerrain.name}</em>
-        </MenuItem>
         {terrainList.map((terrain) => (
           <MenuItem value={terrain.id}>{terrain.name}</MenuItem>
         ))}
