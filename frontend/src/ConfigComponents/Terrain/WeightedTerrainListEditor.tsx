@@ -5,6 +5,7 @@ import {
 } from "./WeightedTerrainEditor";
 import React from "react";
 import { Button } from "@material-ui/core";
+import { AddButton } from "./AddButton";
 
 export type WeightedTerrainListEditorProps = {
   terrains: WeightedTerrainSetting[];
@@ -65,13 +66,10 @@ export const WeightedTerrainListEditor: React.FC<
   const addTerrain = () => {
     onTerrainChanged(null, { terrain: NoneTerrain, weight: 1 });
   };
-  const title = "Apply Terrain";
   return (
     <div>
       {terrainList()}
-      <Button variant="contained" color="primary" onClick={addTerrain}>
-        Add new terrain
-      </Button>
+      <AddButton title={"Add terrain"} addAction={addTerrain} />
     </div>
   );
 };
