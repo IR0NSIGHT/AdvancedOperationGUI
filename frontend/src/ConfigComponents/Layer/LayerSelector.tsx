@@ -1,6 +1,11 @@
 import React from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import { FormControl, InputLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  DropdownSelect,
+  NamedValue,
+  namedValue,
+} from "../Terrain/DropdownSelect";
 
 export type LayerSelectorProps = {
   layerName: string;
@@ -25,33 +30,28 @@ export const LayerSelector: React.FC<LayerSelectorProps> = ({
   layerList,
   onUpdateLayerName,
 }: LayerSelectorProps) => {
-  const handleNameChange = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>,
-    child: React.ReactNode
-  ) => {
-    const newName = (event.target as HTMLSelectElement).value;
-    onUpdateLayerName(newName); // Call the prop function to update the name in the parent component
+  const classes = useStyles();
+  const selectedItem = namedValue(
+    layerName,
+    layerList.findIndex((l) => l === layerName)! ?? -1
+  );
+  const noneItem = namedValue(NoneLayer, -1);
+  const selectableItems = layerList.map(namedValue);
+
+  const onLayerChanged = (newItem: NamedValue) => {
+    onUpdateLayerName(newItem.name);
   };
 
-  const layerListComps = layerList.map((name) => (
-    <MenuItem value={name}>{name}</MenuItem>
-  ));
-  const classes = useStyles();
   return (
     <FormControl className={classes.formControl}>
       <InputLabel id="demo-select-small-label">Layer</InputLabel>
-      <Select
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={layerName}
-        label="Layer"
-        onChange={handleNameChange}
-      >
-        <MenuItem value={NoneLayer}>
-          <em>{NoneLayer}</em>
-        </MenuItem>
-        {layerListComps}
-      </Select>
+      <DropdownSelect
+        selected={selectedItem}
+        allItems={selectableItems}
+        noneItem={noneItem}
+        onChange={onLayerChanged}
+        label={"Layer"}
+      />
     </FormControl>
   );
 };
