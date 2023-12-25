@@ -18,12 +18,13 @@ export const TerrainListEditor: React.FC<TerrainListEditor> = ({
   terrainList,
   allowedTerrains,
 }) => {
+  const allLegalValues = [NoneTerrain, ...allowedTerrains];
   const addTerrain = () => {
-    onListChanged(terrainList, [...terrainList, NoneTerrain]);
+    changeTerrain(NoneTerrain.id, NoneTerrain.id);
   };
   const changeTerrain = (fromId: number, toId: number) => {
     const others = terrainList.filter((t) => t.id !== fromId && t.id !== toId);
-    const toTerrain = allowedTerrains.find((t) => t.id === toId);
+    const toTerrain = allLegalValues.find((t) => t.id === toId);
     if (toTerrain !== undefined) others.push(toTerrain);
     onListChanged(terrainList, sortTerrainAlphabetically(others));
   };
