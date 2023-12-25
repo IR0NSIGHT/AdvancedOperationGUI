@@ -1,6 +1,9 @@
 import React from "react";
 import { MenuItem, Select } from "@material-ui/core";
 
+export const namedValue = (name: string, value: number): NamedValue => {
+  return { value: value, name: name };
+};
 export type NamedValue = { value: number; name: string };
 export const DropdownSelect: React.FC<{
   selected: NamedValue;
