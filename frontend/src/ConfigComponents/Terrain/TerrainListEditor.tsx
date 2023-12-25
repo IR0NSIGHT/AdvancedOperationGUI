@@ -8,12 +8,12 @@ import TerrainTypeSelect from "./TerrainTypeSelect";
 import { DeleteButton } from "../DeleteButton";
 import { AddButton } from "./AddButton";
 
-export type TerrainListEditorProps = {
+export type TerrainListEditor = {
   terrainList: WpTerrainType[];
   allowedTerrains: WpTerrainType[];
   onListChanged: (old: WpTerrainType[], newTerrain: WpTerrainType[]) => void;
 };
-export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
+export const TerrainListEditor: React.FC<TerrainListEditor> = ({
   onListChanged,
   terrainList,
   allowedTerrains,
@@ -43,6 +43,7 @@ export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
             terrain={t}
             terrainList={allowedTerrains}
             onUpdateTerrainName={(newId: number) => changeTerrain(t.id, newId)}
+            noneTerrain={NoneTerrain}
           />
           <DeleteButton onClick={deleteTerrain(t.id)} />
         </div>

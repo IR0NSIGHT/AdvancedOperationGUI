@@ -1,6 +1,10 @@
 import TerrainTypeSelect, { TerrainTypeSelectProps } from "./TerrainTypeSelect";
 import { Story } from "@storybook/react";
-import { sortTerrainAlphabetically, wpTerrainTypes } from "./WpTerrainTypes";
+import {
+  NoneTerrain,
+  sortTerrainAlphabetically,
+  wpTerrainTypes,
+} from "./WpTerrainTypes";
 
 export default {
   title: "Components/TerrainSelector",
@@ -18,4 +22,15 @@ Default.args = {
   onUpdateTerrainName: (newId: number) => {
     console.log("SELECTED NEW TERRAIN: ", newId);
   },
+  noneTerrain: NoneTerrain,
+};
+
+export const NoneTerrainSelected = Template.bind({});
+NoneTerrainSelected.args = {
+  terrain: NoneTerrain,
+  terrainList: sortTerrainAlphabetically(wpTerrainTypes),
+  onUpdateTerrainName: (newId: number) => {
+    console.log("SELECTED NEW TERRAIN: ", newId);
+  },
+  noneTerrain: NoneTerrain,
 };

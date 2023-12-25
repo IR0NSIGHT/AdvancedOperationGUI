@@ -7,6 +7,7 @@ export type TerrainTypeSelectProps = {
   terrain: WpTerrainType;
   terrainList: WpTerrainType[];
   onUpdateTerrainName: (newTerrainId: number) => void;
+  noneTerrain: WpTerrainType;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -19,17 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NoneTerrain: WpTerrainType = {
-  id: -1,
-  name: "None",
-  shortName: "None",
-};
-
 export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
   terrain,
   terrainList,
   onUpdateTerrainName,
+  noneTerrain,
 }: TerrainTypeSelectProps) => {
+  const allTerrains = [noneTerrain, ...terrainList];
   const handleNameChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>,
     child: React.ReactNode
@@ -49,10 +46,13 @@ export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
         label="Terrain"
         onChange={handleNameChange}
         renderValue={(selected) => {
-          const selectedTerrain = terrainList.find((t) => t.id === selected);
+          const selectedTerrain = allTerrains.find((t) => t.id === selected);
           return selectedTerrain!.shortName;
         }}
       >
+        <MenuItem value={noneTerrain.id} disabled style={{ display: "none" }}>
+          {noneTerrain.name}
+        </MenuItem>
         {terrainList.map((terrain) => (
           <MenuItem value={terrain.id}>{terrain.name}</MenuItem>
         ))}

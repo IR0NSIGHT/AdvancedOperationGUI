@@ -1,6 +1,6 @@
-import TerrainTypeSelect, { NoneTerrain } from "./TerrainTypeSelect";
 import {
   getTerrainById,
+  NoneTerrain,
   sortTerrainAlphabetically,
   WpTerrainType,
   wpTerrainTypes,
@@ -8,6 +8,8 @@ import {
 import { NamedNumericValue } from "../Layer/NamedValueSelector";
 import { DeleteButton } from "../DeleteButton";
 import { NumberInput } from "../Operation/NumberInput";
+import React from "react";
+import TerrainTypeSelect from "./TerrainTypeSelect";
 
 export type WeightedTerrainSetting = { terrain: WpTerrainType; weight: number };
 
@@ -54,6 +56,7 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
         onUpdateTerrainName={onTerrainTypeChanged}
         terrain={terrainSetting.terrain}
         terrainList={sortTerrainAlphabetically(allowedTerrains)}
+        noneTerrain={NoneTerrain}
       />
       <NumberInput
         value={terrainSetting.weight}

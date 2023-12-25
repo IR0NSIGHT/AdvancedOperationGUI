@@ -15,7 +15,7 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
 import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
-import { TerrainListEditor } from "../Terrain/TerrainListEditorProps";
+import { TerrainListEditor } from "../Terrain/TerrainListEditor";
 import { NumericFilterSettingList } from "./NumericFilterSettingList";
 import { OperationSubsection } from "./OperationSubsection";
 import { NumericFilterSetting } from "./NumericFilterSetting";
