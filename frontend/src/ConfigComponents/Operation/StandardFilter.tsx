@@ -21,7 +21,7 @@ export const StandardToNumericFilter = (
     { filter: belowLevelFilter, value: std.belowLevel },
     { filter: aboveDegreesFilter, value: std.aboveDegrees },
     { filter: belowDegreesFilter, value: std.belowDegrees },
-  ];
+  ].filter((x) => x.value !== undefined) as NumericFilterSetting[];
 };
 
 export const NumericToStandardFilter = (
