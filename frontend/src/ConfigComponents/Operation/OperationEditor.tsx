@@ -15,12 +15,12 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { DeleteButton } from "../DeleteButton";
 import { WpTerrainType, wpTerrainTypes } from "../Terrain/WpTerrainTypes";
-import { TerrainListEditor } from "../Terrain/TerrainListEditor";
 import { NumericFilterSettingList } from "./NumericFilterSettingList";
 import { OperationSubsection } from "./OperationSubsection";
 import { NumericFilterSetting } from "./NumericFilterSetting";
 import { NoneFilter, StandardFilters } from "./NumericFilter";
 import { JsonTextPanel } from "./JsonTextPanel";
+import { TerrainListEditor } from "../Terrain/TerrainListEditor";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;

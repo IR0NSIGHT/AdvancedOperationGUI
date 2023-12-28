@@ -1,7 +1,5 @@
 import React, { JSX } from "react";
-import TerrainTypeSelect from "../Terrain/TerrainTypeSelect";
-import { DeleteButton } from "../DeleteButton";
-import { Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 type OperationSubsectionProps = {
   title: string;

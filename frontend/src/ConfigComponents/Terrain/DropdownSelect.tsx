@@ -19,7 +19,7 @@ export const DropdownSelect: React.FC<{
     }>
   ) => {
     const id = parseInt((event.target as HTMLSelectElement).value);
-    onChange(allItems.find((i) => i.value == id)!);
+    onChange(allItems.find((i) => i.value === id)!);
   };
   return (
     <Select

@@ -1,6 +1,6 @@
 import { terrainIdsToWeightedTerrains } from "./WpTerrainTypes";
 
-describe("", () => {
+describe("parse terrain id number array", () => {
   test("parse multiple occurences of terrain into correct weighted", () => {
     const terrainRaw = [1, 1, 1, 1, 5, 6, 7, 5, 1, 1];
     const weighted = terrainIdsToWeightedTerrains(terrainRaw);

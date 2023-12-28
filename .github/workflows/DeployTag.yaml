@@ -12,14 +12,38 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Get SSH key
+        run: |
+          mkdir -p ~/.ssh &&
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
+          chmod 700 ~/.ssh &&
+          chmod 600 ~/.ssh/deploy_key && 
+          ls -la ~/.ssh/
+
+      - name: add github to SSH hosts
+        run: |
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Install Node.js and yarn
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18.16.1'
 
       - name: Install dependencies
-        run: yarn install
+        run: cd frontend && yarn install
+
+      - name: Set up git vars
+        run: |
+          git config --global user.email "irnsght@googlemail.com"
+          git config --global user.name "IR0NSIGHT"
+          git remote set-url origin git@github.com:IR0NSIGHT/AdvancedOperationGUI.git
+          git remote -v
 
       - name: Run yarn deploy on new tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: yarn deploy
+        run:
+          eval $(ssh-agent -s) &&
+          ssh-add ~/.ssh/deploy_key &&
+          ssh-add -l &&
+          cd frontend &&
+          yarn deploy

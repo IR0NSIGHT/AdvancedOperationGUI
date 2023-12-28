@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import { NumericFilterSetting } from "./NumericFilterSetting";
 import { NumericFilter } from "./NumericFilter";
 import { NumericFilterSettingEditor } from "./NumericFilterSettingEditor";
@@ -22,7 +21,8 @@ export const NumericFilterSettingList: React.FC<
   ) => {
     const others = listedFilters.filter(
       (f) =>
-        f.filter.name != oldF?.filter.name && f.filter.name != newF?.filter.name
+        f.filter.name !== oldF?.filter.name &&
+        f.filter.name !== newF?.filter.name
     );
     const out =
       newF !== null
@@ -35,7 +35,7 @@ export const NumericFilterSettingList: React.FC<
 
   const addFilter = () => {
     const newFilters = [
-      ...listedFilters.filter((t) => t.filter.name != allowedFilters[0].name),
+      ...listedFilters.filter((t) => t.filter.name !== allowedFilters[0].name),
       {
         filter: allowedFilters[0],
         value: 0,

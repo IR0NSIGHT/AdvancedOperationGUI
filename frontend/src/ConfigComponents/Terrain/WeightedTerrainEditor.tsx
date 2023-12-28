@@ -1,5 +1,5 @@
 import {
-  getTerrainById,
+  absentTerrain,
   NoneTerrain,
   sortTerrainAlphabetically,
   WpTerrainType,
@@ -24,12 +24,11 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
   terrainSetting,
   onUpdateSetting,
 }: WeightedTerrainEditorProps) => {
-  const allowedTerrains = wpTerrainTypes;
+  const allowedTerrains: WpTerrainType[] = [...wpTerrainTypes, absentTerrain];
 
   const onTerrainTypeChanged = (id: number) => {
-    const newTerrain = getTerrainById(id, allowedTerrains);
+    const newTerrain = allowedTerrains.find((t) => t.id === id);
     if (newTerrain === undefined) {
-      console.error("terrain type with id " + id + " was not found!");
       return;
     }
     onUpdateSetting(terrainSetting, { ...terrainSetting, terrain: newTerrain });

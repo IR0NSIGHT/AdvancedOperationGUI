@@ -15,7 +15,7 @@ const Template: Story<LayerSettingMenuProps> = (args) => {
     oldSetting: WpLayerSetting | null,
     newSetting: WpLayerSetting | null
   ) => {
-    if (newSetting != null) setSetting(newSetting);
+    if (newSetting !== null) setSetting(newSetting);
     console.log(oldSetting, newSetting);
   };
 
