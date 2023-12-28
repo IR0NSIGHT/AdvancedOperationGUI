@@ -24,7 +24,7 @@ export const NumericFilterSelect: React.FC<NumericFilterSelectProp> = ({
   );
   return (
     <FormControl style={{ width: "10em" }}>
-      <InputLabel id="demo-select-small-label">Layer</InputLabel>
+      <InputLabel id="demo-select-small-label">Filter</InputLabel>
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"
