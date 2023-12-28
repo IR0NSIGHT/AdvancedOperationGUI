@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh &&
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
-          chmod 700 ~/.ssh
+          chmod 700 ~/.ssh &&
           chmod 600 ~/.ssh/deploy_key
           ls -la ~/.ssh/
 
@@ -24,6 +24,7 @@ jobs:
         run: |
           eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" > debug_key.txt
+          chmod 600 debug_key.txt
           cat debug_key.txt  # Check content in the debug file
           ssh-add debug_key.txt  # Try adding this key
 
