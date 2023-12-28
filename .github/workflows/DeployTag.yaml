@@ -18,7 +18,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/deploy_key
-          echo "$SSH_PRIVATE_KEY"
+          ls -la ~/.ssh/
 
       - name: Debug SSH key
         run: |
