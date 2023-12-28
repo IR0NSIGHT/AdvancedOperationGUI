@@ -20,7 +20,7 @@ export const NumericFilterSelect: React.FC<NumericFilterSelectProp> = ({
     );
   };
   const displayedFilterIdx = allowedFilters.findIndex(
-    (f) => f.name == selectedFilter.name
+    (f) => f.name === selectedFilter.name
   );
   return (
     <FormControl style={{ width: "10em" }}>

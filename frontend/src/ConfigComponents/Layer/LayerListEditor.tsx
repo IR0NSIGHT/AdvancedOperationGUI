@@ -2,7 +2,6 @@ import { WpLayerSetting } from "./WpLayerSetting";
 import React from "react";
 import LayerSettingMenu from "./LayerSettingMenu";
 import { NoneLayer } from "./LayerSelector";
-import { Button } from "@material-ui/core";
 import { AddButton } from "../Terrain/AddButton";
 
 export enum LayerSettingsMode {
@@ -35,8 +34,6 @@ export const LayerListEditor: React.FC<OperationLayerSettingsProps> = ({
   const addLayer = () => {
     updateLayer(null, [NoneLayer, 0]);
   };
-  const title =
-    mode === LayerSettingsMode.APPLY ? "Apply Layer" : "Only on layer";
   return (
     <div>
       {layersettings}
