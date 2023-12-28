@@ -12,14 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Node.js and yarn
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.16.1'
-
-      - name: Install dependencies
-        run: cd frontend && yarn install
-
       - name: Use SSH key
         run: |
           mkdir -p ~/.ssh
@@ -31,6 +23,13 @@ jobs:
           ssh-add ~/.ssh/deploy_key &&
           ssh-add -l
 
+      - name: Install Node.js and yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.16.1'
+
+      - name: Install dependencies
+        run: cd frontend && yarn install
 
       - name: Set up git vars
         run: |
