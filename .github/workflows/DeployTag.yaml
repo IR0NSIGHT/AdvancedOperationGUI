@@ -16,8 +16,15 @@ jobs:
         run: |
           mkdir -p ~/.ssh &&
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
-          chmod 600 ~/.ssh/deploy_key &&
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/deploy_key
           echo "$SSH_PRIVATE_KEY"
+
+      - name: Debug SSH key
+        run: |
+          echo "$SSH_PRIVATE_KEY" > debug_key.txt
+          cat debug_key.txt  # Check content in the debug file
+          ssh-add debug_key.txt  # Try adding this key
 
       - name: add github to SSH hosts
         run: |
