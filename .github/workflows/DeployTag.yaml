@@ -20,14 +20,6 @@ jobs:
           chmod 600 ~/.ssh/deploy_key && 
           ls -la ~/.ssh/
 
-      - name: Debug SSH key
-        run: |
-          eval $(ssh-agent -s)
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > debug_key.txt
-          chmod 600 debug_key.txt
-          cat debug_key.txt  # Check content in the debug file
-          ssh-add debug_key.txt  # Try adding this key
-
       - name: add github to SSH hosts
         run: |
           ssh-keyscan github.com >> ~/.ssh/known_hosts
