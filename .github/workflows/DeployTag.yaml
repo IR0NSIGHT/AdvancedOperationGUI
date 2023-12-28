@@ -12,12 +12,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Get SSH key
+        run: |
+          mkdir -p ~/.ssh &&
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
+          cat ~/.ssh/deploy_key &&
+          chmod 600 ~/.ssh/deploy_key &&
+          ls ~/.ssh
+
       - name: Use SSH key
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
-          cat ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           eval $(ssh-agent -s) &&
           ssh-add ~/.ssh/deploy_key &&
