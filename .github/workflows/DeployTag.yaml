@@ -26,6 +26,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          eval $(ssh-agent -s) &&
+          ssh-add ~/.ssh/deploy_key &&
+          ssh-add -l
+
 
       - name: Set up git vars
         run: |
