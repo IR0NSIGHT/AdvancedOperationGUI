@@ -611,6 +611,13 @@ export const wpTerrainTypes: WpTerrainType[] = [
   { id: 159, name: "Bare Beaches", shortName: "Bare Beaches" },
   { id: 160, name: "Moss", shortName: "Moss" },
 ];
+
+export const absentTerrain: WpTerrainType = {
+  id: -1,
+  name: "Absent Terrain: Ignore on application",
+  shortName: "Absent",
+};
+
 export type WpTerrainType = { id: number; name: string; shortName: string };
 export const sortTerrainAlphabetically = (list: WpTerrainType[]) => {
   return [...list].sort((a, b) => {
@@ -646,7 +653,7 @@ export const terrainIdsToWeightedTerrains = (
     .filter((x) => x.terrain !== undefined) as WeightedTerrainSetting[];
 };
 export const NoneTerrain: WpTerrainType = {
-  id: -1,
+  id: -127,
   name: "None",
   shortName: "None",
 };
