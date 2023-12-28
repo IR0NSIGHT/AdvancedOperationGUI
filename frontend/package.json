@@ -1,7 +1,7 @@
 {
   "homepage": "https://ir0nsight.github.io/AdvancedOperationGUI",
   "name": "my-react-app",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
