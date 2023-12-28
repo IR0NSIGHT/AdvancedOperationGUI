@@ -47,9 +47,6 @@ jobs:
           git remote set-url origin git@github.com:IR0NSIGHT/AdvancedOperationGUI.git
           git remote -v
 
-      - name: test ssh connection
-        run: ssh -T git@github.com
-
       - name: Run yarn deploy on new tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run:
