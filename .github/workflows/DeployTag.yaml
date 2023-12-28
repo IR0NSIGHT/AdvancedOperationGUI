@@ -16,15 +16,14 @@ jobs:
         run: |
           mkdir -p ~/.ssh &&
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
-          cat ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key &&
-          ls ~/.ssh
+          cat ~/.ssh/deploy_key
+
 
       - name: Use SSH key
         run: |
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           eval $(ssh-agent -s) &&
-          ssh-add ~/.ssh/deploy_key &&
           ssh-add -l
 
       - name: Install Node.js and yarn
