@@ -22,4 +22,7 @@ jobs:
 
       - name: Run yarn deploy on new tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        run: cd frontend && yarn deploy
+        run:
+          git config --global user.email "irnsght@googlemail.com"
+          git config --global user.name "IR0NSIGHT"
+          cd frontend && yarn deploy
