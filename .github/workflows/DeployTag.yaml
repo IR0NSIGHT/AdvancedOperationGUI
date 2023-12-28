@@ -17,7 +17,7 @@ jobs:
           mkdir -p ~/.ssh &&
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key &&
           chmod 700 ~/.ssh &&
-          chmod 600 ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key && 
           ls -la ~/.ssh/
 
       - name: Debug SSH key
@@ -31,12 +31,6 @@ jobs:
       - name: add github to SSH hosts
         run: |
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Use SSH key
-        run: |
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/deploy_key
-          ssh-add -l
 
       - name: Install Node.js and yarn
         uses: actions/setup-node@v2
@@ -55,5 +49,8 @@ jobs:
       - name: Run yarn deploy on new tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run:
+          eval $(ssh-agent -s) &&
+          ssh-add ~/.ssh/deploy_key &&
+          ssh-add -l &&
           cd frontend &&
           yarn deploy
