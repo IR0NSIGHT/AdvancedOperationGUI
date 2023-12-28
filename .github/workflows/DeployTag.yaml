@@ -18,12 +18,12 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key &&
           chmod 600 ~/.ssh/deploy_key &&
           echo "$SSH_PRIVATE_KEY"
+          eval $(ssh-agent -s)
 
       - name: Use SSH key
         run: |
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          eval $(ssh-agent -s) &&
-          #ssh-add ~/.ssh/deploy_key &&
+          # ssh-add ~/.ssh/deploy_key
           ssh-add -l
 
       - name: Install Node.js and yarn
