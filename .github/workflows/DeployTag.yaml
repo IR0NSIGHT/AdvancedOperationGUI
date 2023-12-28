@@ -20,11 +20,21 @@ jobs:
       - name: Install dependencies
         run: cd frontend && yarn install
 
+      - name: Use SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Set up git vars
+        run: |
+          git config --global user.email "irnsght@googlemail.com"
+          git config --global user.name "IR0NSIGHT"
+          git remote set-url origin git@github.com:IR0NSIGHT/AdvancedOperationGUI.git
+
       - name: Run yarn deploy on new tag
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         run:
-          git config --global user.email "irnsght@googlemail.com" &&
-          git config --global user.name "IR0NSIGHT" &&
-          git remote set-url origin https://$MY_NAME:${{ secrets.MY_PASSWORD }}@github.com:IR0NSIGHT/AdvancedOperationGUI.git &&
           cd frontend &&
           yarn deploy
