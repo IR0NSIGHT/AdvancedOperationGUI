@@ -22,6 +22,7 @@ jobs:
 
       - name: Debug SSH key
         run: |
+          eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" > debug_key.txt
           cat debug_key.txt  # Check content in the debug file
           ssh-add debug_key.txt  # Try adding this key
