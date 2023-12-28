@@ -1,7 +1,7 @@
 {
   "homepage": "https://ir0nsight.github.io/AdvancedOperationGUI",
   "name": "my-react-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -23,8 +23,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "predeploy":"yarn build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "yarn lint:static && yarn lint:format",
