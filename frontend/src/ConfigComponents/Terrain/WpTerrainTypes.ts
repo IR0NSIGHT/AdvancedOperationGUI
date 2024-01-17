@@ -946,8 +946,8 @@ export const wpTerrainTypes: WpTerrainType[] = [
   {
     id: 157,
     name: "Calcite",
-    shortName: "223,224,220",
-    color: "",
+    shortName: "Calcite",
+    color: "223,224,220",
   },
   {
     id: 158,
