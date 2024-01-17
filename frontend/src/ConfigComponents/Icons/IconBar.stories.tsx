@@ -36,8 +36,15 @@ EmptyIconBar.args = {
 };
 
 export const TerrainsBar = Template.bind({});
-EmptyIconBar.args = {
+TerrainsBar.args = {
   defaultLayers: [],
   terrainList: wpTerrainTypes,
+  numericFilters: [],
+};
+
+export const FiltersBar = Template.bind({});
+FiltersBar.args = {
+  defaultLayers: [],
+  terrainList: [],
   numericFilters: StandardFilters,
 };
