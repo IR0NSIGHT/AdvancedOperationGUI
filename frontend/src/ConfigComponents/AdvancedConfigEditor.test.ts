@@ -70,7 +70,7 @@ describe("mutate list of operations", () => {
       {
         ...newEmptyDisplayOperation(),
         name: "MUTATED",
-        layer: [["Annotation", 8]],
+        layer: [["Annotations", 8]],
         displayId: 1,
       },
       { ...newEmptyDisplayOperation(), name: "Operation A", displayId: 5 },

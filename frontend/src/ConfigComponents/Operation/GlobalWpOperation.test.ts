@@ -93,7 +93,7 @@ describe("changeWriteLayer function", () => {
 
     expect(updatedOp).toEqual([
       ["Annotations", 7],
-      ["Burgers", 3],
+      ["Swamp", 3],
     ]);
   });
 });
