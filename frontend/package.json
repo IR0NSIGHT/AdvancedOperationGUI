@@ -1,7 +1,7 @@
 {
   "homepage": "https://ir0nsight.github.io/AdvancedOperationGUI",
   "name": "my-react-app",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -36,7 +36,7 @@
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "preversion": "yarn lint && yarn test"
+    "preversion": "(yarn lint && yarn test) || exit 1"
   },
   "eslintConfig": {
     "extends": [
