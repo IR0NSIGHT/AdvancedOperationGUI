@@ -36,7 +36,7 @@ export const IconBar: React.FC<IconBarProps> = ({
   const terrainSquares = terrainList.map(iconByTerrain);
   const filterIcons = numericFilters
     .map(iconByFilter)
-    .filter((a) => a != undefined)
+    .filter((a) => a !== undefined)
     .map((a) => a!);
   return (
     <div>
@@ -66,12 +66,10 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
     case "Swamp":
       // Handle "Swamp" case
       return <WaterOutlinedIcon style={{ color: "#556B2F" }} />;
-      break;
 
     case "Jungle":
       // Handle "Jungle" case
       return <NatureIcon style={{ color: " #90EE90" }} />;
-      break;
 
     case "Void":
       // Handle "Void" case
@@ -80,7 +78,6 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
     case "Resources":
       // Handle "Resources" case
       return <DiamondOutlinedIcon />;
-      break;
 
     case "Read Only":
       // Handle "Read Only" case
