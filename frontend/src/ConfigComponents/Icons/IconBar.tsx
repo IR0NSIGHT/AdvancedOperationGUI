@@ -15,6 +15,7 @@ import WaterOutlinedIcon from "@mui/icons-material/WaterOutlined";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 import ContrastOutlinedIcon from "@mui/icons-material/ContrastOutlined";
 import SpeedIcon from "@mui/icons-material/Speed";
+import SquareOutlinedIcon from "@mui/icons-material/SquareOutlined";
 
 export type IconBarProps = {
   defaultLayers: DefaultLayersType[];
@@ -110,8 +111,8 @@ const convertColorStringToHtml = (colorString: string): string => {
   return htmlColor;
 };
 
-const iconByTerrain = (terrain: WpTerrainType): ReactElement => {
-  if (!terrain.color) return UnknownIcon;
+export const iconByTerrain = (terrain: WpTerrainType): ReactElement => {
+  if (!terrain.color) return <SquareOutlinedIcon />;
 
   const color = convertColorStringToHtml(terrain.color);
   return <SquareIcon style={{ color: color }} />;

@@ -7,6 +7,13 @@ import {
 import TerrainTypeSelect from "./TerrainTypeSelect";
 import { DeleteButton } from "../DeleteButton";
 import { AddButton } from "./AddButton";
+import { iconByTerrain } from "../Icons/IconBar";
+
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 export type TerrainListEditorProps = {
   terrainList: WpTerrainType[];
@@ -39,7 +46,8 @@ export const TerrainListEditor: React.FC<TerrainListEditorProps> = ({
   return (
     <div>
       {terrainList.map((t) => (
-        <div>
+        <div style={containerStyle}>
+          {iconByTerrain(t)}
           <TerrainTypeSelect
             terrain={t}
             terrainList={allowedTerrains}
