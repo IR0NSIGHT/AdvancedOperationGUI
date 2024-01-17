@@ -14,7 +14,7 @@ export type TerrainTypeSelectProps = {
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    width: "25em",
+    width: "10em",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),

@@ -5,6 +5,7 @@ import {
 } from "./WeightedTerrainEditor";
 import React from "react";
 import { AddButton } from "./AddButton";
+import { iconByTerrain } from "../Icons/IconBar";
 
 export type WeightedTerrainListEditorProps = {
   terrains: WeightedTerrainSetting[];
@@ -53,13 +54,29 @@ export const updateWeightedTerrainList = (
 export const WeightedTerrainListEditor: React.FC<
   WeightedTerrainListEditorProps
 > = ({ terrains, onTerrainChanged }) => {
-  const terrainList = (): JSX.Element[] => {
-    return terrains.map((t) => (
-      <WeightedTerrainEditor
-        terrainSetting={t}
-        onUpdateSetting={onTerrainChanged}
-      />
-    ));
+  const terrainList = (): JSX.Element => {
+    const icons = terrains
+      .map((t) => Array(t.weight).fill(iconByTerrain(t.terrain)))
+      .flatMap((i) => i)
+      .slice(0, 20);
+
+    return (
+      <div>
+        <div>{icons}</div>
+        <br />
+        <div>
+          {terrains.map((t) => (
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {iconByTerrain(t.terrain)}
+              <WeightedTerrainEditor
+                terrainSetting={t}
+                onUpdateSetting={onTerrainChanged}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   const addTerrain = () => {

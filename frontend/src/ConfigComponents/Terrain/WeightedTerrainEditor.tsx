@@ -42,7 +42,7 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <TerrainTypeSelect
         onUpdateTerrainName={onTerrainTypeChanged}
         terrain={terrainSetting.terrain}
@@ -59,7 +59,7 @@ export const WeightedTerrainEditor: React.FC<WeightedTerrainEditorProps> = ({
         onClick={() => {
           onUpdateSetting(terrainSetting, null);
         }}
-      ></DeleteButton>
+      />
     </div>
   );
 };

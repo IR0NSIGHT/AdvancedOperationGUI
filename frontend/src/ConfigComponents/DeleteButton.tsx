@@ -7,7 +7,12 @@ export type DeleteButtonProp = {
 };
 export const DeleteButton: React.FC<DeleteButtonProp> = ({ onClick }) => {
   return (
-    <IconButton aria-label="delete" size="small" onClick={onClick}>
+    <IconButton
+      aria-label="delete"
+      size="medium"
+      onClick={onClick}
+      style={{ alignItems: "center" }}
+    >
       <DeleteIcon fontSize="small" />
     </IconButton>
   );
