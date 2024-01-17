@@ -8,15 +8,24 @@ import { DefaultLayersType } from "../Layer/WpLayerSetting";
 import React, { ReactElement } from "react";
 import { WpTerrainType } from "../Terrain/WpTerrainTypes";
 import AlignVerticalBottomOutlinedIcon from "@mui/icons-material/AlignVerticalBottomOutlined";
+import { NumericFilter } from "../Operation/NumericFilter";
+import AlignVerticalTopOutlinedIcon from "@mui/icons-material/AlignVerticalTopOutlined";
+import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
+import WaterOutlinedIcon from "@mui/icons-material/WaterOutlined";
+import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
+import ContrastOutlinedIcon from "@mui/icons-material/ContrastOutlined";
+import SpeedIcon from "@mui/icons-material/Speed";
 
 export type IconBarProps = {
   defaultLayers: DefaultLayersType[];
   terrainList: WpTerrainType[];
+  numericFilters: NumericFilter[];
 };
 
 export const IconBar: React.FC<IconBarProps> = ({
   defaultLayers,
   terrainList,
+  numericFilters,
 }) => {
   const icons = defaultLayers
     .map(iconByLayer)
@@ -24,10 +33,15 @@ export const IconBar: React.FC<IconBarProps> = ({
     .map((a) => a!);
 
   const terrainSquares = terrainList.map(iconByTerrain);
+  const filterIcons = numericFilters
+    .map(iconByFilter)
+    .filter((a) => a != undefined)
+    .map((a) => a!);
   return (
     <div>
       {icons}
       {terrainSquares}
+      {filterIcons}
     </div>
   );
 };
@@ -40,16 +54,9 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
       return <ForestIcon style={{ color: "green" }} />;
 
     case "Caves":
-      // Handle "Caves" case
-      break;
-
     case "Caverns":
-      // Handle "Caverns" case
-      break;
-
     case "Chasms":
-      // Handle "Chasms" case
-      break;
+      return <ContrastOutlinedIcon />;
 
     case "Deciduous":
       // Handle "Deciduous" case
@@ -57,10 +64,12 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
 
     case "Swamp":
       // Handle "Swamp" case
+      return <WaterOutlinedIcon style={{ color: "#556B2F" }} />;
       break;
 
     case "Jungle":
       // Handle "Jungle" case
+      return <NatureIcon style={{ color: " #90EE90" }} />;
       break;
 
     case "Void":
@@ -69,6 +78,7 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
 
     case "Resources":
       // Handle "Resources" case
+      return <DiamondOutlinedIcon />;
       break;
 
     case "Read Only":
@@ -77,13 +87,13 @@ const iconByLayer = (layer: DefaultLayersType): ReactElement | undefined => {
 
     case "Annotations":
       // Handle "Annotations" case
-      break;
+      return <ColorLensOutlinedIcon />;
 
     default:
       // Handle the default case (if none of the above cases match)
       break;
   }
-  return <QuestionMarkOutlinedIcon />;
+  return UnknownIcon;
 };
 
 const convertColorStringToHtml = (colorString: string): string => {
@@ -101,12 +111,25 @@ const convertColorStringToHtml = (colorString: string): string => {
 };
 
 const iconByTerrain = (terrain: WpTerrainType): ReactElement => {
-  if (!terrain.color) return <QuestionMarkOutlinedIcon />;
+  if (!terrain.color) return UnknownIcon;
 
   const color = convertColorStringToHtml(terrain.color);
   return <SquareIcon style={{ color: color }} />;
 };
+const UnknownIcon = <QuestionMarkOutlinedIcon />;
+const iconByFilter = (
+  numericFilter: NumericFilter
+): ReactElement | undefined => {
+  switch (numericFilter.name) {
+    case "below degrees":
+    case "above degrees":
+      return <SpeedIcon />;
+    case "below level":
+      return <AlignVerticalTopOutlinedIcon />;
+    case "above level":
+      return <AlignVerticalBottomOutlinedIcon />;
 
-const iconByFilter = (): ReactElement => {
-  return <AlignVerticalBottomOutlinedIcon />;
+    case "None":
+      return undefined;
+  }
 };

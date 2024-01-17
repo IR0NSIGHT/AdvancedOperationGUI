@@ -176,6 +176,9 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                 .map((o) => o[0])
                 .filter(isDefaultLayersType)}
               terrainList={initialOperation.onlyOnTerrain}
+              numericFilters={initialOperation.numericFilters.map(
+                (s) => s.filter
+              )}
             />
             <ArrowForwardIosOutlinedIcon style={{ width: "3em" }} />
 
@@ -184,6 +187,7 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
                 .map((o) => o[0])
                 .filter(isDefaultLayersType)}
               terrainList={initialOperation.terrain.map((s) => s.terrain)}
+              numericFilters={[]}
             />
           </div>
         </div>
