@@ -33,7 +33,9 @@ export const TerrainTypeSelect: React.FC<TerrainTypeSelectProps> = ({
 
   const classes = useStyles();
   const selectedItem = { value: terrain.id, name: terrain.shortName };
-  const allItems = terrainList.map((t) => ({ value: t.id, name: t.shortName }));
+  const allItems = terrainList
+    .sort((a, b) => a.shortName.localeCompare(b.shortName))
+    .map((t) => ({ value: t.id, name: t.shortName }));
   const noneItem = { value: noneTerrain.id, name: noneTerrain.shortName };
 
   return (
