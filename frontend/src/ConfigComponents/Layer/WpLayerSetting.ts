@@ -1,6 +1,6 @@
 import assert from "assert";
 
-export type WpLayerSetting = [string, number];
+export type WpLayerSetting = [DefaultLayersType | typeof NoneLayer, number];
 
 export type DefaultLayersType =
   | "Frost"
@@ -30,6 +30,11 @@ export const DefaultLayers: DefaultLayersType[] = [
   "Read Only",
   "Annotations",
 ];
+
+export function isDefaultLayersType(value: any): value is DefaultLayersType {
+  return DefaultLayers.includes(value);
+}
+
 /**
  * will apply a change in a layerSetting to the list of layerSettings
  * will insert new LayerSetting if oldlayer === null. will remove layerSetting if newLayer === null
@@ -72,3 +77,4 @@ const sortLayersAlphabetic = (layers: WpLayerSetting[]) => {
     return a[0].localeCompare(b[0]);
   });
 };
+export const NoneLayer = "None";

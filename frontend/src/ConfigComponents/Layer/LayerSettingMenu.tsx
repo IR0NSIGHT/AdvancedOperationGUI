@@ -1,6 +1,10 @@
 import React from "react";
 import LayerSelector from "./LayerSelector";
-import { DefaultLayers, WpLayerSetting } from "./WpLayerSetting";
+import {
+  DefaultLayers,
+  DefaultLayersType,
+  WpLayerSetting,
+} from "./WpLayerSetting";
 import {
   DefaultLayerValues,
   NamedNumericValue,
@@ -60,7 +64,7 @@ const LayerSettingMenu: React.FC<LayerSettingMenuProps> = ({
   onUpdateSetting,
 }: LayerSettingMenuProps) => {
   const onNameChange = (name: string) => {
-    onUpdateSetting(layerSetting, [name, layerSetting[1]]);
+    onUpdateSetting(layerSetting, [name as DefaultLayersType, layerSetting[1]]);
   };
   const onValueChange = (value: string) => {
     onUpdateSetting(layerSetting, [layerSetting[0], parseInt(value)]);

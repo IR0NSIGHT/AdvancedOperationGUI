@@ -6,6 +6,7 @@ import {
   NamedValue,
   namedValue,
 } from "../Terrain/DropdownSelect";
+import { NoneLayer } from "./WpLayerSetting";
 
 export type LayerSelectorProps = {
   layerName: string;
@@ -22,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
-
-export const NoneLayer = "None";
 
 export const LayerSelector: React.FC<LayerSelectorProps> = ({
   layerName,

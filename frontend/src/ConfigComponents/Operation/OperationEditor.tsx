@@ -1,5 +1,9 @@
 import React from "react";
-import { applyLayerChange, WpLayerSetting } from "../Layer/WpLayerSetting";
+import {
+  applyLayerChange,
+  isDefaultLayersType,
+  WpLayerSetting,
+} from "../Layer/WpLayerSetting";
 import { CollapsibleComponent } from "./CollapsibleComponent";
 import { LayerListEditor, LayerSettingsMode } from "../Layer/LayerListEditor";
 import {
@@ -21,6 +25,8 @@ import { NumericFilterSetting } from "./NumericFilterSetting";
 import { NoneFilter, StandardFilters } from "./NumericFilter";
 import { JsonTextPanel } from "./JsonTextPanel";
 import { TerrainListEditor } from "../Terrain/TerrainListEditor";
+import { IconBar } from "../Icons/IconBar";
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
 export type OperationEditorProps = {
   initialOperation: DisplayOperation;
@@ -145,7 +151,43 @@ export const OperationEditor: React.FC<OperationEditorProps> = ({
   );
   return (
     <CollapsibleComponent
-      title={initialOperation.name}
+      title={
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ width: "10em" }}>{initialOperation.name}</div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "right",
+              justifyContent: "flex-end",
+
+              marginLeft: "auto",
+              marginRight: 0,
+            }}
+          >
+            <IconBar
+              defaultLayers={initialOperation.onlyOnLayer
+                .map((o) => o[0])
+                .filter(isDefaultLayersType)}
+              terrainList={initialOperation.onlyOnTerrain}
+            />
+            <ArrowForwardIosOutlinedIcon style={{ width: "3em" }} />
+
+            <IconBar
+              defaultLayers={initialOperation.layer
+                .map((o) => o[0])
+                .filter(isDefaultLayersType)}
+              terrainList={initialOperation.terrain.map((s) => s.terrain)}
+            />
+          </div>
+        </div>
+      }
       content={
         <div>
           <div style={{ display: "flex", alignItems: "center" }}>

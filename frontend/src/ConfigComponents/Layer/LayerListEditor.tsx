@@ -1,7 +1,6 @@
-import { WpLayerSetting } from "./WpLayerSetting";
+import { NoneLayer, WpLayerSetting } from "./WpLayerSetting";
 import React from "react";
 import LayerSettingMenu from "./LayerSettingMenu";
-import { NoneLayer } from "./LayerSelector";
 import { AddButton } from "../Terrain/AddButton";
 
 export enum LayerSettingsMode {

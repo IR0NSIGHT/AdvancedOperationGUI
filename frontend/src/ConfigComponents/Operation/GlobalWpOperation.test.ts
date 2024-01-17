@@ -83,7 +83,7 @@ describe("changeWriteLayer function", () => {
       ["Pines", 2],
       ["Annotations", 12],
       ["Annotations", 2],
-      ["Burgers", 3],
+      ["Swamp", 3],
     ];
     const updatedOp = applyLayerChange(
       layers,

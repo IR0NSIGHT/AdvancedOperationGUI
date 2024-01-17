@@ -41,7 +41,7 @@ export const CollapsibleComponent: React.FC<CollapsibleProps> = ({
         role="button"
         tabIndex={0}
       >
-        <Typography variant="h6">{title}</Typography>
+        {title}
         <IconButton>{expanded ? <ExpandLess /> : <ExpandMore />}</IconButton>
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
